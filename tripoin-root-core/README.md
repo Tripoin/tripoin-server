@@ -8,7 +8,7 @@ Command line :
 
 Run test for development : <br>
 1. http://localhost:8080/tripoin/wscontext/connection<br>
-  - Content-Type: application/json
-  - Accept: application/json<br>
+   Content-Type: application/json<br>
+   Accept: application/json<br>
 2. Test For JUnit Class in tripoin-web-service module :<br>
   com.tripoin.web.test.WebServiceGETTest
