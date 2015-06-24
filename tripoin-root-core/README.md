@@ -1,17 +1,16 @@
 # Run Configurations
 
-####Configuration file :
+#####Configuration file :
    
-<return>
-####Command line :
+
+#####Command line :
 
 - mvn clean install -DskipTests | in tripoin-root-core module
 - Run As -> Run Jetty | in tripoin-core-integration module
 
-<return>
-####Run test for development :
+#####Run test for development :
 - http://localhost:8080/tripoin/wscontext/connection
 	* Content-Type: application/json
 	* Accept: application/json
-- Test For JUnit Class in tripoin-web-service module :<return>
+- Test For JUnit Class in tripoin-web-service module :
   *com.tripoin.web.test.WebServiceGETTest*
