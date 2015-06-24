@@ -9,7 +9,7 @@
 * Run As -> Run Jetty | in tripoin-core-integration module
 
 #####Run test for development :
-* http://localhost:8080/tripoin/wscontext/connection
+* [http://localhost:8080/tripoin/wscontext/connection](http://localhost:8080/tripoin/wscontext/connection "wscontext/connection")
 	* Content-Type: application/json
 	* Accept: application/json
 * Test For JUnit Class in tripoin-web-service module :
