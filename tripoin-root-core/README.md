@@ -5,8 +5,13 @@
 * tripoin-core-integration\src\main\webapp\WEB-INF\properties-files\resources-integration.properties
 
 #####Command line :
-* mvn clean install -DskipTests | in tripoin-root-core module
-* Run As -> Run Jetty | in tripoin-core-integration module
+* tripoin-root-core module
+
+> ``mvn clean install -DskipTests``
+ 
+* in tripoin-core-integration module
+
+> ``Run As -> Run Jetty``
 
 #####Run test for development :
 * [http://localhost:8080/tripoin/wscontext/connection](http://localhost:8080/tripoin/wscontext/connection "wscontext/connection")
