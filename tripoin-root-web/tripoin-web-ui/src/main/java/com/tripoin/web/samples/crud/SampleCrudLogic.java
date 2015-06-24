@@ -26,7 +26,7 @@ public class SampleCrudLogic {
     public void init() {
         editProduct(null);
         // Hide and disable if not admin
-        if (!TripoinUI.get().getAccessControl().isUserInRole("admin")) {
+        if (!TripoinUI.get().getAccessControl().isUserInRole("spring")) {
             view.setNewProductEnabled(false);
         }
 
@@ -112,7 +112,7 @@ public class SampleCrudLogic {
     }
 
     public void rowSelected(Product product) {
-        if (TripoinUI.get().getAccessControl().isUserInRole("admin")) {
+        if (TripoinUI.get().getAccessControl().isUserInRole("spring")) {
             view.editProduct(product);
         }
     }

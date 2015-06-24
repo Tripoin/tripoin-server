@@ -21,25 +21,8 @@
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
     
-     <context:annotation-config/>
-		
-	<!-- Property Configurer -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>/WEB-INF/properties-files/resources-web-application.properties</value>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="commonRest" class="com.tripoin.web.common.impl.CommonRestImpl">
-		<property name="protocolHTTP" value="${tripoin.integration.protocol.http}://"/>
-		<property name="hostHTTP" value="${tripoin.integration.host}"/>
-		<property name="portHTTP" value=":${tripoin.integration.port}"/>
-		<property name="homeContextHTTP" value="/${tripoin.integration.home.context}"/>
-		<property name="wsContextHTTP" value="/${tripoin.integration.ws.context}"/>
-		<property name="isOAuth" value="${tripoin.is.oauth}"/>
+    <bean id="baseAccessControl" class="com.tripoin.web.samples.authentication.BasicAccessControl">
+		<property name="commonRest" ref="commonRest"/>
 	</bean>
 	
 </beans>

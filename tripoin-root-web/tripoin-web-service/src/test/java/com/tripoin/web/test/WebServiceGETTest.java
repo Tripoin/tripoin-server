@@ -27,7 +27,7 @@ import com.tripoin.web.common.WebServiceConstant;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/WEB-INF/config/web-application-config.xml" })
+@ContextConfiguration(locations = { "classpath:META-INF/spring/applicationContext-web-service.xml" })
 public class WebServiceGETTest implements ApplicationContextAware {
 	
 	private static transient final Logger LOGGER = LoggerFactory.getLogger(WebServiceGETTest.class);

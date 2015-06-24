@@ -1,20 +1,18 @@
 package com.tripoin.web;
 
-import javax.servlet.annotation.WebServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.tripoin.web.samples.MainScreen;
 import com.tripoin.web.samples.authentication.AccessControl;
-import com.tripoin.web.samples.authentication.BasicAccessControl;
 import com.tripoin.web.samples.authentication.LoginScreen;
 import com.tripoin.web.samples.authentication.LoginScreen.LoginListener;
-
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -29,18 +27,32 @@ import com.vaadin.ui.themes.ValoTheme;
 @Viewport("user-scalable=no,initial-scale=1.0")
 @Theme("tripoin")
 @Widgetset("com.tripoin.web.TripoinAppWidgetset")
+@Scope("prototype")
+@Component
 public class TripoinUI extends UI {
-
-    private AccessControl accessControl = new BasicAccessControl();
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -57029129041123227L;
+	
+	@Autowired
+    private AccessControl baseAccessControl;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         Responsive.makeResponsive(this);
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle("Tripoin");
-        if (!accessControl.isUserSignedIn()) {
-            setContent(new LoginScreen(accessControl, new LoginListener() {
-                @Override
+        if (!baseAccessControl.isUserSignedIn()) {
+            setContent(new LoginScreen(baseAccessControl, new LoginListener() {
+            	
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = -4033665849275819444L;
+
+				@Override
                 public void loginSuccessful() {
                     showMainView();
                 }
@@ -61,11 +73,7 @@ public class TripoinUI extends UI {
     }
 
     public AccessControl getAccessControl() {
-        return accessControl;
+        return baseAccessControl;
     }
 
-    @WebServlet(urlPatterns = "/*", name = "TripoinUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = TripoinUI.class, productionMode = false)
-    public static class TripoinUIServlet extends VaadinServlet {
-    }
 }
