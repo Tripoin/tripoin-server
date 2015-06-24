@@ -9,7 +9,7 @@
 
 > ``mvn clean install -DskipTests``
  
-* in tripoin-core-integration module
+* tripoin-core-integration module
 
 > ``Run As -> Run Jetty``
 
