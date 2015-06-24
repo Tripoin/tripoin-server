@@ -1,5 +1,7 @@
 # Run Configurations
 
+#####Configuration file :
+
 #####Command line :
 - mvn clean install -DskipTests | in tripoin-root-web module
 - mvn jetty:run | in tripoin-web-ui module, run test for development http://localhost:8080/
