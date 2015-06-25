@@ -238,10 +238,10 @@
 		<!-- refert servlet data -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 			<version>${javax.servlet.version}</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>		
 		<!-- refer common data -->
 		<dependency>
 			<groupId>commons-io</groupId>
