@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.tripoin.web.authentication.AccessControl;
+import com.tripoin.web.authentication.LoginScreen;
+import com.tripoin.web.authentication.LoginScreen.LoginListener;
 import com.tripoin.web.common.IStateFullRest;
-import com.tripoin.web.samples.MainScreen;
-import com.tripoin.web.samples.authentication.AccessControl;
-import com.tripoin.web.samples.authentication.LoginScreen;
-import com.tripoin.web.samples.authentication.LoginScreen.LoginListener;
+import com.tripoin.web.view.MainScreen;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.annotations.Widgetset;
@@ -24,6 +24,8 @@ import com.vaadin.ui.themes.ValoTheme;
  * The @Viewport annotation configures the viewport meta tags appropriately on
  * mobile devices. Instead of device based scaling (default), using responsive
  * layouts.
+ * 
+ * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Viewport("user-scalable=no,initial-scale=1.0")
 @Theme("tripoin")
