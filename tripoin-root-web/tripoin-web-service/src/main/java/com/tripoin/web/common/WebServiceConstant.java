@@ -5,6 +5,7 @@ package com.tripoin.web.common;
  */
 public class WebServiceConstant {
 	
+	public static final String RESPONSE_SUCCESS = "SUCCESS";
 	public static final String HTTP_CONNECTION = "/connection";
 
 }

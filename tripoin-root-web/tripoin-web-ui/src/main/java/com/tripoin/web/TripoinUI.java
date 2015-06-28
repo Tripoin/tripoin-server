@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.samples.MainScreen;
 import com.tripoin.web.samples.authentication.AccessControl;
 import com.tripoin.web.samples.authentication.LoginScreen;
@@ -38,6 +39,9 @@ public class TripoinUI extends UI {
 	
 	@Autowired
     private AccessControl baseAccessControl;
+	
+	@Autowired
+	private IStateFullRest stateFullRest;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -75,5 +79,11 @@ public class TripoinUI extends UI {
     public AccessControl getAccessControl() {
         return baseAccessControl;
     }
+
+	@Override
+	public void close() {
+		super.close();
+		stateFullRest.clearAllCookies();
+	}
 
 }

@@ -24,5 +24,5 @@
     <bean id="baseAccessControl" class="com.tripoin.web.samples.authentication.BasicAccessControl">
 		<property name="commonRest" ref="commonRest"/>
 	</bean>
-	
+		
 </beans>

@@ -39,6 +39,9 @@
 		<property name="portHTTP" value=":${tripoin.integration.port}"/>
 		<property name="homeContextHTTP" value="/${tripoin.integration.home.context}"/>
 		<property name="wsContextHTTP" value="/${tripoin.integration.ws.context}"/>
+	</bean>
+	
+	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl">
 		<property name="isOAuth" value="${tripoin.is.oauth}"/>
 	</bean>
 	

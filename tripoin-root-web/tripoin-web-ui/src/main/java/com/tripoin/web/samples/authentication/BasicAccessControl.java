@@ -1,13 +1,11 @@
 package com.tripoin.web.samples.authentication;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 import com.tripoin.core.dto.GeneralConnectionDTO;
 import com.tripoin.web.common.ICommonRest;
+import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.common.WebServiceConstant;
 
 /**
@@ -22,24 +20,25 @@ public class BasicAccessControl implements AccessControl {
 	public void setCommonRest(ICommonRest commonRest) {
 		this.commonRest = commonRest;
 	}
-
-	private final RestTemplate restTemplate = new RestTemplate();
+	
+	@Autowired
+	private IStateFullRest stateFullRest;
 	
     @Override
     public boolean signIn(String username, String password) {
-    	HttpEntity<Integer> entity = new HttpEntity<>(commonRest.buildHeaders(username, password));
-		ResponseEntity<GeneralConnectionDTO> response = restTemplate.exchange(commonRest.getUrl(WebServiceConstant.HTTP_CONNECTION), HttpMethod.GET, entity, GeneralConnectionDTO.class);
-
-        if (HttpStatus.OK != response.getStatusCode())
-            return false;
-
-        CurrentUser.set(username);
+    	stateFullRest.setUsername(username);
+    	stateFullRest.setPassword(password);
+    	GeneralConnectionDTO loginRest = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_CONNECTION), GeneralConnectionDTO.class);
+        if(HttpStatus.OK != stateFullRest.getStatusCode() || loginRest == null || !WebServiceConstant.RESPONSE_SUCCESS.equals(loginRest.getResult())){
+        	return false;
+        }
+        CurrentUser.setUser(username);
         return true;
     }
 
     @Override
     public boolean isUserSignedIn() {
-        return !CurrentUser.get().isEmpty();
+        return !CurrentUser.getUser().isEmpty();
     }
 
     @Override
@@ -55,7 +54,7 @@ public class BasicAccessControl implements AccessControl {
 
     @Override
     public String getPrincipalName() {
-        return CurrentUser.get();
+        return CurrentUser.getUser();
     }
 
 }

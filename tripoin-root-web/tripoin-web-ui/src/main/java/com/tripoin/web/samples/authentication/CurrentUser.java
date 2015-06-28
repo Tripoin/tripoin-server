@@ -18,6 +18,8 @@ public final class CurrentUser {
      */
     public static final String CURRENT_USER_SESSION_ATTRIBUTE_KEY = CurrentUser.class
             .getCanonicalName();
+    public static final String CURRENT_ROLE_SESSION_ATTRIBUTE_KEY = CurrentUser.class
+            .getCanonicalName();
 
     private CurrentUser() {
     }
@@ -29,7 +31,7 @@ public final class CurrentUser {
      * @throws IllegalStateException
      *             if the current session cannot be accessed.
      */
-    public static String get() {
+    public static String getUser() {
         String currentUser = (String) getCurrentRequest().getWrappedSession()
                 .getAttribute(CURRENT_USER_SESSION_ATTRIBUTE_KEY);
         if (currentUser == null) {
@@ -46,7 +48,7 @@ public final class CurrentUser {
      * @throws IllegalStateException
      *             if the current session cannot be accessed.
      */
-    public static void set(String currentUser) {
+    public static void setUser(String currentUser) {
         if (currentUser == null) {
             getCurrentRequest().getWrappedSession().removeAttribute(
                     CURRENT_USER_SESSION_ATTRIBUTE_KEY);
