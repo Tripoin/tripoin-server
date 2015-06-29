@@ -1,5 +1,6 @@
 package com.tripoin.core.pojo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,9 +25,11 @@ public class User {
 	private Integer id;
 	private String username;
 	private String password;
+	private Integer enabled;
+	private Date expiredDate;
+	private Integer nonLocked;
 	private String auth;
 	private Integer status;
-	private Integer enabled;
 	private String remarks;
 	private Role role;
 	private List<VersionFilter> versionFilter;
@@ -42,7 +45,7 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name="user_code", length=20)
+	@Column(name="user_username", length=20)
 	public String getUsername() {
 		return username;
 	}
@@ -60,15 +63,6 @@ public class User {
 		this.password = password;
 	}
 
-	@Column(name="user_auth", length=255)
-	public String getAuth() {
-		return auth;
-	}
-
-	public void setAuth(String auth) {
-		this.auth = auth;
-	}
-
 	@Column(name="user_enabled")
 	public Integer getEnabled() {
 		return enabled;
@@ -76,6 +70,33 @@ public class User {
 
 	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
+	}
+
+	@Column(name="user_expired_date")
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
+	}
+
+	@Column(name="user_non_locked")
+	public Integer getNonLocked() {
+		return nonLocked;
+	}
+
+	public void setNonLocked(Integer nonLocked) {
+		this.nonLocked = nonLocked;
+	}
+
+	@Column(name="user_auth", length=255)
+	public String getAuth() {
+		return auth;
+	}
+
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 
 	@Column(name="user_status")
@@ -118,7 +139,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password="
-				+ password + ", enabled=" + enabled + ", status=" + status + ", remarks=" + remarks
-				+ ", role=" + role + "]";
+				+ password + ", enabled=" + enabled + ", expiredDate="
+				+ expiredDate + ", nonLocked=" + nonLocked + ", auth=" + auth
+				+ ", status=" + status + ", remarks=" + remarks + ", role="
+				+ role + "]";
 	}
+	
 }

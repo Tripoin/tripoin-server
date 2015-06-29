@@ -50,7 +50,7 @@ public class ServiceTest implements ApplicationContextAware  {
 	
 	@Test
 	public void runTest() throws Exception {
-		String value = "bangkit";
+		String value = "ridla";
 		List<User> users = iGenericManagerJpa.loadObjectsJQLStatement("FROM User WHERE username = ?", new Object[]{value}, new PageArgument(0,2));
 		for(User user : users) LOGGER.debug("User Data : "+user);
 	}
