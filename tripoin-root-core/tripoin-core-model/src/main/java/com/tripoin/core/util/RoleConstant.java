@@ -5,8 +5,8 @@ package com.tripoin.core.util;
  */
 public class RoleConstant {
 
-	public static final String ROLE_DEFAULT = "ROLE_DEFAULT";
-	public static final String ROLE_WAITRESS = "ROLE_WAITRESS";
-	public static final String ROLE_TRAIN = "ROLE_TRAIN";
+	public static final String ROLE_SUPERADMIN = "ROLE_SUPERADMIN";
+	public static final String ROLE_ADMIN = "ROLE_ADMIN";
+	public static final String ROLE_USER = "ROLE_USER";
 
 }
