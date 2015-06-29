@@ -16,7 +16,7 @@ public enum ECommonOperator implements Serializable {
 	OR(" OR "),
 	AND(" AND "),
 	
-	EQUAL(" = ?"), 
+	EQUALS(" = ?"), 
 	LESS(" < ?"), 
 	LESS_EQUAL(" < ?"), 
 	GREATER(" > ?"), 

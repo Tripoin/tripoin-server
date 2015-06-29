@@ -64,7 +64,7 @@ public class JQLStatement implements Serializable {
 				jqlQuery = jqlQuery.concat(ECommonOperator.AND.toString());
 			jqlQuery = jqlQuery.concat(ECommonOperator.OBJECT_POINT_CONSTANT.toString()).concat(filterArgument.getField());
 			if(filterArgument.getCondition() == null)
-				jqlQuery = jqlQuery.concat(ECommonOperator.EQUAL.toString());
+				jqlQuery = jqlQuery.concat(ECommonOperator.EQUALS.toString());
 			else
 				jqlQuery = jqlQuery.concat(filterArgument.getCondition().toString());
 		}		
