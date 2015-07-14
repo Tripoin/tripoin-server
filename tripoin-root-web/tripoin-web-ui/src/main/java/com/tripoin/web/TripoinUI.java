@@ -171,7 +171,7 @@ public class TripoinUI extends UI implements ErrorHandler {
         	e.printStackTrace();
         }
 
-        getPage().setTitle("Valo Theme Test");
+        getPage().setTitle("Tripoin Web Application");
         setContent(root);
         root.setWidth("100%");
         /*root.addMenu(buildTestMenu());*/

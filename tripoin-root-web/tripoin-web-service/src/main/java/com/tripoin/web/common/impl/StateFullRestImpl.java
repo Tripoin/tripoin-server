@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,25 +23,19 @@ import org.springframework.web.client.RestTemplate;
 import com.tripoin.web.common.IStateFullRest;
 
 /**
- * @Scope (value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
- * 
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
+@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
 public class StateFullRestImpl implements IStateFullRest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(StateFullRestImpl.class);
 
-	private final Map<String, String> cookies;
+	private final Map<String, String> cookies = new HashMap<>();
 	private String username;
 	private String password;
 	private boolean isOAuth;
-	private final RestTemplate template;
+	private final RestTemplate template = new RestTemplate();
 	private HttpStatus statusCode;
-
-	public StateFullRestImpl() {
-		template = new RestTemplate();
-		cookies = new HashMap<>();
-	}
 
 	public Map<String, String> getCookies() {
 		return cookies;

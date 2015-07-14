@@ -21,8 +21,11 @@
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
     
-     <context:annotation-config/>
+    <context:annotation-config/>
 		
+	<!-- Enable @AspectJ support -->
+	<aop:aspectj-autoproxy />   
+	
 	<!-- Property Configurer -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -41,8 +44,8 @@
 		<property name="wsContextHTTP" value="/${tripoin.integration.ws.context}"/>
 	</bean>
 	
-	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" scope="request">		
-    	<aop:scoped-proxy/>
+	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" >		
+    	<!-- <aop:scoped-proxy proxy-target-class="true"/> -->
 		<property name="isOAuth" value="${tripoin.is.oauth}"/>
 	</bean>
 	
