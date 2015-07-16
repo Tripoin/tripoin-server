@@ -15,6 +15,10 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.HorizontalLayout;
@@ -24,6 +28,9 @@ import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TwinColSelect;
 import com.vaadin.ui.VerticalLayout;
 
+@Component
+@Scope("prototype")
+@VaadinView(value = "selects", cached = true)
 public class NativeSelects extends VerticalLayout implements View {
     /**
 	 * 

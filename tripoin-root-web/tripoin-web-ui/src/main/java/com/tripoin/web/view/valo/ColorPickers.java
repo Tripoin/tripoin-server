@@ -15,6 +15,10 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.colorpicker.Color;
@@ -24,6 +28,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+@Component
+@Scope("prototype")
+@VaadinView(value = "colorpickers", cached = true)
 public class ColorPickers extends VerticalLayout implements View {
     /**
 	 * 

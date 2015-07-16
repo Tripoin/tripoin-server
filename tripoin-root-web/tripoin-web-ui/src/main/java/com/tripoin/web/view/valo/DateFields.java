@@ -18,7 +18,11 @@ package com.tripoin.web.view.valo;
 import java.util.Date;
 import java.util.Locale;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.tripoin.web.TripoinUI;
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.UserError;
@@ -33,6 +37,9 @@ import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+@Component
+@Scope("prototype")
+@VaadinView(value = "datefields", cached = true)
 public class DateFields extends VerticalLayout implements View {
     /**
 	 * 

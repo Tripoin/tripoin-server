@@ -15,7 +15,11 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.tripoin.web.TripoinUI;
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Container;
 import com.vaadin.event.dd.DragAndDropEvent;
 import com.vaadin.event.dd.DropHandler;
@@ -30,6 +34,9 @@ import com.vaadin.ui.Tree;
 import com.vaadin.ui.Tree.TreeDragMode;
 import com.vaadin.ui.VerticalLayout;
 
+@Component
+@Scope("prototype")
+@VaadinView(value = "trees", cached = true)
 public class Trees extends VerticalLayout implements View {
     /**
 	 * 

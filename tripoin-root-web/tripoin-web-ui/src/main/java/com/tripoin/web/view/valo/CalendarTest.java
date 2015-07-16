@@ -6,7 +6,11 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.tripoin.web.TripoinUI;
+import com.tripoin.web.servlet.VaadinView;
 import com.tripoin.web.view.components.calendar.CalendarTestEvent;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.Item;
@@ -54,7 +58,10 @@ import com.vaadin.ui.components.calendar.handler.BasicWeekClickHandler;
 import com.vaadin.ui.themes.ValoTheme;
 
 /** Calendar component test application */
-@Theme("valo-tripoin")
+@Component
+@Scope("prototype")
+@VaadinView(value = "calendar", cached = true)
+@Theme("tripoin-valo")
 public class CalendarTest extends GridLayout implements View {
 
     private static final long serialVersionUID = -5436777475398410597L;

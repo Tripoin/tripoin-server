@@ -15,6 +15,10 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Accordion;
@@ -22,6 +26,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+@Component
+@Scope("prototype")
+@VaadinView(value = "accordions", cached = true)
 public class Accordions extends VerticalLayout implements View {
     /**
 	 * 

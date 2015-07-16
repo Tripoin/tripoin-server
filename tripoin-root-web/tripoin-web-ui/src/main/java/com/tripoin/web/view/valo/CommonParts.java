@@ -15,7 +15,10 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+
 import com.tripoin.web.TripoinUI;
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.event.ShortcutAction.KeyCode;
@@ -53,6 +56,9 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 
+@org.springframework.stereotype.Component
+@Scope("prototype")
+@VaadinView(value = "common", cached = true)
 public class CommonParts extends VerticalLayout implements View {
     /**
 	 * 

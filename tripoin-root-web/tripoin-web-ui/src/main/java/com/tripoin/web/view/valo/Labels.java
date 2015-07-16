@@ -15,6 +15,10 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.MarginInfo;
@@ -23,11 +27,9 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
-/**
- * 
- * @since
- * @author Vaadin Ltd
- */
+@Component
+@Scope("prototype")
+@VaadinView(value = "labels", cached = true)
 public class Labels extends VerticalLayout implements View {
     /**
 	 * 

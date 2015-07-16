@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.event.Transferable;
 import com.vaadin.event.dd.DragAndDropEvent;
 import com.vaadin.event.dd.DropHandler;
@@ -47,11 +50,9 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
-/**
- * 
- * @since
- * @author Vaadin Ltd
- */
+@org.springframework.stereotype.Component
+@Scope("prototype")
+@VaadinView(value = "dragging", cached = true)
 public class Dragging extends VerticalLayout implements View {
 
     /**

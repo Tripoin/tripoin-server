@@ -17,6 +17,10 @@ package com.tripoin.web.view.valo;
 
 import java.util.Date;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.UserError;
@@ -37,11 +41,9 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-/**
- * 
- * @since
- * @author Vaadin Ltd
- */
+@Component
+@Scope("prototype")
+@VaadinView(value = "forms", cached = true)
 public class Forms extends VerticalLayout implements View {
     /**
 	 * 

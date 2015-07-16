@@ -15,7 +15,19 @@
  */
 package com.tripoin.web.view.valo;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.core.dto.ProductData;
 import com.tripoin.web.TripoinUI;
+import com.tripoin.web.container.ProductContainer;
+import com.tripoin.web.service.IInventoryService;
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -44,15 +56,24 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.TreeTable;
 import com.vaadin.ui.VerticalLayout;
 
+@Component
+@Scope("prototype")
+@VaadinView(value = "tables", cached = true)
 public class Tables extends VerticalLayout implements View {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 7037812110286422303L;
-	final Container normalContainer = TripoinUI.generateContainer(200, false);
+	/*final Container normalContainer = TripoinUI.generateContainer(200, false);*/
     final Container hierarchicalContainer = TripoinUI.generateContainer(200,
             true);
+    
+    @Autowired
+    private IInventoryService inventoryService;
+    
+    @Autowired
+    private ProductContainer productContainer;
 
     CheckBox hierarchical = new CheckBox("Hierarchical");
     CheckBox footer = new CheckBox("Footer", true);
@@ -71,8 +92,9 @@ public class Tables extends VerticalLayout implements View {
     CheckBox componentsInCells = new CheckBox("Components in Cells", false);
 
     Table table;
-
-    public Tables() {
+    
+    @PostConstruct
+    public void init(){
         setMargin(true);
         setSpacing(true);
 
@@ -99,7 +121,10 @@ public class Tables extends VerticalLayout implements View {
             public void valueChange(ValueChangeEvent event) {
                 if (table == null) {
                     table = new Table();
-                    table.setContainerDataSource(normalContainer);
+                    List<ProductData> productDatas = inventoryService.getAllProducts();
+                    productContainer.removeAllItems();
+                    productContainer.addAll(productDatas);
+                    table.setContainerDataSource(productContainer);
                     addComponent(table);
                 }
                 if (hierarchical.getValue() && table instanceof Table) {
@@ -111,7 +136,10 @@ public class Tables extends VerticalLayout implements View {
                         && table instanceof TreeTable) {
                     removeComponent(table);
                     table = new Table();
-                    table.setContainerDataSource(normalContainer);
+                    List<ProductData> productDatas = inventoryService.getAllProducts();
+                    productContainer.removeAllItems();
+                    productContainer.addAll(productDatas);
+                    table.setContainerDataSource(productContainer);
                     addComponent(table);
                 }
 
@@ -142,7 +170,7 @@ public class Tables extends VerticalLayout implements View {
         componentsInCells.addValueChangeListener(update);
 
         footer.setValue(false);
-
+    	
     }
 
     static void configure(Table table, boolean footer, boolean sized,

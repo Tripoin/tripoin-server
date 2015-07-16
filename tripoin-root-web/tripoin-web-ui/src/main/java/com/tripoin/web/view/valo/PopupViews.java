@@ -15,6 +15,9 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -25,6 +28,9 @@ import com.vaadin.ui.PopupView;
 import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.VerticalLayout;
 
+@org.springframework.stereotype.Component
+@Scope("prototype")
+@VaadinView(value = "popupviews", cached = true)
 public class PopupViews extends VerticalLayout implements View {
     /**
 	 * 

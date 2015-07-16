@@ -15,6 +15,9 @@
  */
 package com.tripoin.web.view.valo;
 
+import org.springframework.context.annotation.Scope;
+
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
@@ -28,6 +31,9 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
+@org.springframework.stereotype.Component
+@Scope("prototype")
+@VaadinView(value = "panels", cached = true)
 public class Panels extends VerticalLayout implements View {
     /**
 	 * 

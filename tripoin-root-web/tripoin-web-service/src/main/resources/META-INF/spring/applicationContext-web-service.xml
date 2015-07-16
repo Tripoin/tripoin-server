@@ -23,7 +23,6 @@
     
     <context:annotation-config/>
 		
-	<!-- Enable @AspectJ support -->
 	<aop:aspectj-autoproxy />   
 	
 	<!-- Property Configurer -->
@@ -44,8 +43,7 @@
 		<property name="wsContextHTTP" value="/${tripoin.integration.ws.context}"/>
 	</bean>
 	
-	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" >		
-    	<!-- <aop:scoped-proxy proxy-target-class="true"/> -->
+	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" >
 		<property name="isOAuth" value="${tripoin.is.oauth}"/>
 	</bean>
 	

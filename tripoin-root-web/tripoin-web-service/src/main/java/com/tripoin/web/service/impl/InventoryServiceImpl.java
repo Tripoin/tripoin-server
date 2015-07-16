@@ -25,6 +25,7 @@ public class InventoryServiceImpl implements IInventoryService {
 	@Autowired
 	private ICommonRest commonRest;
 	
+	@Autowired
 	private IStateFullRest stateFullRest;
 	
 	@Override
