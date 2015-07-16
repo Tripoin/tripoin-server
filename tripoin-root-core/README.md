@@ -12,9 +12,10 @@
 * tripoin-core-integration module
 
 > ``Run As -> Run Jetty``
+> ``Web Application Port Default : 8081``
 
 #####Run test for development :
-* [http://localhost:8080/tripoin/wscontext/connection](http://localhost:8080/tripoin/wscontext/connection "wscontext/connection")
+* [http://localhost:8081/tripoin/wscontext/connection](http://localhost:8081/tripoin/wscontext/connection "wscontext/connection")
 	* Content-Type: application/json
 	* Accept: application/json
 * Test For JUnit Class in tripoin-web-service module :
