@@ -7,5 +7,4 @@ Repository For Core Application Server
 # tripoin-web
 Repository For Web Application Server 
 - Web Service (REST)
-- Widget
 - User Interface
