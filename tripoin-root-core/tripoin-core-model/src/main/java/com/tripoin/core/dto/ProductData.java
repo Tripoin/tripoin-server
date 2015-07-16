@@ -12,10 +12,10 @@ import com.tripoin.core.pojo.Product;
  */
 public class ProductData {
 	
-	private int id;
+	private Integer id;
     private String productName;
     private BigDecimal price;
-    private int stockCount; 
+    private Integer stockCount; 
     private List<CategoryData> categoryDatas;
     private AvailabilityData availabilityData;
     
@@ -45,11 +45,11 @@ public class ProductData {
 		this.availabilityData = availabilityData;
 	}
 
-	public int getId() {
+	public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -69,11 +69,11 @@ public class ProductData {
         this.price = price;
     }
 
-    public int getStockCount() {
+    public Integer getStockCount() {
         return stockCount;
     }
 
-    public void setStockCount(int stockCount) {
+    public void setStockCount(Integer stockCount) {
         this.stockCount = stockCount;
     }
 
