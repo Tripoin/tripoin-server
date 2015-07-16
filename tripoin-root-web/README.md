@@ -1,6 +1,7 @@
 # Run Configurations
 
 #####Configuration file :
+* tripoin-web-ui\src\main\webapp\WEB-INF\properties-files\resources-web-application.properties
 
 #####Command line :
 - tripoin-root-web module
@@ -11,6 +12,6 @@
 
 > ``mvn jetty:run``
  
-- tripoin-root-web/tripoin-web-app module | packaging war bundle
+- tripoin-root-web module | packaging war bundle
 
 > ``mvn -Pproduction package``
