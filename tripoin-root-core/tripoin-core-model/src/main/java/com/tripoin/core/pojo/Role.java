@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +24,7 @@ public class Role {
 	private List<User> users;
 	private Integer status;
 	private String remarks;
+	private List<Menu> menus;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -69,6 +71,15 @@ public class Role {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+    @ManyToMany(mappedBy = "roles", cascade=CascadeType.ALL)
+	public List<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
 	}
 
 	@Override

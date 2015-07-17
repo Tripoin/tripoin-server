@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.tripoin.core.dao.filter.PageArgument;
+import com.tripoin.core.pojo.Menu;
 import com.tripoin.core.pojo.Product;
 import com.tripoin.core.pojo.User;
 import com.tripoin.core.service.IGenericManagerJpa;
@@ -58,6 +59,11 @@ public class ServiceTest implements ApplicationContextAware  {
 		List<Product> products = iGenericManagerJpa.loadObjects(Product.class);
 		for(Product product : products) {
 			LOGGER.debug("Product Data : "+product);
+		}
+
+		List<Menu> menus = iGenericManagerJpa.loadObjectsJQLStatement("SELECT mn FROM Menu mn INNER JOIN mn.roles role WHERE role.code = ?", new Object[]{"ROLE_SUPERADMIN"}, null);
+		for(Menu menu : menus) {
+			LOGGER.debug("Menu Data : "+menu);
 		}
 	}
 
