@@ -18,7 +18,6 @@
 
 + *tripoin-root-web* module
 
-```java
-mvn clean install -DskipTests
-mvn -Pproduction package
-```
+> ``mvn clean install -DskipTests``
+
+> ``mvn -Pproduction package``
