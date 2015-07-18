@@ -11,7 +11,8 @@ public class WebServiceConstant {
 	/*private static final String HTTP_DELETE = "/delete";*/
 	
 	public static final String HTTP_CONNECTION = "/connection";	
-	public static final String HTTP_LOGIN = "/login";
+	public static final String HTTP_LOGIN = "/login";	
+	public static final String HTTP_LOGIN_MENU = "/login-menu";
 	public static final String HTTP_AVAILABILITY = "/availability".concat(HTTP_LOAD);
 	public static final String HTTP_CATEGORY = "/category".concat(HTTP_LOAD);
 	public static final String HTTP_PRODUCT = "/product".concat(HTTP_LOAD);

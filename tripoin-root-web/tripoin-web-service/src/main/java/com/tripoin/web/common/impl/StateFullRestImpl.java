@@ -2,14 +2,13 @@ package com.tripoin.web.common.impl;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,17 +24,27 @@ import com.tripoin.web.common.IStateFullRest;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
 public class StateFullRestImpl implements IStateFullRest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(StateFullRestImpl.class);
 
+	private Map<String, String> additionalDataMenu = new LinkedHashMap<String, String>();
 	private final Map<String, String> cookies = new HashMap<>();
 	private String username;
 	private String password;
 	private boolean isOAuth;
 	private final RestTemplate template = new RestTemplate();
 	private HttpStatus statusCode;
+
+	@Override
+	public Map<String, String> getAdditionalDataMenu() {
+		return this.additionalDataMenu;
+	}
+
+	@Override
+	public void setAdditionalDataMenu(Map<String, String> additionalDataMenu) {
+		this.additionalDataMenu = additionalDataMenu;
+	}
 
 	public Map<String, String> getCookies() {
 		return cookies;
@@ -177,4 +186,5 @@ public class StateFullRestImpl implements IStateFullRest {
 		headers.add("Authorization","Basic ".concat(base64EncodedToken));
 		return headers;
 	}
+	
 }

@@ -7,7 +7,24 @@ import org.springframework.http.HttpStatus;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-public interface IStateFullRest {
+public interface IStateFullRest { 
+
+	/**
+	 * <b>Description:</b><br>
+	 * Load all Menu but generated on first login<br><br>
+	 * <b>Sample Code:</b><br>
+	 * <code>getAdditionalDataMenu()</code><br>
+	 * @return
+	 */
+	public Map<String, String> getAdditionalDataMenu();
+
+	/**
+	 * <b>Description:</b><br>
+	 * Render all Menu on first login<br><br>
+	 * <b>Sample Code:</b><br>
+	 * <code>setAdditionalDataMenu(additionalDataMenu)</code><br>
+	 */
+	public void setAdditionalDataMenu(Map<String, String> additionalDataMenu);
 
 	/**
 	 * <b>Sample Code:</b><br>
