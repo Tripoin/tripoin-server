@@ -1,7 +1,9 @@
 package com.tripoin.web.authentication;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +14,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import com.tripoin.core.dto.MenuData;
 import com.tripoin.core.dto.UserData;
-import com.tripoin.core.dto.UserTransferObject;
+import com.tripoin.core.dto.UserMenuTransferObject;
 import com.tripoin.web.common.ICommonRest;
 import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.common.WebServiceConstant;
@@ -43,9 +46,18 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
         try{
         	stateFullRest.setUsername(username);
         	stateFullRest.setPassword(password);
-    		UserTransferObject userTransferObject = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_LOGIN), UserTransferObject.class);
-            if(userTransferObject != null){
-            	UserData userData = userTransferObject.getUserDatas().get(0);
+    		UserMenuTransferObject userMenuTransferObject = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_LOGIN_MENU), UserMenuTransferObject.class);
+            if(userMenuTransferObject != null){
+            	List<MenuData> menuDatas = userMenuTransferObject.getMenuDatas();
+            	UserData userData = userMenuTransferObject.getUserDatas().get(0);
+            	if(menuDatas != null){
+            		Map<String, String> additionalDataMenu = new LinkedHashMap<String, String>();
+            		for(MenuData menuData : menuDatas)
+            			additionalDataMenu.put(menuData.getCode(), menuData.getName());
+            		stateFullRest.setAdditionalDataMenu(additionalDataMenu);
+            	}else{
+            		return null;
+            	}
             	if(userData != null){
             		if(userData.getRoleData() != null){
                         List<GrantedAuthority> grantedAuths = new ArrayList<>();

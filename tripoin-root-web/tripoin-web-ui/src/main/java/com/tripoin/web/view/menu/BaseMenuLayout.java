@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import javax.annotation.PostConstruct;
 
 import com.tripoin.web.authentication.IAccessControl;
+import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.servlet.DiscoveryNavigator;
 import com.tripoin.web.view.valo.TestIcon;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -40,33 +41,21 @@ public class BaseMenuLayout extends CssLayout implements View {
 	 * 
 	 */
 	private static final long serialVersionUID = -4795419684894048255L;
-	private final Map<String, String> menuItems = new HashMap<String, String>();
     private static Map<String, String> themeVariants = new HashMap<String, String>();
     private final TestIcon baseIcon = new TestIcon(100);
-    CssLayout menuItemsLayout = new CssLayout();
-    {
-        setId("BaseMenu");
-    }
-    static {
-        themeVariants.put("tripoin-valo", "Default");
-        themeVariants.put("tripoin-valo-blueprint", "Blueprint");
-        themeVariants.put("tripoin-valo-dark", "Dark");
-        themeVariants.put("tripoin-valo-facebook", "Facebook");
-        themeVariants.put("tripoin-valo-flatdark", "Flat dark");
-        themeVariants.put("tripoin-valo-flat", "Flat");
-        themeVariants.put("tripoin-valo-light", "Light");
-        themeVariants.put("tripoin-valo-metro", "Metro");
-    }	
+    private CssLayout menuItemsLayout = new CssLayout();
     private DiscoveryNavigator navigator;
 	
     private IAccessControl accessControl;
-
-	public Map<String, String> getMenuItems() {
-		return menuItems;
-	}
+    
+    private IStateFullRest stateFullRest;
 
 	public CssLayout getMenuItemsLayout() {
 		return menuItemsLayout;
+	}
+
+	public DiscoveryNavigator getNavigator() {
+		return navigator;
 	}
 
 	public void setNavigator(DiscoveryNavigator navigator) {
@@ -77,6 +66,23 @@ public class BaseMenuLayout extends CssLayout implements View {
 		this.accessControl = accessControl;
 	}
 	
+	public void setStateFullRest(IStateFullRest stateFullRest) {
+		this.stateFullRest = stateFullRest;
+	}
+
+	@PostConstruct
+	public void init(){
+        setId("BaseMenu");
+        themeVariants.put("tripoin-valo", "Default");
+        themeVariants.put("tripoin-valo-blueprint", "Blueprint");
+        themeVariants.put("tripoin-valo-dark", "Dark");
+        themeVariants.put("tripoin-valo-facebook", "Facebook");
+        themeVariants.put("tripoin-valo-flatdark", "Flat dark");
+        themeVariants.put("tripoin-valo-flat", "Flat");
+        themeVariants.put("tripoin-valo-light", "Light");
+        themeVariants.put("tripoin-valo-metro", "Metro");
+	}
+
 	public BaseMenuLayout getMenu() {
         final HorizontalLayout top = new HorizontalLayout();
         top.setWidth("100%");
@@ -117,13 +123,8 @@ public class BaseMenuLayout extends CssLayout implements View {
         settingsItem.addItem("Edit Profile", null);
         settingsItem.addItem("Preferences", null);
         settingsItem.addSeparator();
-        settingsItem.addItem("Sign Out", FontAwesome.SIGN_OUT, new Command() {
-			
-			/**
-			 * 
-			 */
+        settingsItem.addItem("Sign Out", FontAwesome.SIGN_OUT, new Command() {			
 			private static final long serialVersionUID = -7829505006330125630L;
-
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
                 VaadinSession.getCurrent().getSession().invalidate();
@@ -138,9 +139,9 @@ public class BaseMenuLayout extends CssLayout implements View {
         addComponent(menuItemsLayout);
 
         Label label = null;
-        int count = -1;
-        for (final Entry<String, String> item : menuItems.entrySet()) {
-            if (item.getKey().equals("labels")) {
+        int count = 0;
+        for (final Entry<String, String> item : this.stateFullRest.getAdditionalDataMenu().entrySet()) {
+            if (item.getKey().equals("datefields")) {
                 label = new Label("Components", ContentMode.HTML);
                 label.setPrimaryStyleName("valo-menu-subtitle");
                 label.addStyleName("h4");
@@ -169,22 +170,15 @@ public class BaseMenuLayout extends CssLayout implements View {
                 label.setSizeUndefined();
                 menuItemsLayout.addComponent(label);
             }
-            final Button b = new Button(item.getValue(), new ClickListener() {
-            	
-                /**
-				 * 
-				 */
+            final Button b = new Button(item.getValue(), new ClickListener() {            	
 				private static final long serialVersionUID = -8962701523482133238L;
-
 				@Override
                 public void buttonClick(final ClickEvent event) {
                     navigator.navigateTo(item.getKey());
                 }
             });
-            if (count == 2) {
-                b.setCaption(b.getCaption()
-                        + " <span class=\"valo-menu-badge\">123</span>");
-            }
+            if (count == 2)
+                b.setCaption(b.getCaption() + " <span class=\"valo-menu-badge\">123</span>");            
             b.setHtmlContentAllowed(true);
             b.setPrimaryStyleName("valo-menu-item");
             b.setIcon(baseIcon.get());
@@ -193,31 +187,6 @@ public class BaseMenuLayout extends CssLayout implements View {
         }
         label.setValue(label.getValue() + " <span class=\"valo-menu-badge\">" + count + "</span>");
         return this;
-	}
-	
-	@PostConstruct
-	public void init(){
-        menuItems.put("common", "Common UI Elements");
-        menuItems.put("labels", "Labels");
-        menuItems.put("buttons-and-links", "Buttons & Links");
-        menuItems.put("textfields", "Text Fields");
-        menuItems.put("datefields", "Date Fields");
-        menuItems.put("comboboxes", "Combo Boxes");
-        menuItems.put("selects", "Selects");
-        menuItems.put("checkboxes", "Check Boxes & Option Groups");
-        menuItems.put("sliders", "Sliders & Progress Bars");
-        menuItems.put("colorpickers", "Color Pickers");
-        menuItems.put("menubars", "Menu Bars");
-        menuItems.put("trees", "Trees");
-        menuItems.put("tables", "Tables");
-        menuItems.put("dragging", "Drag and Drop");
-        menuItems.put("panels", "Panels");
-        menuItems.put("splitpanels", "Split Panels");
-        menuItems.put("tabs", "Tabs");
-        menuItems.put("accordions", "Accordions");
-        menuItems.put("popupviews", "Popup Views");
-        // menuItems.put("calendar", "Calendar");
-        menuItems.put("forms", "Forms");
 	}
 
     @SuppressWarnings("unchecked")
@@ -232,13 +201,8 @@ public class BaseMenuLayout extends CssLayout implements View {
         }
 
         ns.setValue("tripoin-valo");
-        ns.addValueChangeListener(new ValueChangeListener() {
-        	
-            /**
-			 * 
-			 */
+        ns.addValueChangeListener(new ValueChangeListener() {        	
 			private static final long serialVersionUID = 4509042852150358788L;
-
 			@Override
             public void valueChange(final ValueChangeEvent event) {
                 getUI().setTheme((String) ns.getValue());
@@ -249,7 +213,6 @@ public class BaseMenuLayout extends CssLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
 		
 	}
 }

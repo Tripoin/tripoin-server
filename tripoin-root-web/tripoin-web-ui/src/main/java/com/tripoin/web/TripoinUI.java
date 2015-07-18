@@ -42,6 +42,7 @@ import com.vaadin.server.WrappedHttpSession;
 import com.vaadin.server.WrappedSession;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
@@ -59,7 +60,9 @@ import com.vaadin.ui.themes.ValoTheme;
 public class TripoinUI extends UI implements ErrorHandler {
 	
 	private static final long serialVersionUID = -57029129041123227L;
-	
+
+    private CssLayout menuItems;
+    private CssLayout menuItemsLayout;
 	private ApplicationContext applicationContext;
 	
 	@Autowired
@@ -118,13 +121,19 @@ public class TripoinUI extends UI implements ErrorHandler {
         	e.printStackTrace();
         }
 
+        navigator = new DiscoveryNavigator(this, viewDisplay);
+        if(baseMenuLayout.getNavigator() == null)
+        	baseMenuLayout.setNavigator(navigator);
+        if(menuItems == null)
+        	menuItems = baseMenuLayout.getMenu();
+    	if(menuItemsLayout == null)
+    		menuItemsLayout = baseMenuLayout.getMenuItemsLayout();
+
         getPage().setTitle("Tripoin Web Application");
         setContent(root);
         root.setWidth("100%");
-        root.addMenu(baseMenuLayout.getMenu());
+        root.addMenu(menuItems);
         addStyleName(ValoTheme.UI_WITH_MENU);
-        navigator = new DiscoveryNavigator(this, viewDisplay);
-    	baseMenuLayout.setNavigator(navigator);
 
         final String f = Page.getCurrent().getUriFragment();
         if (f == null || f.equals("")) {
@@ -144,12 +153,12 @@ public class TripoinUI extends UI implements ErrorHandler {
 
             @Override
             public void afterViewChange(final ViewChangeEvent event) {
-                for (final Iterator<Component> it = baseMenuLayout.getMenuItemsLayout().iterator(); it.hasNext();) {
+                for (final Iterator<Component> it = menuItemsLayout.iterator(); it.hasNext();) {
                     it.next().removeStyleName("selected");
                 }
-                for (final Entry<String, String> item : baseMenuLayout.getMenuItems().entrySet()) {
+                for (final Entry<String, String> item : stateFullRest.getAdditionalDataMenu().entrySet()) {
                     if (event.getViewName().equals(item.getKey())) {
-                        for (final Iterator<Component> it = baseMenuLayout.getMenuItemsLayout().iterator(); it.hasNext();) {
+                        for (final Iterator<Component> it = menuItemsLayout.iterator(); it.hasNext();) {
                             final Component c = it.next();
                             if (c.getCaption() != null && c.getCaption().startsWith(item.getValue())) {
                                 c.addStyleName("selected");
