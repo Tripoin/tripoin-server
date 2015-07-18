@@ -17,7 +17,7 @@ Repository For Web Application Server
 
 + Vaadin Demo : [demo.vaadin.com/valo-theme](demo.vaadin.com/valo-theme "Demo Valo Theme") | [https://github.com/vaadin/valo-demo](https://github.com/vaadin/valo-demo "Github Vaadin Demo")
 
-+ Vaadin Sample Project : 
++ Vaadin Sample Project : [https://github.com/vaadin/archetype-application-example](https://github.com/vaadin/archetype-application-example "Vaadin Example Project")
 
 ```java
 Group Id    : com.vaadin
