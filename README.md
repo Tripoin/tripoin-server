@@ -15,7 +15,9 @@ Repository For Web Application Server
 + Vaadin Sample Project : 
 
 > ``Group Id    : com.vaadin``
+
 > ``Artifact Id : vaadin-archetype-application-example``
+
 > ``Version     : 7.4.6``
 
-+ Xpoft Project : [https://github.com/xpoft/spring-vaadin](https://github.com/xpoft/spring-vaadin "Xpoft Spring Vaadin") 
++ Alexander xpoft Project : [https://github.com/xpoft/spring-vaadin](https://github.com/xpoft/spring-vaadin "Spring Vaadin") 
