@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2015 at 09:44 AM
+-- Generation Time: Jul 18, 2015 at 06:20 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -30,15 +30,86 @@ CREATE TABLE IF NOT EXISTS `mst_menu` (
 `menu_id` bigint(20) NOT NULL,
   `menu_code` varchar(150) NOT NULL,
   `menu_name` varchar(255) DEFAULT NULL,
-  `menu_status` smallint(6) DEFAULT NULL,
+  `menu_status` smallint(6) DEFAULT '1',
   `menu_remarks` varchar(255) DEFAULT NULL,
   `menu_created_by` varchar(150) DEFAULT 'admin',
   `menu_created_ip` varchar(150) DEFAULT '127.0.0.1',
   `menu_created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `menu_modified_by` varchar(150) DEFAULT NULL,
   `menu_modified_ip` varchar(150) DEFAULT NULL,
-  `mneu_modified_time` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `menu_modified_time` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `mst_menu`
+--
+
+INSERT INTO `mst_menu` (`menu_id`, `menu_code`, `menu_name`, `menu_status`, `menu_remarks`, `menu_created_by`, `menu_created_ip`, `menu_created_time`, `menu_modified_by`, `menu_modified_ip`, `menu_modified_time`) VALUES
+(1, 'common', 'Common UI Elements', 1, 'Common UI Elements', 'admin', '127.0.0.1', '2015-07-17 08:31:07', NULL, NULL, NULL),
+(2, 'labels', 'Labels', 1, 'Labels', 'admin', '127.0.0.1', '2015-07-17 08:37:11', NULL, NULL, NULL),
+(3, 'buttons-and-links', 'Buttons & Links', 1, 'Buttons & Links', 'admin', '127.0.0.1', '2015-07-17 08:37:38', NULL, NULL, NULL),
+(4, 'textfields', 'Text Fields', 1, 'Text Fields', 'admin', '127.0.0.1', '2015-07-17 08:47:51', NULL, NULL, NULL),
+(5, 'datefields', 'Date Fields', 1, 'Date Fields', 'admin', '127.0.0.1', '2015-07-17 08:48:17', NULL, NULL, NULL),
+(6, 'comboboxes', 'Combo Boxes', 1, 'Combo Boxes', 'admin', '127.0.0.1', '2015-07-17 08:48:17', NULL, NULL, NULL),
+(7, 'selects', 'Selects', 1, 'Selects', 'admin', '127.0.0.1', '2015-07-17 08:49:22', NULL, NULL, NULL),
+(8, 'checkboxes', 'Check Boxes & Option Groups', 1, 'Check Boxes & Option Groups', 'admin', '127.0.0.1', '2015-07-17 08:49:22', NULL, NULL, NULL),
+(9, 'sliders', 'Sliders & Progress Bars', 1, 'Sliders & Progress Bars', 'admin', '127.0.0.1', '2015-07-17 08:49:56', NULL, NULL, NULL),
+(10, 'colorpickers', 'Color Pickers', 1, 'Color Pickers', 'admin', '127.0.0.1', '2015-07-17 08:49:56', NULL, NULL, NULL),
+(11, 'menubars', 'Menu Bars', 1, 'Menu Bars', '', '127.0.0.1', '2015-07-17 08:55:18', NULL, NULL, NULL),
+(12, 'trees', 'Trees', 1, 'Trees', 'admin', '127.0.0.1', '2015-07-17 08:55:18', NULL, NULL, NULL),
+(13, 'tables', 'Tables', 1, 'Tables', 'admin', '127.0.0.1', '2015-07-17 08:55:53', NULL, NULL, NULL),
+(14, 'dragging', 'Drag and Drop', 1, 'Drag and Drop', 'admin', '127.0.0.1', '2015-07-17 08:55:53', NULL, NULL, NULL),
+(15, 'panels', 'Panels', 1, 'Panels', 'admin', '127.0.0.1', '2015-07-17 08:57:22', NULL, NULL, NULL),
+(16, 'splitpanels', 'Split Panels', 1, 'Split Panels', 'admin', '127.0.0.1', '2015-07-17 08:57:22', NULL, NULL, NULL),
+(17, 'tabs', 'Tabs', 1, 'Tabs', 'admin', '127.0.0.1', '2015-07-17 08:58:00', NULL, NULL, NULL),
+(18, 'accordions', 'Accordions', 1, 'Accordions', 'admin', '127.0.0.1', '2015-07-17 08:58:00', NULL, NULL, NULL),
+(19, 'popupviews', 'Popup Views', 1, 'Popup Views', 'admin', '127.0.0.1', '2015-07-17 08:58:30', NULL, NULL, NULL),
+(20, 'forms', 'Forms', 1, 'Forms', 'admin', '127.0.0.1', '2015-07-17 08:58:30', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mst_menu_role`
+--
+
+CREATE TABLE IF NOT EXISTS `mst_menu_role` (
+`menu_role_id` bigint(20) NOT NULL,
+  `menu_id` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+
+--
+-- Dumping data for table `mst_menu_role`
+--
+
+INSERT INTO `mst_menu_role` (`menu_role_id`, `menu_id`, `role_id`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1),
+(7, 7, 1),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1),
+(11, 11, 1),
+(12, 12, 1),
+(13, 13, 1),
+(14, 14, 1),
+(15, 15, 1),
+(16, 16, 1),
+(17, 17, 1),
+(18, 18, 1),
+(19, 19, 1),
+(20, 20, 1),
+(21, 1, 2),
+(22, 2, 2),
+(23, 5, 2),
+(24, 9, 2),
+(25, 15, 2),
+(26, 16, 2),
+(27, 20, 2);
 
 -- --------------------------------------------------------
 
@@ -87,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `sec_user` (
 
 INSERT INTO `sec_user` (`user_id`, `user_username`, `user_password`, `user_enabled`, `user_expired_date`, `user_non_locked`, `user_auth`, `user_status`, `user_remarks`, `role_id`) VALUES
 (1, 'ridla', 'wWmc8jbo5M9t1mSTHYHzgFb+ju0=', 1, NULL, NULL, NULL, 1, NULL, 1),
-(2, 'bangkit', '6pzG9pirdnShIOxMaYgSexDkjiE=', 1, NULL, NULL, NULL, 1, NULL, 1);
+(2, 'bangkit', '6pzG9pirdnShIOxMaYgSexDkjiE=', 1, NULL, NULL, NULL, 1, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -188,7 +259,13 @@ INSERT INTO `trx_product_category` (`product_id`, `category_id`) VALUES
 -- Indexes for table `mst_menu`
 --
 ALTER TABLE `mst_menu`
- ADD PRIMARY KEY (`menu_id`), ADD UNIQUE KEY `menu_code` (`menu_code`);
+ ADD PRIMARY KEY (`menu_id`), ADD UNIQUE KEY `menu_code` (`menu_code`), ADD UNIQUE KEY `menu_code_2` (`menu_code`);
+
+--
+-- Indexes for table `mst_menu_role`
+--
+ALTER TABLE `mst_menu_role`
+ ADD PRIMARY KEY (`menu_role_id`);
 
 --
 -- Indexes for table `sec_role`
@@ -228,7 +305,12 @@ ALTER TABLE `trx_product`
 -- AUTO_INCREMENT for table `mst_menu`
 --
 ALTER TABLE `mst_menu`
-MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `mst_menu_role`
+--
+ALTER TABLE `mst_menu_role`
+MODIFY `menu_role_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `sec_role`
 --
