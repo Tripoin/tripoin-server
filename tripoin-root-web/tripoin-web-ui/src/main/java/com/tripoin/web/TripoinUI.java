@@ -194,8 +194,8 @@ public class TripoinUI extends UI implements ErrorHandler {
 
 	@Override
 	public void close() {
-		stateFullRest.clearAllCookies();
 		getAccessControl().clearSecurityContext();
+        getSession().close();
 		super.close();
 	}
 

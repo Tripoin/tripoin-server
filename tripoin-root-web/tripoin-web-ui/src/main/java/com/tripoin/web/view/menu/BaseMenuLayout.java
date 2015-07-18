@@ -127,9 +127,9 @@ public class BaseMenuLayout extends CssLayout implements View {
 			private static final long serialVersionUID = -7829505006330125630L;
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-                VaadinSession.getCurrent().getSession().invalidate();
-                getSession().close();
+		        VaadinSession.getCurrent().getSession().invalidate();
                 getUI().close();
+        		stateFullRest.clearAllCookies();
                 Page.getCurrent().reload();
 			}
 		});
