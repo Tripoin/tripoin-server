@@ -43,7 +43,8 @@
 		<property name="wsContextHTTP" value="/${tripoin.integration.ws.context}"/>
 	</bean>
 	
-	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" >
+	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" scope="session">
+		<aop:scoped-proxy proxy-target-class="true" />
 		<property name="isOAuth" value="${tripoin.is.oauth}"/>
 	</bean>
 	

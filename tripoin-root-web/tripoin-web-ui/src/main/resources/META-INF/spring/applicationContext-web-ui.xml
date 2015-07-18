@@ -27,6 +27,7 @@
     
     <bean id="baseMenuLayout" class="com.tripoin.web.view.menu.BaseMenuLayout" scope="prototype">
     	<property name="accessControl" ref="accessControl"/>
+    	<property name="stateFullRest" ref="stateFullRest"/>
     </bean>
     <bean id="customMenuLayout" class="com.tripoin.web.view.menu.CustomMenuLayout" scope="prototype"/>
     
