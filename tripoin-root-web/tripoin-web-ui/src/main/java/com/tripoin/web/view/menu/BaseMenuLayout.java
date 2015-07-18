@@ -1,6 +1,6 @@
 package com.tripoin.web.view.menu;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -41,7 +41,7 @@ public class BaseMenuLayout extends CssLayout implements View {
 	 * 
 	 */
 	private static final long serialVersionUID = -4795419684894048255L;
-    private static Map<String, String> themeVariants = new HashMap<String, String>();
+    private static Map<String, String> themeVariants = new LinkedHashMap<String, String>();
     private final TestIcon baseIcon = new TestIcon(100);
     private CssLayout menuItemsLayout = new CssLayout();
     private DiscoveryNavigator navigator;
