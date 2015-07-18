@@ -6,20 +6,19 @@
 #####Command line :
 ######Mode Debug
 
-1. *tripoin-web-service* module
++ *tripoin-web-service* module
 
 > ``mvn clean install -DskipTests``
 
-2. *tripoin-web-ui* module | run test for development [http://localhost:8080/](http://localhost:8080/ "localhost")
++ *tripoin-web-ui* module | run test for development [http://localhost:8080/](http://localhost:8080/ "localhost")
 
 > ``mvn jetty:run``
 
 ######Build War 
 
-1. *tripoin-root-web* module
++ *tripoin-root-web* module
 
-> ``mvn clean install -DskipTests``
-
-2. *tripoin-root-web* module
-
-> ``mvn -Pproduction package``
+```java
+mvn clean install -DskipTests
+mvn -Pproduction package
+```
