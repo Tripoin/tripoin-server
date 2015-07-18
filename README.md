@@ -9,8 +9,13 @@ Repository For Web Application Server
 - Web Service (REST)
 - User Interface
 
-#####Reference
-+ Vaadin Demo : [demo.vaadin.com/valo-theme](demo.vaadin.com/valo-theme "Vaadin Demo") | [https://github.com/vaadin/valo-demo](https://github.com/vaadin/valo-demo "Github Vaadin Demo")
+
+# Reference
++ Spring Integration : [https://github.com/xpadro/spring-integration](https://github.com/xpadro/spring-integration "Spring Integration")
+
++ Spring Vaadin : [https://github.com/xpoft/spring-vaadin](https://github.com/xpoft/spring-vaadin "Spring Vaadin")
+
++ Vaadin Demo : [demo.vaadin.com/valo-theme](demo.vaadin.com/valo-theme "Demo Valo Theme") | [https://github.com/vaadin/valo-demo](https://github.com/vaadin/valo-demo "Github Vaadin Demo")
 
 + Vaadin Sample Project : 
 
@@ -18,6 +23,4 @@ Repository For Web Application Server
 
 > ``Artifact Id : vaadin-archetype-application-example``
 
-> ``Version     : 7.4.6``
-
-+ Alexander xpoft Project : [https://github.com/xpoft/spring-vaadin](https://github.com/xpoft/spring-vaadin "Spring Vaadin") 
+> ``Version     : 7.4.6`` 
