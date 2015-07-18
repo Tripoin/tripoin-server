@@ -19,7 +19,7 @@ Repository For Web Application Server
 
 + Vaadin Sample Project : 
 
-````java
+```java
 Group Id    : com.vaadin
 Artifact Id : vaadin-archetype-application-example
 Version     : 7.4.6
