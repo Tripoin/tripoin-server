@@ -19,8 +19,8 @@ Repository For Web Application Server
 
 + Vaadin Sample Project : 
 
-> ``Group Id    : com.vaadin``
-
-> ``Artifact Id : vaadin-archetype-application-example``
-
-> ``Version     : 7.4.6`` 
+````java
+Group Id    : com.vaadin
+Artifact Id : vaadin-archetype-application-example
+Version     : 7.4.6
+``` 
