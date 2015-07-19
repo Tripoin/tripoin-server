@@ -18,7 +18,6 @@ package com.tripoin.web.view.valo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -171,12 +170,10 @@ public class Sliders extends VerticalLayout implements View {
         // pb2.setValue(0.6f);
         row.addComponent(pb2);
 
-        if (!TripoinUI.isTestMode()) {
-            ProgressBar pb3 = new ProgressBar();
-            pb3.setIndeterminate(true);
-            pb3.setCaption("Indeterminate");
-            row.addComponent(pb3);
-        }
+        ProgressBar pb3 = new ProgressBar();
+        pb3.setIndeterminate(true);
+        pb3.setCaption("Indeterminate");
+        row.addComponent(pb3);
     }
 
     float progress = 0;
@@ -209,22 +206,15 @@ public class Sliders extends VerticalLayout implements View {
     private ProgressBar pb2;
 
     @Override
-    public void enter(ViewChangeEvent event) {
-        if (!TripoinUI.isTestMode()) {
-            getUI().setPollInterval(1000);
-            update.start();
-        } else {
-            pb.setValue(0.3f);
-            pb2.setValue(0.6f);
-        }
+    public void enter(ViewChangeEvent event) {    
+        getUI().setPollInterval(1000);
+        update.start();
     }
 
     @Override
     public void detach() {
-        if (!TripoinUI.isTestMode()) {
-            getUI().setPollInterval(-1);
-            update.interrupt();
-        }
+        getUI().setPollInterval(-1);
+        update.interrupt();
         super.detach();
     }
 

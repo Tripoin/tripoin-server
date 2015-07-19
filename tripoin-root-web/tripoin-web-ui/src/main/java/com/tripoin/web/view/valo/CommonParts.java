@@ -17,7 +17,6 @@ package com.tripoin.web.view.valo;
 
 import org.springframework.context.annotation.Scope;
 
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -159,25 +158,23 @@ public class CommonParts extends VerticalLayout implements View {
         spinnerDesc.setCaption("Spinner");
         content.addComponent(spinnerDesc);
 
-        if (!TripoinUI.isTestMode()) {
-            final Label spinner = new Label();
-            spinner.addStyleName("spinner");
+        final Label spinner = new Label();
+        spinner.addStyleName("spinner");
 
-            Button showSpinnerButton = new Button("Show spinner",
-                    new ClickListener() {
-                        /**
-						 * 
-						 */
-						private static final long serialVersionUID = 2506606142500597234L;
+        Button showSpinnerButton = new Button("Show spinner",
+                new ClickListener() {
+                    /**
+					 * 
+					 */
+					private static final long serialVersionUID = 2506606142500597234L;
 
-						@Override
-                        public void buttonClick(final ClickEvent event) {
-                            content.replaceComponent(event.getComponent(),
-                                    spinner);
-                        }
-                    });
-            content.addComponent(showSpinnerButton);
-        }
+					@Override
+                    public void buttonClick(final ClickEvent event) {
+                        content.replaceComponent(event.getComponent(),
+                                spinner);
+                    }
+                });
+        content.addComponent(showSpinnerButton);
 
         return p;
     }

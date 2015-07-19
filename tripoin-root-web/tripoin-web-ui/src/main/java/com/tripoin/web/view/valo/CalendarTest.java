@@ -9,7 +9,6 @@ import java.util.TimeZone;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.servlet.VaadinView;
 import com.tripoin.web.view.components.calendar.CalendarTestEvent;
 import com.vaadin.annotations.Theme;
@@ -144,8 +143,6 @@ public class CalendarTest extends GridLayout implements View {
 
     private Integer lastDay;
 
-    private Locale defaultLocale = Locale.US;
-
     private boolean showWeeklyView;
 
     private boolean useSecondResolution;
@@ -160,19 +157,13 @@ public class CalendarTest extends GridLayout implements View {
         setSpacing(true);
 
         // handleURLParams(request.getParameterMap());
-        testBench = TripoinUI.isTestMode();
 
         initContent();
     }
 
     public void initContent() {
         // Set default Locale for this application
-        if (testBench) {
-            setLocale(defaultLocale);
-
-        } else {
-            setLocale(Locale.getDefault());
-        }
+        setLocale(Locale.getDefault());
 
         // Initialize locale, timezone and timeformat selects.
         localeSelect = createLocaleSelect();

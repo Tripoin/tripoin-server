@@ -21,7 +21,6 @@ import java.util.Locale;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -213,13 +212,8 @@ public class DateFields extends VerticalLayout implements View {
         row.addComponent(date);
     }
 
-    @SuppressWarnings("deprecation")
 	private void setDate(DateField date) {
-        if (TripoinUI.isTestMode()) {
-            date.setValue(new Date(2014 - 1900, 5, 7));
-        } else {
-            date.setValue(new Date());
-        }
+    	date.setValue(new Date());
     }
 
     @Override

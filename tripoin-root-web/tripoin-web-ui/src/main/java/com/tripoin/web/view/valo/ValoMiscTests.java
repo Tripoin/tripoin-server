@@ -15,7 +15,6 @@
  */
 package com.tripoin.web.view.valo;
 
-import com.tripoin.web.TripoinUI;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -75,7 +74,7 @@ public class ValoMiscTests extends UI {
 
         TreeTable table = new TreeTable();
         table.setWidth("100%");
-        table.setContainerDataSource(TripoinUI.generateContainer(200, true));
+        table.setContainerDataSource(MockGeneratorContainer.generateContainer(200, true));
         Tables.configure(table, true, false, false, true, true, true, false,
                 true, false, false, false, false, false, false);
         layout.addComponent(table);

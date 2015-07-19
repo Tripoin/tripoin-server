@@ -18,7 +18,6 @@ package com.tripoin.web.view.valo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -54,11 +53,11 @@ public class ComboBoxes extends VerticalLayout implements View {
 
         ComboBox combo = new ComboBox("Normal");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
         combo.setNullSelectionAllowed(false);
         combo.select(combo.getItemIds().iterator().next());
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.setItemIcon(combo.getItemIds().iterator().next(),
                 new ThemeResource("../runo/icons/16/document.png"));
         row.addComponent(combo);
@@ -70,11 +69,11 @@ public class ComboBoxes extends VerticalLayout implements View {
 
         combo = new ComboBox();
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
         combo.setNullSelectionAllowed(false);
         combo.select(combo.getItemIds().iterator().next());
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.setWidth("240px");
         group.addComponent(combo);
         Button today = new Button("Do It");
@@ -130,41 +129,41 @@ public class ComboBoxes extends VerticalLayout implements View {
 
         combo = new ComboBox("Custom color");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("color1");
         row.addComponent(combo);
 
         combo = new ComboBox("Custom color");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("color2");
         row.addComponent(combo);
 
         combo = new ComboBox("Custom color");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("color3");
         row.addComponent(combo);
 
         combo = new ComboBox("Small");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("small");
         row.addComponent(combo);
 
         combo = new ComboBox("Large");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("large");
         row.addComponent(combo);
 
@@ -178,17 +177,17 @@ public class ComboBoxes extends VerticalLayout implements View {
 
         combo = new ComboBox("Tiny");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("tiny");
         row.addComponent(combo);
 
         combo = new ComboBox("Huge");
         combo.setInputPrompt("You can type here");
-        combo.setContainerDataSource(TripoinUI.generateContainer(200, false));
-        combo.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        combo.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        combo.setContainerDataSource(MockGeneratorContainer.generateContainer(200, false));
+        combo.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        combo.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         combo.addStyleName("huge");
         row.addComponent(combo);
     }

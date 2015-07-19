@@ -18,7 +18,6 @@ package com.tripoin.web.view.valo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Container;
 import com.vaadin.event.dd.DragAndDropEvent;
@@ -58,12 +57,12 @@ public class Trees extends VerticalLayout implements View {
         Tree tree = new Tree();
         tree.setSelectable(true);
         tree.setMultiSelect(true);
-        Container generateContainer = TripoinUI.generateContainer(10, true);
+        Container generateContainer = MockGeneratorContainer.generateContainer(10, true);
         tree.setContainerDataSource(generateContainer);
         tree.setDragMode(TreeDragMode.NODE);
         row.addComponent(tree);
-        tree.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
-        tree.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+        tree.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
+        tree.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         tree.expandItem(generateContainer.getItemIds().iterator().next());
 
         tree.setDropHandler(new DropHandler() {
@@ -84,12 +83,11 @@ public class Trees extends VerticalLayout implements View {
         });
 
         // Add actions (context menu)
-        tree.addActionHandler(TripoinUI.getActionHandler());
+        tree.addActionHandler(MockActionHandler.getActionHandler());
     }
 
     @Override
     public void enter(ViewChangeEvent event) {
-        // TODO Auto-generated method stub
 
     }
 

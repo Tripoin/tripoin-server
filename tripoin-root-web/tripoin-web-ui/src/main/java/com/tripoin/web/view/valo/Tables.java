@@ -1,18 +1,3 @@
-/*
- * Copyright 2000-2014 Vaadin Ltd.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package com.tripoin.web.view.valo;
 
 import java.util.List;
@@ -24,13 +9,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.tripoin.core.dto.ProductData;
-import com.tripoin.web.TripoinUI;
-import com.tripoin.web.container.ProductContainer;
 import com.tripoin.web.service.IInventoryService;
 import com.tripoin.web.servlet.VaadinView;
-import com.vaadin.data.Container;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.dd.DragAndDropEvent;
 import com.vaadin.event.dd.DropHandler;
 import com.vaadin.event.dd.acceptcriteria.AcceptAll;
@@ -53,7 +36,6 @@ import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.Table.RowHeaderMode;
 import com.vaadin.ui.Table.TableDragMode;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.TreeTable;
 import com.vaadin.ui.VerticalLayout;
 
 @Component
@@ -61,21 +43,13 @@ import com.vaadin.ui.VerticalLayout;
 @VaadinView(value = "tables", cached = true)
 public class Tables extends VerticalLayout implements View {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 7037812110286422303L;
-	/*final Container normalContainer = TripoinUI.generateContainer(200, false);*/
-    final Container hierarchicalContainer = TripoinUI.generateContainer(200,
-            true);
     
     @Autowired
     private IInventoryService inventoryService;
     
-    @Autowired
-    private ProductContainer productContainer;
+    private BeanItemContainer<ProductData> productContainer = new BeanItemContainer<>(ProductData.class);
 
-    CheckBox hierarchical = new CheckBox("Hierarchical");
     CheckBox footer = new CheckBox("Footer", true);
     CheckBox sized = new CheckBox("Sized");
     CheckBox expandRatios = new CheckBox("Expand ratios");
@@ -107,16 +81,12 @@ public class Tables extends VerticalLayout implements View {
         wrap.setSpacing(true);
         addComponent(wrap);
 
-        wrap.addComponents(hierarchical, footer, sized, expandRatios, stripes,
+        wrap.addComponents(footer, sized, expandRatios, stripes,
                 verticalLines, horizontalLines, borderless, headers, compact,
                 small, rowIndex, rowCaption, rowIcon, componentsInCells);
 
         ValueChangeListener update = new ValueChangeListener() {
-            /**
-			 * 
-			 */
 			private static final long serialVersionUID = -2039663671423908214L;
-
 			@Override
             public void valueChange(ValueChangeEvent event) {
                 if (table == null) {
@@ -124,25 +94,17 @@ public class Tables extends VerticalLayout implements View {
                     List<ProductData> productDatas = inventoryService.getAllProducts();
                     productContainer.removeAllItems();
                     productContainer.addAll(productDatas);
+                    productContainer.removeContainerProperty("id");
+                    productContainer.removeContainerProperty("categoryDatas");
+                    productContainer.removeContainerProperty("availabilityData");
+                    productContainer.addNestedContainerProperty("availabilityData.name");
                     table.setContainerDataSource(productContainer);
+                    table.setColumnHeader("productName", "Product Name");
+                    table.setColumnHeader("price", "Price");
+                    table.setColumnHeader("stockCount", "Stock");
+                    table.setColumnHeader("availabilityData.name", "Availability");
                     addComponent(table);
                 }
-                if (hierarchical.getValue() && table instanceof Table) {
-                    removeComponent(table);
-                    table = new TreeTable();
-                    table.setContainerDataSource(hierarchicalContainer);
-                    addComponent(table);
-                } else if (!hierarchical.getValue()
-                        && table instanceof TreeTable) {
-                    removeComponent(table);
-                    table = new Table();
-                    List<ProductData> productDatas = inventoryService.getAllProducts();
-                    productContainer.removeAllItems();
-                    productContainer.addAll(productDatas);
-                    table.setContainerDataSource(productContainer);
-                    addComponent(table);
-                }
-
                 configure(table, footer.getValue(), sized.getValue(),
                         expandRatios.getValue(), stripes.getValue(),
                         verticalLines.getValue(), horizontalLines.getValue(),
@@ -153,7 +115,6 @@ public class Tables extends VerticalLayout implements View {
             }
         };
 
-        hierarchical.addValueChangeListener(update);
         footer.addValueChangeListener(update);
         sized.addValueChangeListener(update);
         expandRatios.addValueChangeListener(update);
@@ -184,7 +145,7 @@ public class Tables extends VerticalLayout implements View {
         table.setColumnCollapsingAllowed(true);
         table.setColumnReorderingAllowed(true);
         table.setPageLength(6);
-        table.addActionHandler(TripoinUI.getActionHandler());
+        table.addActionHandler(MockActionHandler.getActionHandler());
         table.setDragMode(TableDragMode.MULTIROW);
         table.setDropHandler(new DropHandler() {
             /**
@@ -202,8 +163,8 @@ public class Tables extends VerticalLayout implements View {
                 Notification.show(event.getTransferable().toString());
             }
         });
-        table.setColumnAlignment(TripoinUI.DESCRIPTION_PROPERTY, Align.RIGHT);
-        table.setColumnAlignment(TripoinUI.INDEX_PROPERTY, Align.CENTER);
+        table.setColumnAlignment(MockGeneratorContainer.DESCRIPTION_PROPERTY, Align.RIGHT);
+        table.setColumnAlignment(MockGeneratorContainer.INDEX_PROPERTY, Align.CENTER);
 
         table.removeContainerProperty("textfield");
         table.removeGeneratedColumn("textfield");
@@ -384,11 +345,11 @@ public class Tables extends VerticalLayout implements View {
         }
         table.setFooterVisible(footer);
         if (footer) {
-            table.setColumnFooter(TripoinUI.CAPTION_PROPERTY, "caption");
-            table.setColumnFooter(TripoinUI.DESCRIPTION_PROPERTY,
+            table.setColumnFooter(MockGeneratorContainer.CAPTION_PROPERTY, "caption");
+            table.setColumnFooter(MockGeneratorContainer.DESCRIPTION_PROPERTY,
                     "description");
-            table.setColumnFooter(TripoinUI.ICON_PROPERTY, "icon");
-            table.setColumnFooter(TripoinUI.INDEX_PROPERTY, "index");
+            table.setColumnFooter(MockGeneratorContainer.ICON_PROPERTY, "icon");
+            table.setColumnFooter(MockGeneratorContainer.INDEX_PROPERTY, "index");
         }
 
         if (sized) {
@@ -403,9 +364,8 @@ public class Tables extends VerticalLayout implements View {
                 table.setWidth("100%");
             }
         }
-        table.setColumnExpandRatio(TripoinUI.CAPTION_PROPERTY,
-                expandRatios ? 1.0f : 0);
-        table.setColumnExpandRatio(TripoinUI.DESCRIPTION_PROPERTY,
+        table.setColumnExpandRatio(MockGeneratorContainer.CAPTION_PROPERTY, expandRatios ? 1.0f : 0);
+        table.setColumnExpandRatio(MockGeneratorContainer.DESCRIPTION_PROPERTY,
                 expandRatios ? 1.0f : 0);
 
         if (!stripes) {
@@ -460,14 +420,14 @@ public class Tables extends VerticalLayout implements View {
 
         if (rowCaption) {
             table.setRowHeaderMode(RowHeaderMode.PROPERTY);
-            table.setItemCaptionPropertyId(TripoinUI.CAPTION_PROPERTY);
+            table.setItemCaptionPropertyId(MockGeneratorContainer.CAPTION_PROPERTY);
         } else {
             table.setItemCaptionPropertyId(null);
         }
 
         if (rowIcon) {
             table.setRowHeaderMode(RowHeaderMode.ICON_ONLY);
-            table.setItemIconPropertyId(TripoinUI.ICON_PROPERTY);
+            table.setItemIconPropertyId(MockGeneratorContainer.ICON_PROPERTY);
         } else {
             table.setItemIconPropertyId(null);
         }
@@ -475,7 +435,6 @@ public class Tables extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeEvent event) {
-        // TODO Auto-generated method stub
 
     }
 
