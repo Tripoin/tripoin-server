@@ -127,10 +127,7 @@ public class BaseMenuLayout extends CssLayout implements View {
 			private static final long serialVersionUID = -7829505006330125630L;
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-		        VaadinSession.getCurrent().getSession().invalidate();
-                getUI().close();
-        		stateFullRest.clearAllCookies();
-                Page.getCurrent().reload();
+				doLogout();
 			}
 		});
         addComponent(settings);
@@ -209,6 +206,13 @@ public class BaseMenuLayout extends CssLayout implements View {
             }
         });
         return ns;
+    }
+    
+    private void doLogout(){
+		stateFullRest.clearAllCookies();
+        VaadinSession.getCurrent().getSession().invalidate();
+        getUI().close();
+        Page.getCurrent().reload();    	
     }
 
 	@Override
