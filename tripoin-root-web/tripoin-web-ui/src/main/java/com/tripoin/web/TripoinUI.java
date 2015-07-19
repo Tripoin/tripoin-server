@@ -55,11 +55,8 @@ public class TripoinUI extends UI implements ErrorHandler {
 	@Autowired
 	private IStateFullRest stateFullRest;
 
+	@Autowired
 	private BaseMenuLayout baseMenuLayout;
-
-    public void setBaseMenuLayout(BaseMenuLayout baseMenuLayout) {
-		this.baseMenuLayout = baseMenuLayout;
-	}
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
