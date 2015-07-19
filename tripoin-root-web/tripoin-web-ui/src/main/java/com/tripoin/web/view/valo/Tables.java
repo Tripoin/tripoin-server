@@ -52,15 +52,15 @@ public class Tables extends VerticalLayout implements View {
 
     CheckBox footer = new CheckBox("Footer", true);
     CheckBox sized = new CheckBox("Sized");
-    CheckBox expandRatios = new CheckBox("Expand ratios");
+    CheckBox expandRatios = new CheckBox("Expand ratios", true);
     CheckBox stripes = new CheckBox("Stripes", true);
     CheckBox verticalLines = new CheckBox("Vertical lines", true);
     CheckBox horizontalLines = new CheckBox("Horizontal lines", true);
-    CheckBox borderless = new CheckBox("Borderless");
+    CheckBox borderless = new CheckBox("Borderless", true);
     CheckBox headers = new CheckBox("Header", true);
     CheckBox compact = new CheckBox("Compact");
-    CheckBox small = new CheckBox("Small");
-    CheckBox rowIndex = new CheckBox("Row index", false);
+    CheckBox small = new CheckBox("Small", true);
+    CheckBox rowIndex = new CheckBox("Row index", true);
     CheckBox rowIcon = new CheckBox("Row icon", false);
     CheckBox rowCaption = new CheckBox("Row caption", false);
     CheckBox componentsInCells = new CheckBox("Components in Cells", false);
