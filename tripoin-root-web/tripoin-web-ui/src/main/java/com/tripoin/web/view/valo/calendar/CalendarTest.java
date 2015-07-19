@@ -1,16 +1,27 @@
-package com.tripoin.web.view.valo;
+/**
+ * Copyright 2013 Vaadin Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.tripoin.web.view.valo.calendar;
 
 import java.text.DateFormatSymbols;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import com.tripoin.web.servlet.VaadinView;
-import com.tripoin.web.view.valo.calendar.CalendarTestEvent;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
@@ -19,8 +30,8 @@ import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.Alignment;
@@ -31,7 +42,6 @@ import com.vaadin.ui.Calendar;
 import com.vaadin.ui.Calendar.TimeFormat;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -40,6 +50,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.DateClickEvent;
@@ -54,14 +65,10 @@ import com.vaadin.ui.components.calendar.event.BasicEventProvider;
 import com.vaadin.ui.components.calendar.event.CalendarEvent;
 import com.vaadin.ui.components.calendar.handler.BasicDateClickHandler;
 import com.vaadin.ui.components.calendar.handler.BasicWeekClickHandler;
-import com.vaadin.ui.themes.ValoTheme;
 
 /** Calendar component test application */
-@Component
-@Scope("prototype")
-@VaadinView(value = "calendar", cached = true)
-@Theme("tripoin-valo")
-public class CalendarTest extends GridLayout implements View {
+@Theme("tests-calendar")
+public class CalendarTest extends UI {
 
     private static final long serialVersionUID = -5436777475398410597L;
 
@@ -88,8 +95,6 @@ public class CalendarTest extends GridLayout implements View {
 
     private Button weekButton;
 
-    private Button dayButton;
-
     private Button nextButton;
 
     private Button prevButton;
@@ -115,7 +120,7 @@ public class CalendarTest extends GridLayout implements View {
 
     private Button applyEventButton;
 
-    private Mode viewMode = Mode.WEEK;
+    private Mode viewMode = Mode.MONTH;
 
     private BasicEventProvider dataSource;
 
@@ -143,6 +148,8 @@ public class CalendarTest extends GridLayout implements View {
 
     private Integer lastDay;
 
+    private Locale defaultLocale = Locale.US;
+
     private boolean showWeeklyView;
 
     private boolean useSecondResolution;
@@ -150,20 +157,68 @@ public class CalendarTest extends GridLayout implements View {
     private DateField startDateField;
     private DateField endDateField;
 
-    public CalendarTest() {
-        setSizeFull();
-        setHeight("1000px");
-        setMargin(true);
-        setSpacing(true);
+    @Override
+    public void init(VaadinRequest request) {
+        GridLayout layout = new GridLayout();
+        layout.setSizeFull();
+        layout.setMargin(true);
+        setContent(layout);
 
-        // handleURLParams(request.getParameterMap());
+        handleURLParams(request.getParameterMap());
 
         initContent();
     }
 
+    private void handleURLParams(Map<String, String[]> parameters) {
+        testBench = parameters.containsKey("testBench")
+                || parameters.containsKey("?testBench");
+
+        if (parameters.containsKey("width")) {
+            calendarWidth = parameters.get("width")[0];
+        }
+
+        if (parameters.containsKey("height")) {
+            calendarHeight = parameters.get("height")[0];
+        }
+
+        if (parameters.containsKey("firstDay")) {
+            firstDay = Integer.parseInt(parameters.get("firstDay")[0]);
+        }
+
+        if (parameters.containsKey("lastDay")) {
+            lastDay = Integer.parseInt(parameters.get("lastDay")[0]);
+        }
+
+        if (parameters.containsKey("firstHour")) {
+            firstHour = Integer.parseInt(parameters.get("firstHour")[0]);
+        }
+
+        if (parameters.containsKey("lastHour")) {
+            lastHour = Integer.parseInt(parameters.get("lastHour")[0]);
+        }
+
+        if (parameters.containsKey("locale")) {
+            String localeArray[] = parameters.get("locale")[0].split("_");
+            defaultLocale = new Locale(localeArray[0], localeArray[1]);
+            setLocale(defaultLocale);
+        }
+
+        if (parameters.containsKey(("secondsResolution"))) {
+            useSecondResolution = true;
+        }
+
+        showWeeklyView = parameters.containsKey("weekly");
+
+    }
+
     public void initContent() {
         // Set default Locale for this application
-        setLocale(Locale.getDefault());
+        if (testBench) {
+            setLocale(defaultLocale);
+
+        } else {
+            setLocale(Locale.getDefault());
+        }
 
         // Initialize locale, timezone and timeformat selects.
         localeSelect = createLocaleSelect();
@@ -220,7 +275,7 @@ public class CalendarTest extends GridLayout implements View {
         calendar.add(GregorianCalendar.DATE, 3);
         start = calendar.getTime();
         end = start;
-        event = getNewEvent("All-day event", start, end);
+        event = getNewEvent("Allday event", start, end);
         event.setAllDay(true);
         event.setDescription("Some description.");
         event.setStyleName("color3");
@@ -230,7 +285,7 @@ public class CalendarTest extends GridLayout implements View {
         calendar.add(GregorianCalendar.DATE, 1);
         start = calendar.getTime();
         end = start;
-        event = getNewEvent("Second all-day event", start, end);
+        event = getNewEvent("Second allday event", start, end);
         event.setAllDay(true);
         event.setDescription("Some description.");
         event.setStyleName("color2");
@@ -281,27 +336,24 @@ public class CalendarTest extends GridLayout implements View {
         HorizontalLayout hl = new HorizontalLayout();
         hl.setWidth("100%");
         hl.setSpacing(true);
+        hl.setMargin(new MarginInfo(false, false, true, false));
         hl.addComponent(prevButton);
         hl.addComponent(captionLabel);
-
-        CssLayout group = new CssLayout();
-        group.addStyleName("v-component-group");
-        group.addComponent(dayButton);
-        group.addComponent(weekButton);
-        group.addComponent(monthButton);
-        hl.addComponent(group);
-
+        hl.addComponent(monthButton);
+        hl.addComponent(weekButton);
         hl.addComponent(nextButton);
         hl.setComponentAlignment(prevButton, Alignment.MIDDLE_LEFT);
         hl.setComponentAlignment(captionLabel, Alignment.MIDDLE_CENTER);
-        hl.setComponentAlignment(group, Alignment.MIDDLE_CENTER);
+        hl.setComponentAlignment(monthButton, Alignment.MIDDLE_CENTER);
+        hl.setComponentAlignment(weekButton, Alignment.MIDDLE_CENTER);
         hl.setComponentAlignment(nextButton, Alignment.MIDDLE_RIGHT);
 
-        // monthButton.setVisible(viewMode == Mode.WEEK);
-        // weekButton.setVisible(viewMode == Mode.DAY);
+        monthButton.setVisible(viewMode == Mode.WEEK);
+        weekButton.setVisible(viewMode == Mode.DAY);
 
         HorizontalLayout controlPanel = new HorizontalLayout();
         controlPanel.setSpacing(true);
+        controlPanel.setMargin(new MarginInfo(false, false, true, false));
         controlPanel.setWidth("100%");
         controlPanel.addComponent(localeSelect);
         controlPanel.addComponent(timeZoneSelect);
@@ -323,17 +375,15 @@ public class CalendarTest extends GridLayout implements View {
                 Alignment.MIDDLE_LEFT);
         controlPanel.setComponentAlignment(addNewEvent, Alignment.MIDDLE_LEFT);
 
-        Label viewCaption = new Label("Calendar");
-        viewCaption.setStyleName(ValoTheme.LABEL_H1);
-        addComponent(viewCaption);
-        addComponent(controlPanel);
-        addComponent(hl);
-        addComponent(calendarComponent);
-        setRowExpandRatio(getRows() - 1, 1.0f);
+        GridLayout layout = (GridLayout) getContent();
+        layout.addComponent(controlPanel);
+        layout.addComponent(hl);
+        layout.addComponent(calendarComponent);
+        layout.setRowExpandRatio(layout.getRows() - 1, 1.0f);
     }
 
     private void initNavigationButtons() {
-        monthButton = new Button("Month", new ClickListener() {
+        monthButton = new Button("Month view", new ClickListener() {
 
             private static final long serialVersionUID = 1L;
 
@@ -343,7 +393,7 @@ public class CalendarTest extends GridLayout implements View {
             }
         });
 
-        weekButton = new Button("Week", new ClickListener() {
+        weekButton = new Button("Week view", new ClickListener() {
 
             private static final long serialVersionUID = 1L;
 
@@ -355,20 +405,6 @@ public class CalendarTest extends GridLayout implements View {
                 handler.weekClick(new WeekClick(calendarComponent, calendar
                         .get(GregorianCalendar.WEEK_OF_YEAR), calendar
                         .get(GregorianCalendar.YEAR)));
-            }
-        });
-
-        dayButton = new Button("Day", new ClickListener() {
-
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void buttonClick(ClickEvent event) {
-                // simulate day click
-                BasicDateClickHandler handler = (BasicDateClickHandler) calendarComponent
-                        .getHandler(DateClickEvent.EVENT_ID);
-                handler.dateClick(new DateClickEvent(calendarComponent,
-                        calendar.getTime()));
             }
         });
 
@@ -495,25 +531,16 @@ public class CalendarTest extends GridLayout implements View {
         });
 
         captionField = createTextField("Caption");
-        captionField.setInputPrompt("Event name");
-        captionField.setRequired(true);
         final TextField whereField = createTextField("Where");
-        whereField.setInputPrompt("Address or location");
         final TextArea descriptionField = createTextArea("Description");
-        descriptionField.setInputPrompt("Describe the event");
         descriptionField.setRows(3);
-        // descriptionField.setRequired(true);
 
         final ComboBox styleNameField = createStyleNameComboBox();
-        styleNameField.setInputPrompt("Choose calendar");
-        styleNameField.setTextInputAllowed(false);
 
         formLayout.addComponent(startDateField);
-        // startDateField.setRequired(true);
         formLayout.addComponent(endDateField);
         formLayout.addComponent(allDayField);
         formLayout.addComponent(captionField);
-        // captionField.setComponentError(new UserError("Testing error"));
         if (eventClass == CalendarTestEvent.class) {
             formLayout.addComponent(whereField);
         }
@@ -561,17 +588,17 @@ public class CalendarTest extends GridLayout implements View {
 
     @SuppressWarnings("unchecked")
 	private ComboBox createStyleNameComboBox() {
-        ComboBox s = new ComboBox("Calendar");
+        ComboBox s = new ComboBox("Color");
         s.addContainerProperty("c", String.class, "");
         s.setItemCaptionPropertyId("c");
         Item i = s.addItem("color1");
-        i.getItemProperty("c").setValue("Work");
+        i.getItemProperty("c").setValue("Green");
         i = s.addItem("color2");
-        i.getItemProperty("c").setValue("Personal");
+        i.getItemProperty("c").setValue("Blue");
         i = s.addItem("color3");
-        i.getItemProperty("c").setValue("Family");
+        i.getItemProperty("c").setValue("Red");
         i = s.addItem("color4");
-        i.getItemProperty("c").setValue("Hobbies");
+        i.getItemProperty("c").setValue("Orange");
         return s;
     }
 
@@ -606,26 +633,18 @@ public class CalendarTest extends GridLayout implements View {
         Date today = getToday();
         calendar = new GregorianCalendar(getLocale());
         calendar.setTime(today);
-        calendarComponent.getInternalCalendar().setTime(today);
-
-        // Calendar getStartDate (and getEndDate) has some strange logic which
-        // returns Monday of the current internal time if no start date has been
-        // set
-        calendarComponent.setStartDate(calendarComponent.getStartDate());
-        calendarComponent.setEndDate(calendarComponent.getEndDate());
-        int rollAmount = calendar.get(GregorianCalendar.DAY_OF_MONTH) - 1;
-        calendar.add(GregorianCalendar.DAY_OF_MONTH, -rollAmount);
-        currentMonthsFirstDate = calendar.getTime();
 
         updateCaptionLabel();
 
         if (!showWeeklyView) {
-            // resetTime(false);
-            // currentMonthsFirstDate = calendar.getTime();
-            // calendarComponent.setStartDate(currentMonthsFirstDate);
-            // calendar.add(GregorianCalendar.MONTH, 1);
-            // calendar.add(GregorianCalendar.DATE, -1);
-            // calendarComponent.setEndDate(calendar.getTime());
+            int rollAmount = calendar.get(GregorianCalendar.DAY_OF_MONTH) - 1;
+            calendar.add(GregorianCalendar.DAY_OF_MONTH, -rollAmount);
+            resetTime(false);
+            currentMonthsFirstDate = calendar.getTime();
+            calendarComponent.setStartDate(currentMonthsFirstDate);
+            calendar.add(GregorianCalendar.MONTH, 1);
+            calendar.add(GregorianCalendar.DATE, -1);
+            calendarComponent.setEndDate(calendar.getTime());
         }
 
         addCalendarEventListeners();
@@ -907,28 +926,23 @@ public class CalendarTest extends GridLayout implements View {
 
         updateCalendarEventPopup(newEvent);
         updateCalendarEventForm(event);
-        // TODO this only works the first time
-        captionField.focus();
 
-        if (!getUI().getWindows().contains(scheduleEventPopup)) {
-            getUI().addWindow(scheduleEventPopup);
+        if (!getWindows().contains(scheduleEventPopup)) {
+            addWindow(scheduleEventPopup);
         }
-
     }
 
     /* Initializes a modal window to edit schedule event. */
     private void createCalendarEventPopup() {
         VerticalLayout layout = new VerticalLayout();
-        // layout.setMargin(true);
+        layout.setMargin(true);
         layout.setSpacing(true);
 
         scheduleEventPopup = new Window(null, layout);
-        scheduleEventPopup.setWidth("300px");
+        scheduleEventPopup.setWidth("400px");
         scheduleEventPopup.setModal(true);
         scheduleEventPopup.center();
 
-        scheduleEventFieldLayout.addStyleName("light");
-        scheduleEventFieldLayout.setMargin(false);
         layout.addComponent(scheduleEventFieldLayout);
 
         applyEventButton = new Button("Apply", new ClickListener() {
@@ -944,7 +958,6 @@ public class CalendarTest extends GridLayout implements View {
                 }
             }
         });
-        applyEventButton.addStyleName("primary");
         Button cancel = new Button("Cancel", new ClickListener() {
 
             private static final long serialVersionUID = 1L;
@@ -963,7 +976,6 @@ public class CalendarTest extends GridLayout implements View {
                 deleteCalendarEvent();
             }
         });
-        deleteEventButton.addStyleName("borderless");
         scheduleEventPopup.addCloseListener(new Window.CloseListener() {
 
             private static final long serialVersionUID = 1L;
@@ -975,16 +987,12 @@ public class CalendarTest extends GridLayout implements View {
         });
 
         HorizontalLayout buttons = new HorizontalLayout();
-        buttons.addStyleName("v-window-bottom-toolbar");
-        buttons.setWidth("100%");
         buttons.setSpacing(true);
         buttons.addComponent(deleteEventButton);
         buttons.addComponent(applyEventButton);
-        buttons.setExpandRatio(applyEventButton, 1);
-        buttons.setComponentAlignment(applyEventButton, Alignment.TOP_RIGHT);
         buttons.addComponent(cancel);
         layout.addComponent(buttons);
-
+        layout.setComponentAlignment(buttons, Alignment.BOTTOM_RIGHT);
     }
 
     private void updateCalendarEventPopup(boolean newEvent) {
@@ -1020,6 +1028,7 @@ public class CalendarTest extends GridLayout implements View {
     }
 
     private CalendarEvent createNewEvent(Date startDate, Date endDate) {
+
         BasicEvent event = new BasicEvent();
         event.setCaption("");
         event.setStart(startDate);
@@ -1034,7 +1043,7 @@ public class CalendarTest extends GridLayout implements View {
         if (dataSource.containsEvent(event)) {
             dataSource.removeEvent(event);
         }
-        getUI().removeWindow(scheduleEventPopup);
+        removeWindow(scheduleEventPopup);
     }
 
     /* Adds/updates the event in the data source and fires change event. */
@@ -1048,12 +1057,12 @@ public class CalendarTest extends GridLayout implements View {
             dataSource.addEvent(event);
         }
 
-        getUI().removeWindow(scheduleEventPopup);
+        removeWindow(scheduleEventPopup);
     }
 
     private void discardCalendarEvent() {
         scheduleEventFieldGroup.discard();
-        getUI().removeWindow(scheduleEventPopup);
+        removeWindow(scheduleEventPopup);
     }
 
     @SuppressWarnings("unchecked")
@@ -1139,8 +1148,8 @@ public class CalendarTest extends GridLayout implements View {
      */
     public void switchToWeekView() {
         viewMode = Mode.WEEK;
-        // weekButton.setVisible(false);
-        // monthButton.setVisible(true);
+        weekButton.setVisible(false);
+        monthButton.setVisible(true);
     }
 
     /*
@@ -1149,23 +1158,17 @@ public class CalendarTest extends GridLayout implements View {
      */
     public void switchToMonthView() {
         viewMode = Mode.MONTH;
-        // monthButton.setVisible(false);
-        // weekButton.setVisible(false);
+        monthButton.setVisible(false);
+        weekButton.setVisible(false);
 
-        int rollAmount = calendar.get(GregorianCalendar.DAY_OF_MONTH) - 1;
-        calendar.add(GregorianCalendar.DAY_OF_MONTH, -rollAmount);
-
-        calendarComponent.setStartDate(calendar.getTime());
+        calendar.setTime(currentMonthsFirstDate);
+        calendarComponent.setStartDate(currentMonthsFirstDate);
 
         updateCaptionLabel();
 
         calendar.add(GregorianCalendar.MONTH, 1);
         calendar.add(GregorianCalendar.DATE, -1);
-
-        calendarComponent.setEndDate(calendar.getTime());
-
-        calendar.setTime(getToday());
-        // resetCalendarTime(true);
+        resetCalendarTime(true);
     }
 
     /*
@@ -1173,8 +1176,8 @@ public class CalendarTest extends GridLayout implements View {
      */
     public void switchToDayView() {
         viewMode = Mode.DAY;
-        // monthButton.setVisible(true);
-        // weekButton.setVisible(true);
+        monthButton.setVisible(true);
+        weekButton.setVisible(true);
     }
 
     private void resetCalendarTime(boolean resetEndTime) {
@@ -1241,11 +1244,5 @@ public class CalendarTest extends GridLayout implements View {
         calendarClone.set(java.util.Calendar.HOUR_OF_DAY, 0);
 
         return calendarClone.getTime();
-    }
-
-    @Override
-    public void enter(ViewChangeEvent event) {
-        // TODO Auto-generated method stub
-
     }
 }
