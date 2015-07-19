@@ -115,14 +115,11 @@ public class TripoinUI extends UI implements ErrorHandler {
         navigator.setErrorView(CommonParts.class);
 
         navigator.addViewChangeListener(new ViewChangeListener() {
-
 			private static final long serialVersionUID = -1255484519903571054L;
-
 			@Override
             public boolean beforeViewChange(final ViewChangeEvent event) {
                 return true;
             }
-
             @Override
             public void afterViewChange(final ViewChangeEvent event) {
                 for (final Iterator<Component> it = menuItemsLayout.iterator(); it.hasNext();) {
