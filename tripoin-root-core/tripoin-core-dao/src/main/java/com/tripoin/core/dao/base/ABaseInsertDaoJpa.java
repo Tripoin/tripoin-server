@@ -24,7 +24,7 @@ public abstract class ABaseInsertDaoJpa implements IGenericInsertDaoJpa {
 	@Override
 	@Transactional
 	public void saveObject(Object objectType) throws Exception {
-		getEntityManager().persist(objectType);
+		getEntityManager().merge(objectType);
 		getEntityManager().flush();
 	}
     
