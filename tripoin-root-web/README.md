@@ -19,5 +19,3 @@
 + *tripoin-root-web* module
 
 > ``mvn clean install -DskipTests``
-
-> ``mvn -Pproduction package``
