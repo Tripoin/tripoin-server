@@ -56,7 +56,10 @@ import com.vaadin.ui.components.calendar.handler.BasicDateClickHandler;
 import com.vaadin.ui.components.calendar.handler.BasicWeekClickHandler;
 import com.vaadin.ui.themes.ValoTheme;
 
-/** Calendar component test application */
+/** 
+ * Calendar component test application
+ * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
+ */
 @Component
 @Scope("prototype")
 @VaadinView(value = "calendar", cached = true)

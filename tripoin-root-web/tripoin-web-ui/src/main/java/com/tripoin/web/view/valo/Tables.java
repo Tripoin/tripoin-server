@@ -38,6 +38,9 @@ import com.vaadin.ui.Table.TableDragMode;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
+ */
 @Component
 @Scope("prototype")
 @VaadinView(value = "tables", cached = true)

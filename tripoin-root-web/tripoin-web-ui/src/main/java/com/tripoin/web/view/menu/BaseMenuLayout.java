@@ -37,9 +37,7 @@ import com.vaadin.ui.themes.ValoTheme;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 public class BaseMenuLayout extends CssLayout implements View {
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4795419684894048255L;
     private static Map<String, String> themeVariants = new LinkedHashMap<String, String>();
     private final TestIcon baseIcon = new TestIcon(100);
@@ -91,10 +89,8 @@ public class BaseMenuLayout extends CssLayout implements View {
         addComponent(top);
         addComponent(createThemeSelect());
 
-        final Button showMenu = new Button("Menu", new ClickListener() {
-        	
+        final Button showMenu = new Button("Menu", new ClickListener() {        	
 			private static final long serialVersionUID = -4671912497297145261L;
-
 			@Override
             public void buttonClick(final ClickEvent event) {
                 if (getStyleName().contains("valo-menu-visible")) {
@@ -117,9 +113,7 @@ public class BaseMenuLayout extends CssLayout implements View {
 
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
-        final MenuItem settingsItem = settings.addItem(accessControl.getUsername(),
-                new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"),
-                null);
+        final MenuItem settingsItem = settings.addItem(accessControl.getUsername(), new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"), null);
         settingsItem.addItem("Edit Profile", null);
         settingsItem.addItem("Preferences", null);
         settingsItem.addSeparator();
@@ -146,9 +140,7 @@ public class BaseMenuLayout extends CssLayout implements View {
                 menuItemsLayout.addComponent(label);
             }
             if (item.getKey().equals("panels")) {
-                label.setValue(label.getValue()
-                        + " <span class=\"valo-menu-badge\">" + count
-                        + "</span>");
+                label.setValue(label.getValue() + " <span class=\"valo-menu-badge\">" + count + "</span>");
                 count = 0;
                 label = new Label("Containers", ContentMode.HTML);
                 label.setPrimaryStyleName("valo-menu-subtitle");
@@ -157,9 +149,7 @@ public class BaseMenuLayout extends CssLayout implements View {
                 menuItemsLayout.addComponent(label);
             }
             if (item.getKey().equals("forms")) {
-                label.setValue(label.getValue()
-                        + " <span class=\"valo-menu-badge\">" + count
-                        + "</span>");
+                label.setValue(label.getValue() + " <span class=\"valo-menu-badge\">" + count + "</span>");
                 count = 0;
                 label = new Label("Other", ContentMode.HTML);
                 label.setPrimaryStyleName("valo-menu-subtitle");
@@ -219,4 +209,5 @@ public class BaseMenuLayout extends CssLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		
 	}
+	
 }
