@@ -24,9 +24,9 @@ import com.tripoin.core.service.IGenericManagerJpa;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("productEndpoint")
-public class ProductEndpoint {
+public class ProductLoadEndpoint {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(ProductEndpoint.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(ProductLoadEndpoint.class);
 
 	@Autowired
 	private IGenericManagerJpa iGenericManagerJpa;
