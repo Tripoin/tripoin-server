@@ -1,5 +1,9 @@
 package com.tripoin.web.test;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +16,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.tripoin.core.dto.AvailabilityTransferObject;
+import com.tripoin.core.dto.CategoryData;
+import com.tripoin.core.dto.CategoryTransferObject;
 import com.tripoin.core.dto.GeneralTransferObject;
+import com.tripoin.core.dto.ProductData;
 import com.tripoin.core.dto.ProductTransferObject;
 import com.tripoin.web.common.ICommonRest;
-import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.common.WebServiceConstant;
 
 /**
@@ -31,7 +38,7 @@ public class WebServiceGETTest implements ApplicationContextAware {
 	private ICommonRest commonRest;
 	
 	@Autowired
-	private IStateFullRest stateFullRest;
+	private StateFullRestTest stateFullRest;
 		
 	private ApplicationContext applicationContext;
 	
@@ -46,28 +53,38 @@ public class WebServiceGETTest implements ApplicationContextAware {
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
-	
+
 	@Test
-	public void runResponseTest1st() {
+	/*@Test(expected=HttpClientErrorException.class)*/
+	public void runResponseGetTest() {
 		stateFullRest.setUsername("ridla");
 		stateFullRest.setPassword("ridla");
-		GeneralTransferObject generalConnectionDTO = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_CONNECTION), GeneralTransferObject.class);
 		
-		LOGGER.debug("Response Body 1 : ".concat(generalConnectionDTO.getResponseMsg()));
-		
+		GeneralTransferObject generalConnectionDTO = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_CONNECTION), GeneralTransferObject.class);		
+		LOGGER.debug("Response Message Connection : ".concat(generalConnectionDTO.getResponseMsg()));		
 	}
 	
 	@After
-	/*@Test(expected=HttpClientErrorException.class)*/
-	public void runResponseTest2nd() {
+	public void runResponsePostTest() {
 		stateFullRest.setUsername(null);
 		stateFullRest.setPassword(null);
-		/*stateFullRest.clearAllCookies();*/
 		
-		ProductTransferObject productConnectionDTO = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_PRODUCT), ProductTransferObject.class); 
-
-		LOGGER.debug("Response Body 2 : ".concat(productConnectionDTO.toString()));
+		AvailabilityTransferObject availabilityTransferObject = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_AVAILABILITY), AvailabilityTransferObject.class);
+		LOGGER.debug("Response Body Availabilities : "+availabilityTransferObject.getAvailabilityDatas());
 		
+		CategoryTransferObject categoryTransferObject = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_CATEGORY), CategoryTransferObject.class);
+		LOGGER.debug("Response Body Categories : "+categoryTransferObject.getCategoryDatas());
+		
+		ProductData productData = new ProductData();
+		productData.setProductName("Indonesian Dictionary");
+		productData.setPrice(new BigDecimal(2.4));
+		productData.setStockCount(3);
+		productData.setAvailabilityData(availabilityTransferObject.getAvailabilityDatas().get(0));
+		List<CategoryData> categoryDatas = new ArrayList<CategoryData>();
+		categoryDatas.add(categoryTransferObject.getCategoryDatas().get(0));
+		productData.setCategoryDatas(categoryDatas);		
+		ProductTransferObject producTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PRODUCT_SAVE), productData, ProductTransferObject.class);		
+		LOGGER.debug("Response Body Products : "+producTransferObject.getProductDatas());		
 	}
 
 }
