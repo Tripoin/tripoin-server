@@ -23,20 +23,22 @@ import com.tripoin.core.service.IGenericManagerJpa;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@Component("productLoadEndpoint")
-public class ProductLoadEndpoint {
+@Component("productSaveEndpoint")
+public class ProductSaveEndpoint {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(ProductLoadEndpoint.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(ProductSaveEndpoint.class);
 
 	@Autowired
 	private IGenericManagerJpa iGenericManagerJpa;
 
 	@Secured({RoleConstant.ROLE_SUPERADMIN, RoleConstant.ROLE_ADMIN, RoleConstant.ROLE_USER})
-	public Message<ProductTransferObject> getAllProduct(Message<?> inMessage){	
+	public Message<ProductTransferObject> saveProduct(Message<ProductData> inMessage){	
 		ProductTransferObject productTransferObject = new ProductTransferObject();
 		Map<String, Object> responseHeaderMap = new HashMap<String, Object>();
 		
 		try{
+			Product productPayload = new Product(inMessage.getPayload());
+			iGenericManagerJpa.saveObject(productPayload);
 			List<Product> productList = iGenericManagerJpa.loadObjects(Product.class);
 			List<ProductData> productDatas = new ArrayList<ProductData>();
 			if(productList != null){
@@ -48,12 +50,12 @@ public class ProductLoadEndpoint {
 			}
 			productTransferObject.setResponseCode("0");
 			productTransferObject.setResponseMsg(ParameterConstant.RESPONSE_SUCCESS);
-			productTransferObject.setResponseDesc("Load Product Data Success");			
+			productTransferObject.setResponseDesc("Save Product Data Success");			
 		}catch (Exception e){
-			LOGGER.error("Load Product System Error : "+e.getLocalizedMessage(), e);
+			LOGGER.error("Save Product System Error : "+e.getLocalizedMessage(), e);
 			productTransferObject.setResponseCode("1");
 			productTransferObject.setResponseMsg(ParameterConstant.RESPONSE_FAILURE);
-			productTransferObject.setResponseDesc("Load Product System Error : "+e.getLocalizedMessage());
+			productTransferObject.setResponseDesc("Save Product System Error : "+e.getLocalizedMessage());
 		}
 		
 		setReturnStatusAndMessage(productTransferObject, responseHeaderMap);
