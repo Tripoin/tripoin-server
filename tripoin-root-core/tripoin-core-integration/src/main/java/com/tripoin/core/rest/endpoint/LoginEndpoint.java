@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
@@ -28,6 +30,8 @@ import com.tripoin.core.service.IGenericManagerJpa;
  */
 @Component("loginEndpoint")
 public class LoginEndpoint {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(LoginEndpoint.class);
 
 	@Autowired
 	private IGenericManagerJpa iGenericManagerJpa;
@@ -59,6 +63,7 @@ public class LoginEndpoint {
 			userTransferObject.setResponseMsg(ParameterConstant.RESPONSE_SUCCESS);
 			userTransferObject.setResponseDesc("Login Success");			
 		}catch (Exception e){
+			LOGGER.error("Login System Error : "+e.getLocalizedMessage(), e);
 			userTransferObject.setResponseCode("1");
 			userTransferObject.setResponseMsg(ParameterConstant.RESPONSE_FAILURE);
 			userTransferObject.setResponseDesc("Login System Error : "+e.getMessage());

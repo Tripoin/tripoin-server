@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
@@ -31,6 +33,8 @@ import com.tripoin.core.service.IGenericManagerJpa;
  */
 @Component("loginMenuEndpoint")
 public class LoginMenuEndpoint {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(LoginMenuEndpoint.class);
 
 	@Autowired
 	private IGenericManagerJpa iGenericManagerJpa;
@@ -62,7 +66,6 @@ public class LoginMenuEndpoint {
 				userDatas.add(userData);
 				userMenuTransferObject.setUserDatas(userDatas);
 			}
-			System.out.println(this.currentRole);
 			List<Menu> menuList = iGenericManagerJpa.loadObjectsJQLStatement("SELECT mn FROM Menu mn INNER JOIN mn.roles role WHERE role.code = ?", new Object[] { this.currentRole }, null);
 			if (menuList != null) {
 				List<MenuData> menuDatas = new ArrayList<MenuData>();
@@ -76,6 +79,7 @@ public class LoginMenuEndpoint {
 			userMenuTransferObject.setResponseMsg(ParameterConstant.RESPONSE_SUCCESS);
 			userMenuTransferObject.setResponseDesc("Login Menu Success");
 		} catch (Exception e) {
+			LOGGER.error("Login Menu System Error : "+e.getLocalizedMessage(), e);
 			userMenuTransferObject.setResponseCode("1");
 			userMenuTransferObject.setResponseMsg(ParameterConstant.RESPONSE_FAILURE);
 			userMenuTransferObject.setResponseDesc("Login Menu System Error : " + e.getMessage());
