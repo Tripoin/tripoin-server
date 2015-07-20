@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.tripoin.core.dto.AvailabilityData;
+
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
@@ -27,6 +29,21 @@ public class Availability implements Serializable {
 	private int id;
 	private String name;
 	private List<Product> products;
+	
+	public Availability() {}
+
+	public Availability(AvailabilityData availabilityData) {
+		if(availabilityData.getId() != null)
+			this.id = availabilityData.getId();
+		this.name = availabilityData.getName();
+	}
+
+	public Availability(int id, String name, List<Product> products) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.products = products;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

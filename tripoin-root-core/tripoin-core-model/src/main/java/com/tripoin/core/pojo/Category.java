@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.tripoin.core.dto.CategoryData;
+
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
@@ -27,6 +29,21 @@ public class Category implements Serializable {
 	private int id;
     private String name;
     private List<Product> products;
+
+    public Category() {}
+    
+	public Category(CategoryData categoryData) {
+		if(categoryData.getId() != null)
+			this.id = categoryData.getId();
+		this.name = categoryData.getName();
+	}
+	
+	public Category(int id, String name, List<Product> products) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.products = products;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

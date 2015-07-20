@@ -2,6 +2,7 @@ package com.tripoin.core.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.tripoin.core.dto.CategoryData;
+import com.tripoin.core.dto.ProductData;
+
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
@@ -37,6 +41,33 @@ public class Product implements Serializable {
     private int stockCount;
     private List<Category> categories;
     private Availability availability;    
+    
+    public Product() {}
+    
+	public Product(ProductData productData) {
+		if(productData.getId() != null)
+			this.id = productData.getId();
+		this.productName = productData.getProductName();
+		this.price = productData.getPrice();
+		this.stockCount = productData.getStockCount();
+		this.categories = new ArrayList<Category>();
+		if(productData.getCategoryDatas() != null)
+			for(CategoryData categoryData : productData.getCategoryDatas())
+				this.categories.add(new Category(categoryData));
+		if(productData.getAvailabilityData() != null)
+			this.availability = new Availability(productData.getAvailabilityData());
+	}
+    
+	public Product(int id, String productName, BigDecimal price,
+			int stockCount, List<Category> categories, Availability availability) {
+		super();
+		this.id = id;
+		this.productName = productName;
+		this.price = price;
+		this.stockCount = stockCount;
+		this.categories = categories;
+		this.availability = availability;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
