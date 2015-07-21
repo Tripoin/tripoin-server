@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import com.tripoin.web.authentication.IAccessControl;
 import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.servlet.DiscoveryNavigator;
-import com.tripoin.web.view.valo.TestIcon;
+import com.tripoin.web.view.valo.BaseIcon;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.navigator.View;
@@ -40,7 +40,7 @@ public class BaseMenuLayout extends CssLayout implements View {
 
 	private static final long serialVersionUID = -4795419684894048255L;
     private static Map<String, String> themeVariants = new LinkedHashMap<String, String>();
-    private final TestIcon baseIcon = new TestIcon(100);
+    private final BaseIcon baseIcon = new BaseIcon(100);
     private CssLayout menuItemsLayout = new CssLayout();
     private DiscoveryNavigator navigator;
 	

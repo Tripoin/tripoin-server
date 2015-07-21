@@ -42,7 +42,7 @@ public class Accordions extends VerticalLayout implements View {
     }
 
     Accordion getAccordion(String caption) {
-        TestIcon testIcon = new TestIcon(0);
+        BaseIcon baseIcon = new BaseIcon(0);
         Accordion ac = new Accordion();
         ac.setCaption(caption);
         ac.addTab(new VerticalLayout() {
@@ -56,7 +56,7 @@ public class Accordions extends VerticalLayout implements View {
                 addComponent(new Label(
                         "Fabio vel iudice vincam, sunt in culpa qui officia. Ut enim ad minim veniam, quis nostrud exercitation."));
             }
-        }, "First Caption", testIcon.get());
+        }, "First Caption", baseIcon.get());
         ac.addTab(new VerticalLayout() {
             /**
 			 * 
@@ -68,7 +68,7 @@ public class Accordions extends VerticalLayout implements View {
                 addComponent(new Label(
                         "Gallia est omnis divisa in partes tres, quarum."));
             }
-        }, "Second Caption", testIcon.get());
+        }, "Second Caption", baseIcon.get());
         ac.addTab(new VerticalLayout() {
             /**
 			 * 
@@ -80,7 +80,7 @@ public class Accordions extends VerticalLayout implements View {
                 addComponent(new Label(
                         "Nihil hic munitissimus habendi senatus locus, nihil horum? Sed haec quis possit intrepidus aestimare tellus."));
             }
-        }, "Third Caption", testIcon.get());
+        }, "Third Caption", baseIcon.get());
         ac.addTab(new VerticalLayout() {
             /**
 			 * 
@@ -92,7 +92,7 @@ public class Accordions extends VerticalLayout implements View {
                 addComponent(new Label(
                         "Inmensae subtilitatis, obscuris et malesuada fames. Quisque ut dolor gravida, placerat libero vel, euismod."));
             }
-        }, "Custom Caption Style", testIcon.get()).setStyleName("color1");
+        }, "Custom Caption Style", baseIcon.get()).setStyleName("color1");
         return ac;
     }
 

@@ -55,18 +55,18 @@ public class CheckBoxes extends VerticalLayout implements View {
         check.addStyleName("color1");
         row.addComponent(check);
 
-        TestIcon testIcon = new TestIcon(30);
+        BaseIcon baseIcon = new BaseIcon(30);
         check = new CheckBox("Custom color", true);
         check.addStyleName("color2");
-        check.setIcon(testIcon.get());
+        check.setIcon(baseIcon.get());
         row.addComponent(check);
 
         check = new CheckBox("With Icon", true);
-        check.setIcon(testIcon.get());
+        check.setIcon(baseIcon.get());
         row.addComponent(check);
 
         check = new CheckBox();
-        check.setIcon(testIcon.get(true));
+        check.setIcon(baseIcon.get(true));
         row.addComponent(check);
 
         check = new CheckBox("Small", true);
@@ -93,9 +93,9 @@ public class CheckBoxes extends VerticalLayout implements View {
                 .addItem("Option Two, with a longer caption that should wrap when the components width is explicitly set.");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon(two, testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get(true));
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon(two, baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get(true));
         row.addComponent(options);
 
         options = new OptionGroup("Choose many, explicit width");
@@ -106,9 +106,9 @@ public class CheckBoxes extends VerticalLayout implements View {
                 .addItem("Option Two, with a longer caption that should wrap when the components width is explicitly set.");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon(two, testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get(true));
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon(two, baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get(true));
         row.addComponent(options);
 
         options = new OptionGroup("Choose one, small");
@@ -118,9 +118,9 @@ public class CheckBoxes extends VerticalLayout implements View {
         options.addItem("Option Two");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon("Option Two", testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get(true));
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon("Option Two", baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get(true));
         row.addComponent(options);
 
         options = new OptionGroup("Choose many, small");
@@ -130,9 +130,9 @@ public class CheckBoxes extends VerticalLayout implements View {
         options.addItem("Option Two");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon("Option Two", testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get(true));
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon("Option Two", baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get(true));
         row.addComponent(options);
 
         options = new OptionGroup("Choose one, large");
@@ -142,9 +142,9 @@ public class CheckBoxes extends VerticalLayout implements View {
         options.addItem("Option Two");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon("Option Two", testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get(true));
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon("Option Two", baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get(true));
         row.addComponent(options);
 
         options = new OptionGroup("Choose many, large");
@@ -154,9 +154,9 @@ public class CheckBoxes extends VerticalLayout implements View {
         options.addItem("Option Two");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon("Option Two", testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get(true));
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon("Option Two", baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get(true));
         row.addComponent(options);
 
         options = new OptionGroup("Horizontal items");
@@ -165,9 +165,9 @@ public class CheckBoxes extends VerticalLayout implements View {
         two = options.addItem("Option Two, with a longer caption");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon(two, testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get());
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon(two, baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get());
         row.addComponent(options);
 
         options = new OptionGroup("Horizontal items, explicit width");
@@ -178,9 +178,9 @@ public class CheckBoxes extends VerticalLayout implements View {
         two = options.addItem("Option Two, with a longer caption");
         options.addItem("Option Three");
         options.select("Option One");
-        options.setItemIcon("Option One", testIcon.get());
-        options.setItemIcon(two, testIcon.get());
-        options.setItemIcon("Option Three", testIcon.get());
+        options.setItemIcon("Option One", baseIcon.get());
+        options.setItemIcon(two, baseIcon.get());
+        options.setItemIcon("Option Three", baseIcon.get());
         row.addComponent(options);
     }
 

@@ -19,7 +19,7 @@ public class MockGeneratorContainer {
     
     @SuppressWarnings("unchecked")
     public static Container generateContainer(final int size, final boolean hierarchical) {
-        final TestIcon testIcon = new TestIcon(90);
+        final BaseIcon baseIcon = new BaseIcon(90);
         final IndexedContainer container = hierarchical ? new HierarchicalContainer() : new IndexedContainer();
         final StringGenerator sg = new StringGenerator();
         container.addContainerProperty(CAPTION_PROPERTY, String.class, null);
@@ -31,9 +31,9 @@ public class MockGeneratorContainer {
             item.getItemProperty(CAPTION_PROPERTY).setValue(sg.nextString(true) + " " + sg.nextString(false));
             item.getItemProperty(INDEX_PROPERTY).setValue(i);
             item.getItemProperty(DESCRIPTION_PROPERTY).setValue(sg.nextString(true) + " " + sg.nextString(false) + " " + sg.nextString(false));
-            item.getItemProperty(ICON_PROPERTY).setValue(testIcon.get());
+            item.getItemProperty(ICON_PROPERTY).setValue(baseIcon.get());
         }
-        container.getItem(container.getIdByIndex(0)).getItemProperty(ICON_PROPERTY).setValue(testIcon.get());
+        container.getItem(container.getIdByIndex(0)).getItemProperty(ICON_PROPERTY).setValue(baseIcon.get());
 
         if (hierarchical) {
             for (int i = 1; i < size + 1; i++) {
@@ -41,7 +41,7 @@ public class MockGeneratorContainer {
                     final String id = i + " -> " + j;
                     Item child = container.addItem(id);
                     child.getItemProperty(CAPTION_PROPERTY).setValue(sg.nextString(true) + " " + sg.nextString(false));
-                    child.getItemProperty(ICON_PROPERTY).setValue(testIcon.get());
+                    child.getItemProperty(ICON_PROPERTY).setValue(baseIcon.get());
                     // ((Hierarchical) container).setChildrenAllowed(id, false);
                     ((Hierarchical) container).setParent(id, i);
 
@@ -49,7 +49,7 @@ public class MockGeneratorContainer {
                         final String id2 = id + " -> " + k;
                         child = container.addItem(id2);
                         child.getItemProperty(CAPTION_PROPERTY).setValue(sg.nextString(true) + " " + sg.nextString(false));
-                        child.getItemProperty(ICON_PROPERTY).setValue(testIcon.get());
+                        child.getItemProperty(ICON_PROPERTY).setValue(baseIcon.get());
                         // ((Hierarchical) container)
                         // .setChildrenAllowed(id, false);
                         ((Hierarchical) container).setParent(id2, id);
@@ -58,7 +58,7 @@ public class MockGeneratorContainer {
                             final String id3 = id2 + " -> " + l;
                             child = container.addItem(id3);
                             child.getItemProperty(CAPTION_PROPERTY).setValue(sg.nextString(true) + " " + sg.nextString(false));
-                            child.getItemProperty(ICON_PROPERTY).setValue(testIcon.get());
+                            child.getItemProperty(ICON_PROPERTY).setValue(baseIcon.get());
                             // ((Hierarchical) container)
                             // .setChildrenAllowed(id, false);
                             ((Hierarchical) container).setParent(id3, id2);

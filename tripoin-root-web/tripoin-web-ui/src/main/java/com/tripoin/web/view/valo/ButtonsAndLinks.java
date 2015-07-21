@@ -56,62 +56,62 @@ public class ButtonsAndLinks extends VerticalLayout implements View {
         button.addStyleName("danger");
         row.addComponent(button);
 
-        TestIcon testIcon = new TestIcon(10);
+        BaseIcon baseIcon = new BaseIcon(10);
         button = new Button("Small");
         button.addStyleName("small");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         row.addComponent(button);
 
         button = new Button("Large");
         button.addStyleName("large");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         row.addComponent(button);
 
         button = new Button("Top");
         button.addStyleName("icon-align-top");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         row.addComponent(button);
 
         button = new Button("Image icon");
-        button.setIcon(testIcon.get(true, 16));
+        button.setIcon(baseIcon.get(true, 16));
         row.addComponent(button);
 
         button = new Button("Image icon");
         button.addStyleName("icon-align-right");
-        button.setIcon(testIcon.get(true));
+        button.setIcon(baseIcon.get(true));
         row.addComponent(button);
 
         button = new Button("Photos");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         row.addComponent(button);
 
         button = new Button();
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         button.addStyleName("icon-only");
         row.addComponent(button);
 
         button = new Button("Borderless");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         button.addStyleName("borderless");
         row.addComponent(button);
 
         button = new Button("Borderless, colored");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         button.addStyleName("borderless-colored");
         row.addComponent(button);
 
         button = new Button("Quiet");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         button.addStyleName("quiet");
         row.addComponent(button);
 
         button = new Button("Link style");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         button.addStyleName("link");
         row.addComponent(button);
 
         button = new Button("Icon on right");
-        button.setIcon(testIcon.get());
+        button.setIcon(baseIcon.get());
         button.addStyleName("icon-align-right");
         row.addComponent(button);
 
@@ -153,7 +153,7 @@ public class ButtonsAndLinks extends VerticalLayout implements View {
         link = new Link("Link with icon", new ExternalResource(
                 "https://vaadin.com"));
         link.addStyleName("color3");
-        link.setIcon(testIcon.get());
+        link.setIcon(baseIcon.get());
         row.addComponent(link);
 
         link = new Link("Small", new ExternalResource("https://vaadin.com"));
@@ -165,7 +165,7 @@ public class ButtonsAndLinks extends VerticalLayout implements View {
         row.addComponent(link);
 
         link = new Link(null, new ExternalResource("https://vaadin.com"));
-        link.setIcon(testIcon.get());
+        link.setIcon(baseIcon.get());
         link.addStyleName("large");
         row.addComponent(link);
     }

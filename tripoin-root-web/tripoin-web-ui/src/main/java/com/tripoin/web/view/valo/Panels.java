@@ -37,46 +37,46 @@ public class Panels extends VerticalLayout implements View {
         row.addStyleName("wrapping");
         row.setSpacing(true);
         addComponent(row);
-        TestIcon testIcon = new TestIcon(60);
+        BaseIcon baseIcon = new BaseIcon(60);
 
         Panel panel = new Panel("Normal");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         panel = new Panel("Sized");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.setWidth("10em");
         panel.setHeight("250px");
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         panel = new Panel("Custom Caption");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.addStyleName("color1");
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         panel = new Panel("Custom Caption");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.addStyleName("color2");
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         panel = new Panel("Custom Caption");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.addStyleName("color3");
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         panel = new Panel("Borderless style");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.addStyleName("borderless");
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         panel = new Panel("Borderless + scroll divider");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.addStyleName("borderless");
         panel.addStyleName("scroll-divider");
         panel.setContent(panelContentScroll());
@@ -84,13 +84,13 @@ public class Panels extends VerticalLayout implements View {
         row.addComponent(panel);
 
         panel = new Panel("Well style");
-        panel.setIcon(testIcon.get());
+        panel.setIcon(baseIcon.get());
         panel.addStyleName("well");
         panel.setContent(panelContent());
         row.addComponent(panel);
 
         CssLayout layout = new CssLayout();
-        layout.setIcon(testIcon.get());
+        layout.setIcon(baseIcon.get());
         layout.setCaption("Panel style layout");
         layout.addStyleName("card");
         layout.addComponent(panelContent());
@@ -129,7 +129,7 @@ public class Panels extends VerticalLayout implements View {
         layout.setWidth("14em");
 
         layout = new CssLayout();
-        layout.setIcon(testIcon.get());
+        layout.setIcon(baseIcon.get());
         layout.setCaption("Well style layout");
         layout.addStyleName("well");
         layout.addComponent(panelContent());

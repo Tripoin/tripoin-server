@@ -150,7 +150,7 @@ public class Tabsheets extends VerticalLayout implements View {
 
     static TabSheet getTabSheet(boolean caption, String style,
             boolean closable, boolean scrolling, boolean icon, boolean disable) {
-        TestIcon testIcon = new TestIcon(60);
+        BaseIcon baseIcon = new BaseIcon(60);
 
         TabSheet ts = new TabSheet();
         ts.addStyleName(style);
@@ -178,7 +178,7 @@ public class Tabsheets extends VerticalLayout implements View {
             }
 
             if (icon) {
-                t.setIcon(testIcon.get(false));
+                t.setIcon(baseIcon.get(false));
             }
         }
 

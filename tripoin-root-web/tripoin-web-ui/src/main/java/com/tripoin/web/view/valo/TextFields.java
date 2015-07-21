@@ -27,7 +27,7 @@ import com.vaadin.ui.VerticalLayout;
 public class TextFields extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 5411634871287781814L;
-	private TestIcon testIcon = new TestIcon(140);
+	private BaseIcon baseIcon = new BaseIcon(140);
 
     public TextFields() {
         setMargin(true);
@@ -43,7 +43,7 @@ public class TextFields extends VerticalLayout implements View {
 
         TextField tf = new TextField("Normal");
         tf.setInputPrompt("First name");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         row.addComponent(tf);
 
         tf = new TextField("Custom color");
@@ -86,45 +86,45 @@ public class TextFields extends VerticalLayout implements View {
         tf = new TextField("Large");
         tf.setValue("Field value");
         tf.addStyleName("large");
-        tf.setIcon(testIcon.get(true));
+        tf.setIcon(baseIcon.get(true));
         row.addComponent(tf);
 
         tf = new TextField("Icon inside");
         tf.setInputPrompt("Ooh, an icon");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         row.addComponent(tf);
 
         tf = new TextField("Large, Icon inside");
         tf.setInputPrompt("Ooh, an icon");
         tf.addStyleName("large");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         row.addComponent(tf);
 
         tf = new TextField("Small, Icon inside");
         tf.setInputPrompt("Ooh, an icon");
         tf.addStyleName("small");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         row.addComponent(tf);
 
         tf = new TextField("16px supported by default");
         tf.setInputPrompt("Image icon");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get(true, 16));
+        tf.setIcon(baseIcon.get(true, 16));
         row.addComponent(tf);
 
         tf = new TextField();
         tf.setValue("Font, no caption");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         row.addComponent(tf);
 
         tf = new TextField();
         tf.setValue("Image, no caption");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get(true, 16));
+        tf.setIcon(baseIcon.get(true, 16));
         row.addComponent(tf);
 
         CssLayout group = new CssLayout();
@@ -134,7 +134,7 @@ public class TextFields extends VerticalLayout implements View {
         tf = new TextField();
         tf.setInputPrompt("Grouped with a button");
         tf.addStyleName("inline-icon");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         tf.setWidth("260px");
         group.addComponent(tf);
 
@@ -146,7 +146,7 @@ public class TextFields extends VerticalLayout implements View {
         tf.setInputPrompt("Write here…");
         tf.addStyleName("inline-icon");
         tf.addStyleName("borderless");
-        tf.setIcon(testIcon.get());
+        tf.setIcon(baseIcon.get());
         row.addComponent(tf);
 
         tf = new TextField("Right-aligned");
@@ -205,7 +205,7 @@ public class TextFields extends VerticalLayout implements View {
         ta = new TextArea("Inline icon");
         ta.setInputPrompt("Inline icon not really working");
         ta.addStyleName("inline-icon");
-        ta.setIcon(testIcon.get());
+        ta.setIcon(baseIcon.get());
         row.addComponent(ta);
 
         ta = new TextArea("Custom color");
