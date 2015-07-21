@@ -11,11 +11,11 @@ import com.vaadin.server.ThemeResource;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-public class TestIcon {
+public class BaseIcon {
 
     int iconCount = 0;
 
-    public TestIcon(int startIndex) {
+    public BaseIcon(int startIndex) {
         iconCount = startIndex;
     }
 
