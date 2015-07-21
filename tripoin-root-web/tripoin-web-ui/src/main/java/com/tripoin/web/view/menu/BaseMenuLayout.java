@@ -86,8 +86,26 @@ public class BaseMenuLayout extends CssLayout implements View {
         top.setWidth("100%");
         top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
         top.addStyleName("valo-menu-title");
+        final Label title = new Label("<h3>Web Application <strong>Tripoin</strong></h3>", ContentMode.HTML);
+        title.setSizeUndefined();
+        top.addComponent(title);
+        top.setExpandRatio(title, 1);
         addComponent(top);
-        addComponent(createThemeSelect());
+
+        final MenuBar settings = new MenuBar();
+        settings.addStyleName("user-menu");
+        final MenuItem settingsItem = settings.addItem(accessControl.getUsername(), new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"), null);
+        settingsItem.addItem("Edit Profile", null);
+        settingsItem.addItem("Preferences", null);
+        settingsItem.addSeparator();
+        settingsItem.addItem("Sign Out", FontAwesome.SIGN_OUT, new Command() {			
+			private static final long serialVersionUID = -7829505006330125630L;
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				doLogout();
+			}
+		});
+        addComponent(settings);
 
         final Button showMenu = new Button("Menu", new ClickListener() {        	
 			private static final long serialVersionUID = -4671912497297145261L;
@@ -105,29 +123,6 @@ public class BaseMenuLayout extends CssLayout implements View {
         showMenu.addStyleName("valo-menu-toggle");
         showMenu.setIcon(FontAwesome.LIST);
         addComponent(showMenu);
-
-        final Label title = new Label("<h3>Web Application <strong>Tripoin</strong></h3>", ContentMode.HTML);
-        title.setSizeUndefined();
-        top.addComponent(title);
-        top.setExpandRatio(title, 1);
-
-        final MenuBar settings = new MenuBar();
-        settings.addStyleName("user-menu");
-        final MenuItem settingsItem = settings.addItem(accessControl.getUsername(), new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"), null);
-        settingsItem.addItem("Edit Profile", null);
-        settingsItem.addItem("Preferences", null);
-        settingsItem.addSeparator();
-        settingsItem.addItem("Sign Out", FontAwesome.SIGN_OUT, new Command() {			
-			private static final long serialVersionUID = -7829505006330125630L;
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				doLogout();
-			}
-		});
-        addComponent(settings);
-
-        menuItemsLayout.setPrimaryStyleName("valo-menuitems");
-        addComponent(menuItemsLayout);
 
         Label label = null;
         int count = 0;
@@ -173,6 +168,9 @@ public class BaseMenuLayout extends CssLayout implements View {
             count++;
         }
         label.setValue(label.getValue() + " <span class=\"valo-menu-badge\">" + count + "</span>");
+        menuItemsLayout.setPrimaryStyleName("valo-menuitems");
+        addComponent(menuItemsLayout);
+        addComponent(createThemeSelect());
         return this;
 	}
 

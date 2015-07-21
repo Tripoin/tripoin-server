@@ -87,11 +87,11 @@ public class TripoinUI extends UI implements ErrorHandler {
         	baseMenuLayout.setWidth("320px");
         } 
         
-        try{
+        /*try{
         	Thread.sleep(2000);
         }catch(InterruptedException e){
         	e.printStackTrace();
-        }
+        }*/
 
         navigator = new DiscoveryNavigator(this, viewDisplay);
         if(baseMenuLayout.getNavigator() == null)
