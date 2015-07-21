@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2015 at 06:20 PM
+-- Generation Time: Jul 21, 2015 at 02:21 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `mst_menu` (
   `menu_modified_by` varchar(150) DEFAULT NULL,
   `menu_modified_ip` varchar(150) DEFAULT NULL,
   `menu_modified_time` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `mst_menu`
@@ -64,7 +64,8 @@ INSERT INTO `mst_menu` (`menu_id`, `menu_code`, `menu_name`, `menu_status`, `men
 (17, 'tabs', 'Tabs', 1, 'Tabs', 'admin', '127.0.0.1', '2015-07-17 08:58:00', NULL, NULL, NULL),
 (18, 'accordions', 'Accordions', 1, 'Accordions', 'admin', '127.0.0.1', '2015-07-17 08:58:00', NULL, NULL, NULL),
 (19, 'popupviews', 'Popup Views', 1, 'Popup Views', 'admin', '127.0.0.1', '2015-07-17 08:58:30', NULL, NULL, NULL),
-(20, 'forms', 'Forms', 1, 'Forms', 'admin', '127.0.0.1', '2015-07-17 08:58:30', NULL, NULL, NULL);
+(20, 'calendar', 'Calendar', 1, 'Calendar', 'admin', '127.0.0.1', '2015-07-17 08:58:30', NULL, NULL, NULL),
+(21, 'forms', 'Forms', 1, 'Forms', 'admin', '127.0.0.1', '2015-07-21 12:13:15', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `mst_menu_role` (
 `menu_role_id` bigint(20) NOT NULL,
   `menu_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `mst_menu_role`
@@ -103,13 +104,14 @@ INSERT INTO `mst_menu_role` (`menu_role_id`, `menu_id`, `role_id`) VALUES
 (18, 18, 1),
 (19, 19, 1),
 (20, 20, 1),
-(21, 1, 2),
-(22, 2, 2),
-(23, 5, 2),
-(24, 9, 2),
-(25, 15, 2),
-(26, 16, 2),
-(27, 20, 2);
+(21, 21, 1),
+(22, 1, 2),
+(23, 2, 2),
+(24, 5, 2),
+(25, 9, 2),
+(26, 15, 2),
+(27, 16, 2),
+(28, 20, 2);
 
 -- --------------------------------------------------------
 
@@ -305,12 +307,12 @@ ALTER TABLE `trx_product`
 -- AUTO_INCREMENT for table `mst_menu`
 --
 ALTER TABLE `mst_menu`
-MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `mst_menu_role`
 --
 ALTER TABLE `mst_menu_role`
-MODIFY `menu_role_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+MODIFY `menu_role_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `sec_role`
 --
