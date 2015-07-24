@@ -3,6 +3,7 @@ package com.tripoin.web.view;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Label;
@@ -17,6 +18,7 @@ import com.vaadin.ui.themes.Reindeer;
  */
 @Component
 @Scope("prototype")
+@VaadinView(value = "errorView", cached = true)
 public class ErrorView extends VerticalLayout implements View {
 
     /**
@@ -29,7 +31,7 @@ public class ErrorView extends VerticalLayout implements View {
         setMargin(true);
         setSpacing(true);
 
-        Label header = new Label("The view could not be found");
+        Label header = new Label("Page could not be found.");
         header.addStyleName(Reindeer.LABEL_H1);
         addComponent(header);
         addComponent(explanation = new Label());

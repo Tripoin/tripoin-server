@@ -3,16 +3,18 @@ package com.tripoin.web;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 
 import com.tripoin.web.authentication.IAccessControl;
 import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.servlet.DiscoveryNavigator;
+import com.tripoin.web.view.ErrorView;
 import com.tripoin.web.view.login.LoginScreen;
 import com.tripoin.web.view.login.LoginScreen.LoginListener;
 import com.tripoin.web.view.menu.BaseMenuLayout;
-import com.tripoin.web.view.valo.CommonParts;
 import com.tripoin.web.view.valo.ValoMenuLayout;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
@@ -43,6 +45,7 @@ import com.vaadin.ui.themes.ValoTheme;
 public class TripoinUI extends UI implements ErrorHandler {
 	
 	private static final long serialVersionUID = -57029129041123227L;
+    private static Logger LOGGER = LoggerFactory.getLogger(TripoinUI.class);
     private CssLayout menuItems;
     private CssLayout menuItemsLayout;
 	private ValoMenuLayout root = new ValoMenuLayout();
@@ -60,24 +63,29 @@ public class TripoinUI extends UI implements ErrorHandler {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        Responsive.makeResponsive(this);
-        setLocale(vaadinRequest.getLocale());
-        getPage().setTitle("Tripoin");
-        if (vaadinRequest.getParameter("test") != null) {
-            if (browserCantRenderFontsConsistently()) {
-                getPage().getStyles().add(".v-app.v-app.v-app {font-family: Sans-Serif;}");
-            }
-        }
-        if (accessControl.isUserSignedIn()){
-            mainView();
-        }else{
-            setContent(new LoginScreen(accessControl, new LoginListener() {            	
-				private static final long serialVersionUID = -4033665849275819444L;
-				@Override
-                public void loginSuccessful() {
-                    mainView();
-                }
-            }));
+        try{
+	        Responsive.makeResponsive(this);
+	        setLocale(vaadinRequest.getLocale());
+	        getPage().setTitle("Tripoin");
+	        if (vaadinRequest.getParameter("test") != null) {
+	            if (browserCantRenderFontsConsistently()) {
+	                getPage().getStyles().add(".v-app.v-app.v-app {font-family: Sans-Serif;}");
+	            }
+	        }
+	        if (accessControl.isUserSignedIn()){
+	            mainView();
+	        }else{
+	            setContent(new LoginScreen(accessControl, new LoginListener() {            	
+					private static final long serialVersionUID = -4033665849275819444L;
+					@Override
+	                public void loginSuccessful() {
+	                    mainView();
+	                }
+	            }));
+	        }       	
+        }catch(Exception e){
+        	LOGGER.error(e.getMessage(), e);
+        	error(new com.vaadin.server.ErrorEvent(new AccessDeniedException("Oops! We've run out of web pages.")));
         }
     }
 
@@ -85,13 +93,7 @@ public class TripoinUI extends UI implements ErrorHandler {
     	setTheme("tripoin-valo");
         if (getPage().getWebBrowser().isIE() && getPage().getWebBrowser().getBrowserMajorVersion() == 9) {
         	baseMenuLayout.setWidth("320px");
-        } 
-        
-        /*try{
-        	Thread.sleep(2000);
-        }catch(InterruptedException e){
-        	e.printStackTrace();
-        }*/
+        }
 
         navigator = new DiscoveryNavigator(this, viewDisplay);
         if(baseMenuLayout.getNavigator() == null)
@@ -99,7 +101,7 @@ public class TripoinUI extends UI implements ErrorHandler {
         if(menuItems == null)
         	menuItems = baseMenuLayout.getMenu();
     	if(menuItemsLayout == null)
-    		menuItemsLayout = baseMenuLayout.getMenuItemsLayout();
+    		menuItemsLayout = baseMenuLayout.getMenuItemsLayout(); 
 
         getPage().setTitle("Tripoin Web Application");
         setContent(root);
@@ -112,7 +114,7 @@ public class TripoinUI extends UI implements ErrorHandler {
             navigator.navigateTo("common");
         }
 
-        navigator.setErrorView(CommonParts.class);
+        navigator.setErrorView(ErrorView.class);
 
         navigator.addViewChangeListener(new ViewChangeListener() {
 			private static final long serialVersionUID = -1255484519903571054L;
@@ -158,13 +160,13 @@ public class TripoinUI extends UI implements ErrorHandler {
 		if (event.getThrowable().getCause() instanceof AccessDeniedException){
             AccessDeniedException accessDeniedException = (AccessDeniedException) event.getThrowable().getCause();
             Notification.show(accessDeniedException.getMessage(), Notification.Type.ERROR_MESSAGE);
-            setContent(null);
+            setContent(new ErrorView());
             return;
         }
 		if (event.getThrowable() instanceof AccessDeniedException){
             AccessDeniedException exception = (AccessDeniedException) event.getThrowable();
             Notification.show(exception.getMessage(), Notification.Type.ERROR_MESSAGE);
-            setContent(null);
+            setContent(new ErrorView());
             return;
         }
 	}

@@ -6,7 +6,6 @@ import com.tripoin.web.servlet.view.ValoThemeSessionInitListener;
 import com.vaadin.server.*;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
@@ -101,7 +100,6 @@ public class SpringVaadinServlet extends VaadinServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SecurityContextHolder.setContext(SecurityContextHolder.createEmptyContext());
 		super.service(request, response);
 	}
     
