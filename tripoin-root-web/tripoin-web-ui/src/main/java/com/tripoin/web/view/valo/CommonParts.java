@@ -45,7 +45,7 @@ import com.vaadin.ui.Window.CloseListener;
  */
 @org.springframework.stereotype.Component
 @Scope("prototype")
-@VaadinView(value = "common", cached = true)
+@VaadinView(value = "", cached = true)
 public class CommonParts extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 4528676068625230032L;

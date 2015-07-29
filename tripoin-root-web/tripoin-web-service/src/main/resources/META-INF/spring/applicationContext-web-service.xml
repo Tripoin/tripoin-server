@@ -43,13 +43,12 @@
 		<property name="wsContextHTTP" value="/${tripoin.integration.ws.context}"/>
 	</bean>
 	
-	<bean id="stateFullRest" class="com.tripoin.web.common.impl.StateFullRestImpl" scope="session">
-		<aop:scoped-proxy proxy-target-class="true" />
-		<property name="isOAuth" value="${tripoin.is.oauth}"/>
-	</bean>
-	
 	<context:component-scan base-package="com.tripoin.web.service">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+	
+	<context:component-scan base-package="com.tripoin.web.common">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
     </context:component-scan>
 	
 </beans>

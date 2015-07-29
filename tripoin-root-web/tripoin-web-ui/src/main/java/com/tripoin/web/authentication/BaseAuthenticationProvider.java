@@ -63,6 +63,7 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
                         List<GrantedAuthority> grantedAuths = new ArrayList<>();
                         grantedAuths.add(new SimpleGrantedAuthority(userData.getRoleData().getCode()));
                         Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
+                        LOGGER.debug("User [{}] successfully logged in web service", username);
                         return auth;            			
             		}else{
             			return null;

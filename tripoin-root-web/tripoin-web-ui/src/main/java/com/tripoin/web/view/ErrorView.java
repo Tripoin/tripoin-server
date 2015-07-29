@@ -1,8 +1,5 @@
 package com.tripoin.web.view;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -16,18 +13,14 @@ import com.vaadin.ui.themes.Reindeer;
  * 
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@Component
-@Scope("prototype")
-@VaadinView(value = "errorView", cached = true)
+@VaadinView(value = "error", cached = true)
 public class ErrorView extends VerticalLayout implements View {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 6392094992266168555L;
 	private Label explanation;
 
     public ErrorView() {
+    	addStyleName("error-screen");
         setMargin(true);
         setSpacing(true);
 

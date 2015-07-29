@@ -32,6 +32,25 @@
 			<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
    		</listener>
    		
+   		<listener>
+    		<listener-class>org.atmosphere.cpr.SessionSupport</listener-class>
+		</listener>
+		
+		<context-param>
+		    <param-name>org.atmosphere.cpr.sessionSupport</param-name>
+		    <param-value>true</param-value>
+		</context-param>
+		
+	    <filter>
+	        <filter-name>HttpMethodFilter</filter-name>
+	        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	    </filter>
+	    
+	    <filter-mapping>
+	        <filter-name>HttpMethodFilter</filter-name>
+	        <url-pattern>/*</url-pattern>
+	    </filter-mapping>
+   		
  		<filter>
 	        <filter-name>requestContextFilter</filter-name>
 	        <filter-class>org.springframework.web.filter.RequestContextFilter</filter-class>
@@ -73,14 +92,15 @@
 		
 		<context-param>
         	<param-name>heartbeatInterval</param-name>
-        	<param-value>305</param-value>
+        	<param-value>65</param-value>
     	</context-param>
 		<session-config>
-			<session-timeout>5</session-timeout>	
-			<cookie-config>  
-            	<max-age>720000</max-age>  
-        	</cookie-config>  
+			<session-timeout>1</session-timeout> 
     	</session-config>
+    	<context-param>
+  			<param-name>disable-xsrf-protection</param-name>
+  			<param-value>false</param-value>
+		</context-param>
 	    <servlet>
 	        <servlet-name>Tripoin Web Servlet</servlet-name>
 	        <servlet-class>com.tripoin.web.servlet.SpringVaadinServlet</servlet-class>
@@ -92,23 +112,28 @@
 	            <param-name>systemMessagesBeanName</param-name>
 	            <param-value>DEFAULT</param-value>
 	        </init-param>
-		    <init-param>
-		      <param-name>contextConfigLocation</param-name>
-		      <param-value></param-value>
-		    </init-param>
 	        <init-param>
 	            <param-name>closeIdleSessions</param-name>
 	            <param-value>true</param-value>
 	        </init-param>
 	        <init-param>
 	            <param-name>heartbeatInterval</param-name>
-	            <param-value>305</param-value>
+	            <param-value>65</param-value>
 	        </init-param>
+	        <!-- <init-param>
+    			<param-name>pushmode</param-name>
+    			<param-value>automatic</param-value>
+  			</init-param> -->
 	        <async-supported>true</async-supported>
+	        <!-- <load-on-startup>10</load-on-startup> -->
 	    </servlet>
 	    <servlet-mapping>
 	        <servlet-name>Tripoin Web Servlet</servlet-name>
 	        <url-pattern>/*</url-pattern>
+	    </servlet-mapping>
+	    <servlet-mapping>
+	        <servlet-name>default</servlet-name>
+	        <url-pattern>/static/*</url-pattern>
 	    </servlet-mapping>
 	
 	    <context-param>

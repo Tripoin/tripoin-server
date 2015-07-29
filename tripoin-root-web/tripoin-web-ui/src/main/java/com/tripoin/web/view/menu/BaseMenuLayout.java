@@ -1,23 +1,19 @@
 package com.tripoin.web.view.menu;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 
-import com.tripoin.web.authentication.IAccessControl;
-import com.tripoin.web.common.IStateFullRest;
-import com.tripoin.web.servlet.DiscoveryNavigator;
 import com.tripoin.web.view.valo.BaseIcon;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -31,6 +27,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
@@ -41,31 +38,21 @@ public class BaseMenuLayout extends CssLayout implements View {
 	private static final long serialVersionUID = -4795419684894048255L;
     private static Map<String, String> themeVariants = new LinkedHashMap<String, String>();
     private final BaseIcon baseIcon = new BaseIcon(100);
+    private MenuItem settingsItem;
     private CssLayout menuItemsLayout = new CssLayout();
-    private DiscoveryNavigator navigator;
-	
-    private IAccessControl accessControl;
-    
-    private IStateFullRest stateFullRest;
+    private LogoutListener logoutListener;
+    private Map<String, String> additionalDataMenu;
 
 	public CssLayout getMenuItemsLayout() {
 		return menuItemsLayout;
 	}
 
-	public DiscoveryNavigator getNavigator() {
-		return navigator;
-	}
-
-	public void setNavigator(DiscoveryNavigator navigator) {
-		this.navigator = navigator;
-	}
-
-	public void setAccessControl(IAccessControl accessControl) {
-		this.accessControl = accessControl;
+	public void setAdditionalDataMenu(Map<String, String> additionalDataMenu) {
+		this.additionalDataMenu = additionalDataMenu;
 	}
 	
-	public void setStateFullRest(IStateFullRest stateFullRest) {
-		this.stateFullRest = stateFullRest;
+	public void addLogoutListener(LogoutListener logoutListener){
+		this.logoutListener = logoutListener;
 	}
 
 	@PostConstruct
@@ -82,6 +69,15 @@ public class BaseMenuLayout extends CssLayout implements View {
 	}
 
 	public BaseMenuLayout getMenu() {
+        addComponent(buildTitle());        
+        addComponent(buildUserMenu());        
+        addComponent(buildToggleButton());
+        addComponent(buildMenuItems());
+        addComponent(createThemeSelect());
+        return this;
+	}
+	
+	private Component buildTitle() {
         final HorizontalLayout top = new HorizontalLayout();
         top.setWidth("100%");
         top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
@@ -90,11 +86,13 @@ public class BaseMenuLayout extends CssLayout implements View {
         title.setSizeUndefined();
         top.addComponent(title);
         top.setExpandRatio(title, 1);
-        addComponent(top);
-
+		return top;
+	}
+	
+	private Component buildUserMenu() {
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
-        final MenuItem settingsItem = settings.addItem(accessControl.getUsername(), new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"), null);
+        settingsItem = settings.addItem("", new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"), null);
         settingsItem.addItem("Edit Profile", null);
         settingsItem.addItem("Preferences", null);
         settingsItem.addSeparator();
@@ -102,12 +100,14 @@ public class BaseMenuLayout extends CssLayout implements View {
 			private static final long serialVersionUID = -7829505006330125630L;
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				doLogout();
+				logoutListener.doLogout();
 			}
 		});
-        addComponent(settings);
-
-        final Button showMenu = new Button("Menu", new ClickListener() {        	
+		return settings;
+	}
+	
+	private Component buildToggleButton() {
+		final Button showMenu = new Button("Menu", new ClickListener() {        	
 			private static final long serialVersionUID = -4671912497297145261L;
 			@Override
             public void buttonClick(final ClickEvent event) {
@@ -122,11 +122,13 @@ public class BaseMenuLayout extends CssLayout implements View {
         showMenu.addStyleName(ValoTheme.BUTTON_SMALL);
         showMenu.addStyleName("valo-menu-toggle");
         showMenu.setIcon(FontAwesome.LIST);
-        addComponent(showMenu);
-
+		return showMenu;
+	}
+	
+	private Component buildMenuItems() {
         Label label = null;
         int count = 0;
-        for (final Entry<String, String> item : this.stateFullRest.getAdditionalDataMenu().entrySet()) {
+        for (final Entry<String, String> item : this.additionalDataMenu.entrySet()) {
             if (item.getKey().equals("datefields")) {
                 label = new Label("Components", ContentMode.HTML);
                 label.setPrimaryStyleName("valo-menu-subtitle");
@@ -156,7 +158,7 @@ public class BaseMenuLayout extends CssLayout implements View {
 				private static final long serialVersionUID = -8962701523482133238L;
 				@Override
                 public void buttonClick(final ClickEvent event) {
-                    navigator.navigateTo(item.getKey());
+					UI.getCurrent().getNavigator().navigateTo(item.getKey());
                 }
             });
             if (count == 2)
@@ -169,9 +171,7 @@ public class BaseMenuLayout extends CssLayout implements View {
         }
         label.setValue(label.getValue() + " <span class=\"valo-menu-badge\">" + count + "</span>");
         menuItemsLayout.setPrimaryStyleName("valo-menuitems");
-        addComponent(menuItemsLayout);
-        addComponent(createThemeSelect());
-        return this;
+        return menuItemsLayout;
 	}
 
     @SuppressWarnings("unchecked")
@@ -195,12 +195,13 @@ public class BaseMenuLayout extends CssLayout implements View {
         });
         return ns;
     }
-    
-    private void doLogout(){
-		stateFullRest.clearAllCookies();
-        VaadinSession.getCurrent().getSession().invalidate();
-        getUI().close();
-        Page.getCurrent().reload();    	
+	
+	public void updateUser(String username){
+		settingsItem.setText(username);
+	}
+	
+    public interface LogoutListener extends Serializable {
+        void doLogout();
     }
 
 	@Override
