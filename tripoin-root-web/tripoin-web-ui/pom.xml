@@ -79,6 +79,45 @@
         <!-- refer vaadin data -->
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
+            <version>${vaadin.spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-expression</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-webmvc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>aopalliance</groupId>
+					<artifactId>aopalliance</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-shared</artifactId>
         </dependency>
         <dependency>
@@ -352,6 +391,9 @@
 						<fileset>
 							<directory>src/main/webapp/VAADIN/widgetsets</directory>
 						</fileset>
+						<fileset>
+							<directory>src/main/webapp/VAADIN/gwt-unitCache</directory>
+						</fileset>
 					</filesets>
 				</configuration>
 			</plugin>
@@ -406,10 +448,6 @@
                 <version>${jetty.plugin.version}</version>
                 <configuration>
                 	<scanIntervalSeconds>10</scanIntervalSeconds>
-                   	<httpConnector>
-                   		<idleTimeout>30000</idleTimeout>
-                   		<soLingerTime>-1</soLingerTime>                   
-                   	</httpConnector>
                 </configuration>
             </plugin>
 		</plugins>
