@@ -8,13 +8,13 @@ import com.vaadin.ui.HorizontalLayout;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-public class ValoMenuLayout extends HorizontalLayout {
+public class RootMenuLayout extends HorizontalLayout {
 
 	private static final long serialVersionUID = 5628348322337740893L;
 	private CssLayout contentArea = new CssLayout();
     private CssLayout menuArea = new CssLayout();
 
-    public ValoMenuLayout() {
+    public RootMenuLayout() {
         setSizeFull();
 
         menuArea.setPrimaryStyleName("valo-menu");
