@@ -1,13 +1,13 @@
 package com.tripoin.web.view.valo;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -19,7 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@org.springframework.stereotype.Component
+@Component
 @Scope("prototype")
 @VaadinView(value = "panels", cached = true)
 public class Panels extends VerticalLayout implements View {
@@ -136,7 +136,7 @@ public class Panels extends VerticalLayout implements View {
         row.addComponent(layout);
     }
 
-    Component panelContent() {
+    com.vaadin.ui.Component panelContent() {
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();
         layout.setMargin(true);
@@ -151,7 +151,7 @@ public class Panels extends VerticalLayout implements View {
         return layout;
     }
 
-    Component panelContentScroll() {
+    com.vaadin.ui.Component panelContentScroll() {
         VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
         layout.setSpacing(true);

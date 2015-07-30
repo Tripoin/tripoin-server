@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.event.Transferable;
@@ -23,7 +24,6 @@ import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DragAndDropWrapper;
@@ -38,7 +38,7 @@ import com.vaadin.ui.VerticalLayout;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@org.springframework.stereotype.Component
+@Component
 @Scope("prototype")
 @VaadinView(value = "dragging", cached = true)
 public class Dragging extends VerticalLayout implements View {
@@ -118,7 +118,7 @@ public class Dragging extends VerticalLayout implements View {
         sample.setSizeUndefined();
         sample.setHeight("100px");
 
-        for (final Component component : createComponents()) {
+        for (final com.vaadin.ui.Component component : createComponents()) {
             sample.addComponent(component);
         }
 
@@ -126,8 +126,8 @@ public class Dragging extends VerticalLayout implements View {
 
     }
 
-    private List<Component> createComponents() {
-        final List<Component> components = new ArrayList<Component>();
+    private List<com.vaadin.ui.Component> createComponents() {
+        final List<com.vaadin.ui.Component> components = new ArrayList<com.vaadin.ui.Component>();
 
         final Label label = new Label(
                 "This is a long text block that will wrap.");
@@ -190,7 +190,7 @@ public class Dragging extends VerticalLayout implements View {
 		@Override
         public void drop(final DragAndDropEvent dropEvent) {
             final Transferable transferable = dropEvent.getTransferable();
-            final Component sourceComponent = transferable.getSourceComponent();
+            final com.vaadin.ui.Component sourceComponent = transferable.getSourceComponent();
             if (sourceComponent instanceof WrappedComponent) {
                 final TargetDetails dropTargetData = dropEvent
                         .getTargetDetails();
@@ -199,9 +199,9 @@ public class Dragging extends VerticalLayout implements View {
                 // find the location where to move the dragged component
                 boolean sourceWasAfterTarget = true;
                 int index = 0;
-                final Iterator<Component> componentIterator = layout
+                final Iterator<com.vaadin.ui.Component> componentIterator = layout
                         .getComponentIterator();
-                Component next = null;
+                com.vaadin.ui.Component next = null;
                 while (next != target && componentIterator.hasNext()) {
                     next = componentIterator.next();
                     if (next != sourceComponent) {
@@ -256,7 +256,7 @@ public class Dragging extends VerticalLayout implements View {
             setCompositionRoot(layout);
         }
 
-        public void addComponent(final Component component) {
+        public void addComponent(final com.vaadin.ui.Component component) {
             final WrappedComponent wrapper = new WrappedComponent(component,
                     dropHandler);
             wrapper.setSizeUndefined();
@@ -274,7 +274,7 @@ public class Dragging extends VerticalLayout implements View {
 		private static final long serialVersionUID = 4336701737193760660L;
 		private final DropHandler dropHandler;
 
-        public WrappedComponent(final Component content,
+        public WrappedComponent(final com.vaadin.ui.Component content,
                 final DropHandler dropHandler) {
             super(content);
             this.dropHandler = dropHandler;

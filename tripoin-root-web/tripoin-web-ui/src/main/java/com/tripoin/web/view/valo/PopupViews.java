@@ -1,12 +1,12 @@
 package com.tripoin.web.view.valo;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.PopupView;
@@ -16,7 +16,7 @@ import com.vaadin.ui.VerticalLayout;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@org.springframework.stereotype.Component
+@Component
 @Scope("prototype")
 @VaadinView(value = "popupviews", cached = true)
 public class PopupViews extends VerticalLayout implements View {
@@ -42,7 +42,7 @@ public class PopupViews extends VerticalLayout implements View {
 			private static final long serialVersionUID = 3178595923379249115L;
 
 			@Override
-            public Component getPopupComponent() {
+            public com.vaadin.ui.Component getPopupComponent() {
                 return new VerticalLayout() {
                     /**
 					 * 
@@ -75,7 +75,7 @@ public class PopupViews extends VerticalLayout implements View {
 			int count = 0;
 
             @Override
-            public Component getPopupComponent() {
+            public com.vaadin.ui.Component getPopupComponent() {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
