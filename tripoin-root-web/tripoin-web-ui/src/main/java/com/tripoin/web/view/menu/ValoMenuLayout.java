@@ -1,4 +1,4 @@
-package com.tripoin.web.view.valo;
+package com.tripoin.web.view.menu;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
