@@ -12,18 +12,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.tripoin.web.authentication.IAccessControl;
+import com.tripoin.web.common.EWebUIConstant;
 import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.servlet.DiscoveryNavigator;
 import com.tripoin.web.view.ErrorView;
+import com.tripoin.web.view.home.HomeView;
 import com.tripoin.web.view.login.LoginScreen;
 import com.tripoin.web.view.login.LoginScreen.LoginListener;
 import com.tripoin.web.view.menu.BaseMenuLayout;
+import com.tripoin.web.view.menu.RootMenuLayout;
 import com.tripoin.web.view.menu.BaseMenuLayout.LogoutListener;
-import com.tripoin.web.view.valo.ValoMenuLayout;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -60,7 +61,7 @@ public class TripoinUI extends UI implements ErrorHandler {
     private static Logger LOGGER = LoggerFactory.getLogger(TripoinUI.class);
     private CssLayout menuItems;
     private CssLayout menuItemsLayout;
-	private ValoMenuLayout root = new ValoMenuLayout();
+	private RootMenuLayout root = new RootMenuLayout();
     private ComponentContainer viewDisplay = root.getContentContainer();
     private DiscoveryNavigator navigator;
     private ApplicationContext applicationContext;
@@ -80,7 +81,6 @@ public class TripoinUI extends UI implements ErrorHandler {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         try{
-        	SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
         	getSession().setErrorHandler(this);
 	        Responsive.makeResponsive(this);
 	        addStyleName(ValoTheme.UI_WITH_MENU);
@@ -142,9 +142,8 @@ public class TripoinUI extends UI implements ErrorHandler {
     private void generateNavigator(){
         navigator = new DiscoveryNavigator(this, viewDisplay);
         final String f = Page.getCurrent().getUriFragment();
-        if (f == null || f.equals("") || f.equals("#!")) {
-            navigator.navigateTo("");
-        }  
+        if (f == null || EWebUIConstant.HOME_VIEW.toString().equals(f) || EWebUIConstant.NAVIGATE_NULL.toString().equals(f)) 
+            navigator.navigateTo(HomeView.VIEW_NAME);          
         navigator.setErrorView(ErrorView.class);
         navigator.addViewChangeListener(new ViewChangeListener() {
 			private static final long serialVersionUID = -1255484519903571054L;
@@ -182,11 +181,10 @@ public class TripoinUI extends UI implements ErrorHandler {
 	public void close() {
 		if(stateFullRest != null && stateFullRest.getAdditionalDataMenu() != null && !stateFullRest.getAdditionalDataMenu().isEmpty())
 			stateFullRest.clearAllCookies();
-        VaadinSession.getCurrent().close();
 		getSession().getSession().invalidate();
 		getSession().close();
-		Page.getCurrent().setLocation("/j_spring_security_logout");
-		setPollInterval(3000);
+        VaadinSession.getCurrent().close();
+		Page.getCurrent().setLocation("./j_spring_security_logout");
 	}
 
 	@Override

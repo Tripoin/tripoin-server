@@ -12,7 +12,10 @@ public enum EWebUIConstant {
 	
 	REGEX_USERNAME("^[a-z0-9_-]{5,15}$"),
 	
-    COMING("Coming"), AVAILABLE("Available"), DISCONTINUED("Discontinued");
+    COMING("Coming"), AVAILABLE("Available"), DISCONTINUED("Discontinued"),
+	
+	HOME_VIEW(""),
+	NAVIGATE_NULL("#!");
 	
 	private String operator;	
 	

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -121,6 +122,7 @@ public class SpringVaadinServlet extends VaadinServlet {
 	@Override
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+    	SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_THREADLOCAL);
 		final Locale locale = localeResolver.resolveLocale(request);
         LocaleContextHolder.setLocale(locale);
         ServletRequestAttributes requestAttributes = new ServletRequestAttributes(request);

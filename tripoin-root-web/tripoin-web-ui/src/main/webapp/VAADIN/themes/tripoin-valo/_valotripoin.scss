@@ -150,4 +150,16 @@
   .content-labels {
   	max-width: 800px;
   }
+  
+  .home-view {
+    overflow: auto;
+
+    .home-content {
+      @include valo-panel-style;
+      max-width: 800px;
+      // Override the default of CustomLayout
+      padding: $v-unit-size !important;
+    }
+  }
+  
 }

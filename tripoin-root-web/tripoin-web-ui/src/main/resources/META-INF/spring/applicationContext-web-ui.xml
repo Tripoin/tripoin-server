@@ -27,6 +27,10 @@
     <bean id="login" class="com.tripoin.web.view.login.LoginScreen" scope="prototype"/>    
 	<bean id="tripoinUI" class="com.tripoin.web.TripoinUI" scope="prototype"/>    
     
+	<context:component-scan base-package="com.tripoin.web.view.home">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+    </context:component-scan>   
+    
 	<context:component-scan base-package="com.tripoin.web.view.valo">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
     </context:component-scan>

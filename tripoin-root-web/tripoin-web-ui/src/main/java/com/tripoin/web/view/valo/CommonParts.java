@@ -1,6 +1,7 @@
 package com.tripoin.web.view.valo;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -20,7 +21,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -43,9 +43,9 @@ import com.vaadin.ui.Window.CloseListener;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@org.springframework.stereotype.Component
+@Component
 @Scope("prototype")
-@VaadinView(value = "", cached = true)
+@VaadinView(value = "common", cached = true)
 public class CommonParts extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 4528676068625230032L;
@@ -578,7 +578,7 @@ public class CommonParts extends VerticalLayout implements View {
                     MenuBar menuBar = MenuBars.getToolBar();
                     menuBar.setSizeUndefined();
                     menuBar.setStyleName(toolbarStyle);
-                    Component toolbar = menuBar;
+                    com.vaadin.ui.Component toolbar = menuBar;
                     if (toolbarLayout) {
                         menuBar.setWidth(null);
                         HorizontalLayout toolbarLayout = new HorizontalLayout();
@@ -596,7 +596,7 @@ public class CommonParts extends VerticalLayout implements View {
                     root.addComponent(toolbar);
                 }
 
-                Component content = null;
+                com.vaadin.ui.Component content = null;
 
                 if (tabsVisible) {
                     TabSheet tabs = new TabSheet();
