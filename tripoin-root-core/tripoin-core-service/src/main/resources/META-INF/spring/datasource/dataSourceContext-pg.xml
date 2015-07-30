@@ -39,18 +39,19 @@
 			</list>
 		</property>
 	</bean>
-	
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="false">
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" lazy-init="false">
         <property name="driverClassName" value="${db.driverclass}"/>
         <property name="url" value="${db.url}${db.host}:${db.port}/${db.name}"/>
-        <property name="poolPreparedStatements" value="true"/>
-        <property name="maxActive" value="10" />
-        <property name="maxWait" value="1000" />
-        <property name="testOnBorrow" value="true" />
-        <property name="validationQuery" value="select 1" />
         <property name="username" value="${db.username}" />
         <property name="password" value="${db.password}" />
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxTotal" value="10" />
+        <property name="maxWaitMillis" value="1000" />
+        <property name="testOnBorrow" value="true" />
+        <property name="validationQuery" value="select 1" />
     </bean>    
+    
     <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
     	<constructor-arg index="0" ref="dataSource" />
     </bean>    
