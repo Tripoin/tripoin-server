@@ -10,6 +10,8 @@ public class WebServiceConstant {
 	/*private static final String HTTP_UPDATE = "/update";*/
 	/*private static final String HTTP_DELETE = "/delete";*/
 	
+	public static final String HTTP_ONLY = "HttpOnly";
+	
 	public static final String HTTP_CONNECTION = "/connection";	
 	public static final String HTTP_LOGIN = "/login";	
 	public static final String HTTP_LOGIN_MENU = "/login-menu";

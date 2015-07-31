@@ -20,6 +20,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.tripoin.web.common.IStateFullRest;
+import com.tripoin.web.common.WebServiceConstant;
 
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
@@ -29,7 +30,7 @@ public class StateFullRestTest implements IStateFullRest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(StateFullRestTest.class);
 
 	private Map<String, String> additionalDataMenu = new LinkedHashMap<String, String>();
-	private final Map<String, String> cookies = new HashMap<>();
+	private final Map<String, String> cookies = new HashMap<String, String>();
 	private String username;
 	private String password;
 	private boolean isOAuth;
@@ -138,10 +139,11 @@ public class StateFullRestTest implements IStateFullRest {
 		List<String> cookiesList = headers.get("Set-Cookie");
 		if (cookiesList != null && !cookiesList.isEmpty()) {
 			String cookiesStr = cookiesList.get(0);
-			String[] cookiesSplit = cookiesStr.split(";");
+			String[] cookiesSplit = cookiesStr.split("; ");
 			for (String cookieStr : cookiesSplit) {
 				String[] keyValueSplit = cookieStr.split("=");
-				cookies.put(keyValueSplit[0], keyValueSplit[1]);
+				if(!WebServiceConstant.HTTP_ONLY.equals(cookieStr) || keyValueSplit.length > 1)
+					cookies.put(keyValueSplit[0], keyValueSplit[1]);
 			}
 		}
 	}

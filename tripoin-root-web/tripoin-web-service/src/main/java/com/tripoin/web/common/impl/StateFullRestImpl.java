@@ -24,6 +24,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.tripoin.web.common.IStateFullRest;
+import com.tripoin.web.common.WebServiceConstant;
 
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
@@ -145,10 +146,11 @@ public class StateFullRestImpl implements IStateFullRest {
 		List<String> cookiesList = headers.get("Set-Cookie");
 		if (cookiesList != null && !cookiesList.isEmpty()) {
 			String cookiesStr = cookiesList.get(0);
-			String[] cookiesSplit = cookiesStr.split(";");
+			String[] cookiesSplit = cookiesStr.split("; ");
 			for (String cookieStr : cookiesSplit) {
 				String[] keyValueSplit = cookieStr.split("=");
-				cookies.put(keyValueSplit[0], keyValueSplit[1]);
+				if(!WebServiceConstant.HTTP_ONLY.equals(cookieStr) || keyValueSplit.length > 1)
+					cookies.put(keyValueSplit[0], keyValueSplit[1]);
 			}
 		}
 	}
