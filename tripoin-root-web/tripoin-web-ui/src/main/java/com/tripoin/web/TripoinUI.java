@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.access.AccessDeniedException;
@@ -41,11 +39,12 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WrappedHttpSession;
 import com.vaadin.server.WrappedSession;
+import com.vaadin.shared.Position;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
-import com.vaadin.util.CurrentInstance;
 
 /**
  * Tripoin UI class of the application that shows either the login screen or the
@@ -61,7 +60,6 @@ import com.vaadin.util.CurrentInstance;
 public class TripoinUI extends UI implements ErrorHandler {
 	
 	private static final long serialVersionUID = -57029129041123227L;
-    private static Logger LOGGER = LoggerFactory.getLogger(TripoinUI.class);
     private CssLayout menuItems;
     private CssLayout menuItemsLayout;
 	private RootMenuLayout root = new RootMenuLayout();
@@ -188,26 +186,31 @@ public class TripoinUI extends UI implements ErrorHandler {
 		getSession().getSession().invalidate();
 		getSession().close();
         VaadinSession.getCurrent().close();
-		getSession().getService().destroy();
+		VaadinServlet.getCurrent().destroy();
 		Page.getCurrent().setLocation("./j_spring_security_logout");
-        CurrentInstance.clearAll();
 	}
 
 	@Override
 	public void error(com.vaadin.server.ErrorEvent event) {
-		AccessDeniedException accessDeniedException = new AccessDeniedException("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).");
+		String description = "The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).";
+		AccessDeniedException accessDeniedException = new AccessDeniedException(description);
 		ErrorView errorView;
         if("false".equals(VaadinServlet.getCurrent().getServletContext().getInitParameter("productionMode"))){
     		if (event.getThrowable().getCause() instanceof AccessDeniedException)
                 accessDeniedException = (AccessDeniedException) event.getThrowable().getCause();
     		if (event.getThrowable() instanceof AccessDeniedException)
                 accessDeniedException = (AccessDeniedException) event.getThrowable();        	
-        }else{
-    		if (event.getThrowable().getCause() instanceof AccessDeniedException)
-            	LOGGER.error(event.getThrowable().getCause().getMessage());
-    		if (event.getThrowable() instanceof AccessDeniedException)
-            	LOGGER.error(event.getThrowable().getMessage());        	
         }
+		Notification notification = new Notification("");
+		notification.setCaption("Bad Request");
+        notification.setDescription(description);
+		notification.setStyleName("system closable");
+        notification.setPosition(Position.BOTTOM_CENTER);
+        notification.setDelayMsec(7500);
+        if(Page.getCurrent() == null)
+        	notification.show(getPage());
+        else
+        	notification.show(Page.getCurrent());
         errorView = new ErrorView(accessDeniedException.getMessage());
         setContent(errorView);
 	}

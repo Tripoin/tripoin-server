@@ -6,12 +6,9 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Page;
-import com.vaadin.shared.Position;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
@@ -29,15 +26,7 @@ public class ErrorView extends VerticalLayout implements View {
 
 	public ErrorView(String description) {
 		setMargin(true);
-		setSpacing(true);
-		Notification notification = new Notification("");
-		notification.setCaption("Bad Request");
-        notification.setDescription("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).");
-		notification.setStyleName("system closable");
-        notification.setPosition(Position.BOTTOM_CENTER);
-        notification.show(Page.getCurrent());
-        notification.setDelayMsec(10000);
-        
+		setSpacing(true);        
         Panel p = new Panel("Error Infromation");
         p.setStyleName("bold");
         p.setIcon(FontAwesome.STACK_OVERFLOW);
