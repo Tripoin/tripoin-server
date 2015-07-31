@@ -1,11 +1,19 @@
 package com.tripoin.web.view;
 
 import com.tripoin.web.servlet.VaadinView;
+import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ExternalResource;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
 
 /**
  * View shown when trying to navigate to a view that does not exist using
@@ -14,26 +22,42 @@ import com.vaadin.ui.themes.Reindeer;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @VaadinView(value = "error", cached = true)
+@Theme("tripoin-valo")
 public class ErrorView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 6392094992266168555L;
-	private Label explanation;
 
-    public ErrorView() {
-    	addStyleName("error-screen");
-        setMargin(true);
-        setSpacing(true);
-
-        Label header = new Label("Page could not be found.");
-        header.addStyleName(Reindeer.LABEL_H1);
-        addComponent(header);
-        addComponent(explanation = new Label());
+	public ErrorView(String description) {
+		setMargin(true);
+		setSpacing(true);
+		Notification notification = new Notification("");
+		notification.setCaption("Bad Request");
+        notification.setDescription("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).");
+		notification.setStyleName("system closable");
+        notification.setPosition(Position.BOTTOM_CENTER);
+        notification.show(Page.getCurrent());
+        notification.setDelayMsec(10000);
+        
+        Panel p = new Panel("Error Infromation");
+        p.setStyleName("bold");
+        p.setIcon(FontAwesome.STACK_OVERFLOW);
+        VerticalLayout right = new VerticalLayout();
+        right.setSpacing(true);
+        right.setMargin(true);
+        p.setContent(right);
+        p.setWidth("50%");
+        Label descriptionLabel = new Label(description);
+        right.addComponent(descriptionLabel);
+        Label contactLabel = new Label("Please Contact Us : ");
+        Link url = new Link("tripoin, inc.", new ExternalResource("http://www.tripoin.net"));
+        url.setIcon(FontAwesome.SUPPORT);
+        right.addComponents(contactLabel, url);
+        this.addComponent(p);
+        this.setComponentAlignment(p, Alignment.TOP_CENTER);
     }
 
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-        explanation.setValue(String.format(
-                "You tried to navigate to a view ('%s') that does not exist.",
-                event.getViewName()));
-    }
+	@Override
+	public void enter(ViewChangeEvent event) {
+		
+	}
 }

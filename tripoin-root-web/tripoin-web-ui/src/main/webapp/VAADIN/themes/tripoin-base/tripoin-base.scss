@@ -45,7 +45,6 @@ $login-info-opacity: 0.7 !default;
 $login-background-color: $editor-background-color !default;
 // Get more background images from unsplash.com (remember to optimize the filesize)
 $login-background-image: "img/archetype-login-bg.jpg" !default;
-$error-background-image: "img/error.png" !default;
 
 $editor-shadow: 0 0 10px 10px rgba(0,0,0,.1) !default;
 $editor-embed-background-color: darken($editor-background-color, 5%) !default;
@@ -65,17 +64,6 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
 
 @mixin tripoin-base {
   @include valo;
-  
-  // error screen
-  .error-screen {
-    background: $editor-background-color;    
-    @if $error-background-image {
-      background-image: url(#{$error-background-image});
-      background-position: 50% 50%;
-    }
-    width: 50%;
-    height: 50%;
-  }
   
   // login screen - for small screens, see below
   .login-screen {

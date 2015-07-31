@@ -1,5 +1,7 @@
 package com.tripoin.web;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map.Entry;
@@ -35,14 +37,15 @@ import com.vaadin.server.ErrorHandler;
 import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WrappedHttpSession;
 import com.vaadin.server.WrappedSession;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.util.CurrentInstance;
 
 /**
  * Tripoin UI class of the application that shows either the login screen or the
@@ -104,8 +107,9 @@ public class TripoinUI extends UI implements ErrorHandler {
 	            setContent(login);
 	        }       	
         }catch(Exception e){
-        	LOGGER.error(e.getMessage(), e);
-        	error(new com.vaadin.server.ErrorEvent(new AccessDeniedException("Oops! We've run out of web pages.")));
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+        	error(new com.vaadin.server.ErrorEvent(new AccessDeniedException(errors.toString())));
         }
     }
 
@@ -184,23 +188,28 @@ public class TripoinUI extends UI implements ErrorHandler {
 		getSession().getSession().invalidate();
 		getSession().close();
         VaadinSession.getCurrent().close();
+		getSession().getService().destroy();
 		Page.getCurrent().setLocation("./j_spring_security_logout");
+        CurrentInstance.clearAll();
 	}
 
 	@Override
 	public void error(com.vaadin.server.ErrorEvent event) {
-		if (event.getThrowable().getCause() instanceof AccessDeniedException){
-            AccessDeniedException accessDeniedException = (AccessDeniedException) event.getThrowable().getCause();
-            Notification.show(accessDeniedException.getMessage(), Notification.Type.ERROR_MESSAGE);
-            setContent(new ErrorView());
-            return;
+		AccessDeniedException accessDeniedException = new AccessDeniedException("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).");
+		ErrorView errorView;
+        if("false".equals(VaadinServlet.getCurrent().getServletContext().getInitParameter("productionMode"))){
+    		if (event.getThrowable().getCause() instanceof AccessDeniedException)
+                accessDeniedException = (AccessDeniedException) event.getThrowable().getCause();
+    		if (event.getThrowable() instanceof AccessDeniedException)
+                accessDeniedException = (AccessDeniedException) event.getThrowable();        	
+        }else{
+    		if (event.getThrowable().getCause() instanceof AccessDeniedException)
+            	LOGGER.error(event.getThrowable().getCause().getMessage());
+    		if (event.getThrowable() instanceof AccessDeniedException)
+            	LOGGER.error(event.getThrowable().getMessage());        	
         }
-		if (event.getThrowable() instanceof AccessDeniedException){
-            AccessDeniedException exception = (AccessDeniedException) event.getThrowable();
-            Notification.show(exception.getMessage(), Notification.Type.ERROR_MESSAGE);
-            setContent(new ErrorView());
-            return;
-        }
+        errorView = new ErrorView(accessDeniedException.getMessage());
+        setContent(errorView);
 	}
     
     public void setAplicationContext(VaadinRequest vaadinRequest){
