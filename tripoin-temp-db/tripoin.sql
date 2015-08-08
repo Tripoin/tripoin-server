@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2015 at 02:21 PM
+-- Generation Time: Aug 08, 2015 at 07:25 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `trx_product` (
   `product_price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `product_stock_count` bigint(20) DEFAULT '0',
   `availability_id` bigint(20) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `trx_product`
@@ -229,7 +229,8 @@ INSERT INTO `trx_product` (`product_id`, `product_name`, `product_price`, `produ
 (1, 'Beginners guide to ice hockey', '14.70', 0, 1),
 (2, 'Being awesome at feeling down', '27.80', 378, 2),
 (3, 'Learning the basics of designing tree houses', '28.40', 0, 3),
-(4, 'The secrets of dummies', '11.00', 0, 3);
+(4, 'The secrets of dummies', '11.00', 0, 3),
+(5, 'Indonesian Dictionary', '2.40', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -251,7 +252,8 @@ INSERT INTO `trx_product_category` (`product_id`, `category_id`) VALUES
 (2, 8),
 (3, 4),
 (3, 8),
-(4, 3);
+(4, 3),
+(5, 1);
 
 --
 -- Indexes for dumped tables
@@ -337,7 +339,7 @@ MODIFY `category_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 -- AUTO_INCREMENT for table `trx_product`
 --
 ALTER TABLE `trx_product`
-MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
