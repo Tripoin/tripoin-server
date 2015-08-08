@@ -61,7 +61,7 @@ public class SpringVaadinServlet extends VaadinServlet {
     private LocaleResolver localeResolver;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {    	
+    public void init(ServletConfig config) throws ServletException {  
         applicationContext = WebApplicationContextUtils.getWebApplicationContext(config.getServletContext());
         if (config.getInitParameter(CONTEXT_CONFIG_LOCATION_PARAMETER) != null) {
             XmlWebApplicationContext context = new XmlWebApplicationContext();
@@ -78,8 +78,8 @@ public class SpringVaadinServlet extends VaadinServlet {
         if (SpringApplicationContext.getApplicationContext() == null){
             SpringApplicationContext.setApplicationContext(applicationContext);
         }
-        initLocaleResolver(applicationContext);
-        super.init(config);
+        super.init(config);  	
+        initLocaleResolver(applicationContext); 
     }
 
     protected void initializePlugin(VaadinServletService service) {
@@ -93,9 +93,6 @@ public class SpringVaadinServlet extends VaadinServlet {
         if (uiProviderProperty == null) {
             service.addSessionInitListener(new SessionInitListener() {
             	
-                /**
-				 * 
-				 */
 				private static final long serialVersionUID = 7821444940054741472L;
 
 				@Override
@@ -120,8 +117,7 @@ public class SpringVaadinServlet extends VaadinServlet {
     }
 
 	@Override
-	protected void service(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_THREADLOCAL);
 		final Locale locale = localeResolver.resolveLocale(request);
         LocaleContextHolder.setLocale(locale);

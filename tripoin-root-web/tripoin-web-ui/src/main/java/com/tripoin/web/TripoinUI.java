@@ -183,11 +183,10 @@ public class TripoinUI extends UI implements ErrorHandler {
 	public void close() {
 		if(stateFullRest != null && stateFullRest.getAdditionalDataMenu() != null && !stateFullRest.getAdditionalDataMenu().isEmpty())
 			stateFullRest.clearAllCookies();
-		getSession().getSession().invalidate();
-		getSession().close();
         VaadinSession.getCurrent().close();
-		VaadinServlet.getCurrent().destroy();
-		Page.getCurrent().setLocation("./j_spring_security_logout");
+		getSession().close();
+		getSession().getSession().invalidate();
+		UI.getCurrent().getPage().setLocation("j_spring_security_logout");
 	}
 
 	@Override

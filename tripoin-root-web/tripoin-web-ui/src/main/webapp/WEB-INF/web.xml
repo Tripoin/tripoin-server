@@ -92,10 +92,10 @@
 		
 		<context-param>
         	<param-name>heartbeatInterval</param-name>
-        	<param-value>65</param-value>
+        	<param-value>305</param-value>
     	</context-param>
 		<session-config>
-			<session-timeout>1</session-timeout> 
+			<session-timeout>5</session-timeout> 
     	</session-config>
     	<context-param>
   			<param-name>disable-xsrf-protection</param-name>
@@ -118,7 +118,7 @@
 	        </init-param>
 	        <init-param>
 	            <param-name>heartbeatInterval</param-name>
-	            <param-value>65</param-value>
+	            <param-value>305</param-value>
 	        </init-param>
 	        <!-- <init-param>
     			<param-name>pushmode</param-name>
