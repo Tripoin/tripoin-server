@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.tripoin.core.pojo.Employee;
 import com.tripoin.core.service.IGenericManagerJpa;
 
 /**
@@ -46,6 +47,20 @@ public class GenerateUserTest implements ApplicationContextAware {
 	@Test
 	public void runTest() throws Exception {
 		LOGGER.debug("Password spring : ".concat(jasyptStringDigester.digest("spring")));		
+	}
+	
+	@Test
+	public void deleteEmployee(){		
+		
+		Employee employee;					
+		
+		try {
+			employee = iGenericManagerJpa.loadObjects(Employee.class).get(0);
+			System.out.println(employee.toString());
+			iGenericManagerJpa.deleteObject(employee);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
