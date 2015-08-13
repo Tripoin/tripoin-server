@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tripoin.core.dao.IGenericDeleteDaoJpa;
+import com.tripoin.core.dao.IGenericReadDaoJpa;
 
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
@@ -21,11 +22,11 @@ public abstract class ABaseDeleteDaoJpa implements IGenericDeleteDaoJpa {
         return entityManager;
     }    
 
-	@Override
-	@Transactional
-	public void deleteObject(Object objectType) throws Exception {
-		getEntityManager().remove(objectType);
-		getEntityManager().flush();
+    @Transactional
+	@Override		
+	public void deleteObject(Object objectType) throws Exception {    	
+		objectType = entityManager.merge(objectType);
+		getEntityManager().remove(objectType);		
 	}
     
 }
