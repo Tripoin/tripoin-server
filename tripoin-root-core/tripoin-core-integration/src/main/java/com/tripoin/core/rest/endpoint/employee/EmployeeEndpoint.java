@@ -1,4 +1,4 @@
-package com.tripoin.core.rest.endpoint;
+package com.tripoin.core.rest.endpoint.employee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,33 +15,31 @@ import org.springframework.stereotype.Component;
 
 import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.common.RoleConstant;
+import com.tripoin.core.dto.AvailabilityData;
+import com.tripoin.core.dto.AvailabilityTransferObject;
 import com.tripoin.core.dto.EmployeeData;
 import com.tripoin.core.dto.EmployeeTransferObject;
-import com.tripoin.core.dto.ProductData;
-import com.tripoin.core.dto.ProductTransferObject;
+import com.tripoin.core.pojo.Availability;
 import com.tripoin.core.pojo.Employee;
-import com.tripoin.core.pojo.Product;
 import com.tripoin.core.service.IGenericManagerJpa;
 
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@Component("employeeSaveEndpoint")
-public class EmployeeSaveEndpoint {
+@Component("employeeEndpoint")
+public class EmployeeEndpoint {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(EmployeeSaveEndpoint.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(EmployeeEndpoint.class);
 
 	@Autowired
 	private IGenericManagerJpa iGenericManagerJpa;
 
 	@Secured({RoleConstant.ROLE_SUPERADMIN, RoleConstant.ROLE_ADMIN, RoleConstant.ROLE_USER})
-	public Message<EmployeeTransferObject> saveProduct(Message<EmployeeData> inMessage){	
+	public Message<EmployeeTransferObject> getAllEmployee(Message<?> inMessage){	
 		EmployeeTransferObject employeeTransferObject = new EmployeeTransferObject();
 		Map<String, Object> responseHeaderMap = new HashMap<String, Object>();
 		
 		try{
-			Employee employeePayload = new Employee(inMessage.getPayload());
-			iGenericManagerJpa.saveObject(employeePayload);
 			List<Employee> employeeList = iGenericManagerJpa.loadObjects(Employee.class);
 			List<EmployeeData> employeeDatas = new ArrayList<EmployeeData>();
 			if(employeeList != null){
@@ -53,12 +51,12 @@ public class EmployeeSaveEndpoint {
 			}
 			employeeTransferObject.setResponseCode("0");
 			employeeTransferObject.setResponseMsg(ParameterConstant.RESPONSE_SUCCESS);
-			employeeTransferObject.setResponseDesc("Save Product Data Success");			
+			employeeTransferObject.setResponseDesc("Load Employee Data Success");			
 		}catch (Exception e){
-			LOGGER.error("Save Product System Error : "+e.getLocalizedMessage(), e);
+			LOGGER.error("Employee System Error : "+e.getLocalizedMessage(), e);
 			employeeTransferObject.setResponseCode("1");
 			employeeTransferObject.setResponseMsg(ParameterConstant.RESPONSE_FAILURE);
-			employeeTransferObject.setResponseDesc("Save Product System Error : "+e.getLocalizedMessage());
+			employeeTransferObject.setResponseDesc("Availability System Error : "+e.getLocalizedMessage());
 		}
 		
 		setReturnStatusAndMessage(employeeTransferObject, responseHeaderMap);

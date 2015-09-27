@@ -9,6 +9,10 @@
 		<artifactId>tripoin-root-core</artifactId>
 		<version>1.0.0</version>
 	</parent>
+        <properties>
+            <jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
+            <jetty.server.version>8.1.12.v20130726</jetty.server.version>
+        </properties>
 	<description>Core Integration Component</description>
 	<organization>
 		<name>Tripoin</name>
@@ -22,7 +26,19 @@
 	</developers>
 
 	<build>
-		<plugins>
+		<plugins>                    
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.plugin.version}</version>
+                <configuration>
+                	<scanIntervalSeconds>10</scanIntervalSeconds>
+                        <webApp>
+                            <contextPath>/tripoin</contextPath>
+                        </webApp>	
+                </configuration>            
+            </plugin>        
+        
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -38,6 +54,53 @@
 	</build>
 
 	<dependencies>
+            <!-- refer jetty data  --> 
+        <dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-servlets</artifactId>
+		    <version>${jetty.server.version}</version>
+		    <exclusions>
+				<exclusion>
+				    <groupId>org.eclipse.jetty</groupId>
+				    <artifactId>jetty-continuation</artifactId>
+				</exclusion>
+				<exclusion>
+				    <groupId>org.eclipse.jetty</groupId>
+				    <artifactId>jetty-http</artifactId>
+				</exclusion>
+				<exclusion>
+				    <groupId>org.eclipse.jetty</groupId>
+				    <artifactId>jetty-util</artifactId>
+				</exclusion>
+		    </exclusions>
+        </dependency>
+        <dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-annotations</artifactId>
+		    <version>${jetty.server.version}</version>
+		    <exclusions>
+				<exclusion>
+				    <groupId>org.eclipse.jetty</groupId>
+		    		<artifactId>jetty-webapp</artifactId>
+				</exclusion>
+		    </exclusions>
+        </dependency>
+        <dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-webapp</artifactId>
+		    <version>${jetty.server.version}</version>
+		    <exclusions>
+				<exclusion>
+				    <groupId>org.eclipse.jetty</groupId>
+				    <artifactId>jetty-server</artifactId>
+				</exclusion>
+				<exclusion>
+				    <groupId>org.eclipse.jetty</groupId>
+				    <artifactId>jetty-util</artifactId>
+				</exclusion>
+		    </exclusions>
+        </dependency>
+        
 		<!-- refer tripoin-core -->
 		<dependency>
 			<groupId>com.tripoin.core</groupId>
@@ -276,6 +339,12 @@
    			<version>${javax.el.version}</version>
    			<scope>provided</scope>
 		</dependency>
+	 <dependency>
+	  <groupId>javax.servlet</groupId>
+	  <artifactId>servlet-api</artifactId>
+	  <version>2.3</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 
 	<repositories>

@@ -1,5 +1,6 @@
-package com.tripoin.core.rest.endpoint;
+package com.tripoin.core.rest.endpoint.user;
 
+import com.tripoin.core.rest.endpoint.employee.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,10 +27,10 @@ import com.tripoin.core.service.IGenericManagerJpa;
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
-@Component("employeeDeleteEndpoint")
-public class EmployeeDeleteEndpoint {
+@Component("userUpdateEndpoint")
+public class UserUpdateEndpoint {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(EmployeeDeleteEndpoint.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UserUpdateEndpoint.class);
 
 	@Autowired
 	private IGenericManagerJpa iGenericManagerJpa;
@@ -40,8 +41,8 @@ public class EmployeeDeleteEndpoint {
 		Map<String, Object> responseHeaderMap = new HashMap<String, Object>();
 		
 		try{
-			Employee employeePayload = new Employee(inMessage.getPayload());			
-			iGenericManagerJpa.deleteObject(employeePayload);
+			Employee employeePayload = new Employee(inMessage.getPayload());
+			iGenericManagerJpa.updateObject(employeePayload);
 			List<Employee> employeeList = iGenericManagerJpa.loadObjects(Employee.class);
 			List<EmployeeData> employeeDatas = new ArrayList<EmployeeData>();
 			if(employeeList != null){
@@ -53,12 +54,12 @@ public class EmployeeDeleteEndpoint {
 			}
 			employeeTransferObject.setResponseCode("0");
 			employeeTransferObject.setResponseMsg(ParameterConstant.RESPONSE_SUCCESS);
-			employeeTransferObject.setResponseDesc("Delete Employee Data Success");			
+			employeeTransferObject.setResponseDesc("Update Product Data Success");			
 		}catch (Exception e){
-			LOGGER.error("Delete Employee System Error : "+e.getLocalizedMessage(), e);
+			LOGGER.error("Save Product System Error : "+e.getLocalizedMessage(), e);
 			employeeTransferObject.setResponseCode("1");
 			employeeTransferObject.setResponseMsg(ParameterConstant.RESPONSE_FAILURE);
-			employeeTransferObject.setResponseDesc("Delete Employee System Error : "+e.getLocalizedMessage());
+			employeeTransferObject.setResponseDesc("Update Product System Error : "+e.getLocalizedMessage());
 		}
 		
 		setReturnStatusAndMessage(employeeTransferObject, responseHeaderMap);
