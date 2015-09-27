@@ -20,7 +20,7 @@ import com.tripoin.core.pojo.User;
 import com.tripoin.core.service.IGenericManagerJpa;
 
 /**
- * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
+ *@author <a href="mailto:fauzi.knightmaster.achmad@gmail.com">Achmad Fauzi</a>
  */
 @Component("userDeleteEndpoint")
 public class UserDeleteEndpoint {
@@ -62,9 +62,9 @@ public class UserDeleteEndpoint {
         return message;
     }
 
-    private void setReturnStatusAndMessage(UserTransferObject employeeTransferObject, Map<String, Object> responseHeaderMap) {
-        responseHeaderMap.put("Return-Status", employeeTransferObject.getResponseCode());
-        responseHeaderMap.put("Return-Status-Msg", employeeTransferObject.getResponseDesc());
+    private void setReturnStatusAndMessage(UserTransferObject userTransferObject, Map<String, Object> responseHeaderMap) {
+        responseHeaderMap.put("Return-Status", userTransferObject.getResponseCode());
+        responseHeaderMap.put("Return-Status-Msg", userTransferObject.getResponseDesc());
     }
 
 }

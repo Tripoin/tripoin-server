@@ -21,7 +21,7 @@ import com.tripoin.core.pojo.User;
 import com.tripoin.core.service.IGenericManagerJpa;
 
 /**
- * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
+ * @author <a href="mailto:fauzi.knightmaster.achmad@gmail.com">Achmad Fauzi</a>
  */
 @Component("userEndpoint")
 public class UserEndpoint {
