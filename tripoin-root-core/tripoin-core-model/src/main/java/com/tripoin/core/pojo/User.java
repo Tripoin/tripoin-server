@@ -39,6 +39,8 @@ public class User {
     private Role role;
     private List<VersionFilter> versionFilter;
 
+    public User(){}
+    
     public User(UserData userData) {
         if (userData.getId() != null) {
             this.id = userData.getId();
