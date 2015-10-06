@@ -12,6 +12,8 @@
 		<project.encoding>UTF-8</project.encoding>
 		<project.source.version>1.7</project.source.version>
 		<project.target.version>1.7</project.target.version>
+		
+		<tripoin.util.version>1.0.0</tripoin.util.version>
         				
         <!-- Convenience property to set the Spring Framework version -->
 		<spring.version>4.1.6.RELEASE</spring.version>
