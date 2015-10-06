@@ -3,6 +3,7 @@ package com.tripoin.web.view.valo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.tripoin.util.ui.chart.HighChart;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -62,7 +63,10 @@ public class CommonParts extends VerticalLayout implements View {
         row.setWidth("100%");
         row.setSpacing(true);
         addComponent(row);
+        HighChart chart = new HighChart();
+        chart.setHcjs("{ title: { text: 'test diagram' }, series: [{ name: 's1', data: [1, 3, 2]}] };");
 
+        row.addComponent(chart);
         row.addComponent(loadingIndicators());
         row.addComponent(notifications());
         row.addComponent(windows());
