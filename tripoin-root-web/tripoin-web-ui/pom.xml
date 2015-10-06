@@ -22,7 +22,7 @@
 	</developers>
 
     <dependencies>
-        <!-- refer tripoin-web -->
+        <!-- refer tripoin -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>tripoin-web-service</artifactId>
@@ -31,6 +31,17 @@
             	<exclusion>
 		            <groupId>javax.validation</groupId>
 		            <artifactId>validation-api</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.tripoin.util</groupId>
+            <artifactId>tripoin-util-ui</artifactId>
+            <version>${tripoin.util.version}</version>
+            <exclusions>
+            	<exclusion>
+		            <groupId>com.vaadin</groupId>
+		            <artifactId>vaadin-server</artifactId>
             	</exclusion>
             </exclusions>
         </dependency>
@@ -82,6 +93,10 @@
             <artifactId>vaadin-spring</artifactId>
             <version>${vaadin.spring.version}</version>
 			<exclusions>
+            	<exclusion>
+		            <groupId>com.vaadin</groupId>
+		            <artifactId>vaadin-server</artifactId>
+            	</exclusion>
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-core</artifactId>
@@ -113,6 +128,10 @@
 				<exclusion>
 					<groupId>aopalliance</groupId>
 					<artifactId>aopalliance</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
 				</exclusion>
 			</exclusions>
         </dependency>
