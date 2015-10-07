@@ -15,11 +15,8 @@ import org.springframework.stereotype.Component;
 
 import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.common.RoleConstant;
-import com.tripoin.core.dto.AvailabilityData;
-import com.tripoin.core.dto.AvailabilityTransferObject;
 import com.tripoin.core.dto.EmployeeData;
 import com.tripoin.core.dto.EmployeeTransferObject;
-import com.tripoin.core.pojo.Availability;
 import com.tripoin.core.pojo.Employee;
 import com.tripoin.core.service.IGenericManagerJpa;
 

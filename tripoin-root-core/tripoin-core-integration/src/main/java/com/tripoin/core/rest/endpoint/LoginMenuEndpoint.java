@@ -17,9 +17,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.tripoin.core.common.ECommonOperator;
 import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.common.RoleConstant;
+import com.tripoin.core.dao.filter.ECommonOperator;
 import com.tripoin.core.dao.filter.FilterArgument;
 import com.tripoin.core.dto.MenuData;
 import com.tripoin.core.dto.UserData;

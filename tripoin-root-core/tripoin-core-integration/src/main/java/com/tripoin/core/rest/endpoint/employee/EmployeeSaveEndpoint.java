@@ -17,10 +17,7 @@ import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.common.RoleConstant;
 import com.tripoin.core.dto.EmployeeData;
 import com.tripoin.core.dto.EmployeeTransferObject;
-import com.tripoin.core.dto.ProductData;
-import com.tripoin.core.dto.ProductTransferObject;
 import com.tripoin.core.pojo.Employee;
-import com.tripoin.core.pojo.Product;
 import com.tripoin.core.service.IGenericManagerJpa;
 
 /**
