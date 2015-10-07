@@ -2,8 +2,6 @@ package com.tripoin.core.dao.filter;
 
 import java.io.Serializable;
 
-import com.tripoin.core.common.ECommonOperator;
-
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Query;
 
-import com.tripoin.core.common.ECommonOperator;
+import com.tripoin.core.dao.filter.ECommonOperator;
 import com.tripoin.core.dao.filter.FilterArgument;
 import com.tripoin.core.dao.filter.PageArgument;
 import com.tripoin.core.dao.filter.SortArgument;

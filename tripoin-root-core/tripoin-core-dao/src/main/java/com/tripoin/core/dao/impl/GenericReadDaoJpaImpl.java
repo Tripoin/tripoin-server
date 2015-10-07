@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.tripoin.core.dao.base.ABaseReadDaoJpa;
 import com.tripoin.core.dao.filter.FilterArgument;
@@ -20,7 +19,6 @@ public class GenericReadDaoJpaImpl extends ABaseReadDaoJpa {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public <T> List<T> loadObjectsFilterArgument(Class<T> objectType, FilterArgument[] filterArguments, Object[] values, SortArgument sortArgument, PageArgument pageArgument) throws Exception {
 		System.out.println(jqlStatement.getJQL(objectType, filterArguments, values, sortArgument));
 		Query query = getEntityManager().createQuery(jqlStatement.getJQL(objectType, filterArguments, values, sortArgument));
@@ -36,7 +34,6 @@ public class GenericReadDaoJpaImpl extends ABaseReadDaoJpa {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public <T> List<T> loadObjectsJQLStatement(String jql, Object[] values, PageArgument pageArgument) throws Exception {
 		Query query = getEntityManager().createQuery(jql);
 		if (values != null && values.length > 0) {

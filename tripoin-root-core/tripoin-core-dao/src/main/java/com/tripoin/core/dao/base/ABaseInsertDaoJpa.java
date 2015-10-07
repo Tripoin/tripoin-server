@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.tripoin.core.dao.IGenericInsertDaoJpa;
 
@@ -22,7 +21,6 @@ public abstract class ABaseInsertDaoJpa implements IGenericInsertDaoJpa {
     }
     
 	@Override
-	@Transactional
 	public void saveObject(Object objectType) throws Exception {
 		getEntityManager().merge(objectType);
 		getEntityManager().flush();
