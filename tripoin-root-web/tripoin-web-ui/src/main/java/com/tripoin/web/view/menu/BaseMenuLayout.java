@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 
-import com.tripoin.web.view.valo.BaseIcon;
+import com.tripoin.web.view.page.BaseIcon;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.navigator.View;
