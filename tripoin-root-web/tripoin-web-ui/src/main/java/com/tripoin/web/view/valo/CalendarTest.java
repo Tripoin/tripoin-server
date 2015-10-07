@@ -9,8 +9,8 @@ import java.util.TimeZone;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.tripoin.util.ui.calendar.CalendarTestEvent;
 import com.tripoin.web.servlet.VaadinView;
-import com.tripoin.web.view.valo.calendar.CalendarTestEvent;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
