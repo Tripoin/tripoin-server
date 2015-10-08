@@ -46,7 +46,7 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
         try{
         	stateFullRest.setUsername(username);
         	stateFullRest.setPassword(password);
-    		UserMenuTransferObject userMenuTransferObject = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_LOGIN_MENU), UserMenuTransferObject.class);
+    		UserMenuTransferObject userMenuTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_LOGIN_MENU), null, UserMenuTransferObject.class);
             if(userMenuTransferObject != null){
             	List<MenuData> menuDatas = userMenuTransferObject.getMenuDatas();
             	UserData userData = userMenuTransferObject.getUserDatas().get(0);
@@ -62,8 +62,8 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
             		if(userData.getRoleData() != null){
                         List<GrantedAuthority> grantedAuths = new ArrayList<>();
                         grantedAuths.add(new SimpleGrantedAuthority(userData.getRoleData().getCode()));
-                        Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
-                        LOGGER.debug("User [{}] successfully logged in web service", username);
+                        Authentication auth = new UsernamePasswordAuthenticationToken(userData.getUsername(), password, grantedAuths);
+                        LOGGER.debug("User [{}] successfully logged in web service", userData.getUsername());
                         return auth;            			
             		}else{
             			return null;
