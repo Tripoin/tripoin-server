@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2015 at 04:50 AM
+-- Generation Time: Oct 08, 2015 at 06:17 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -123,7 +123,9 @@ CREATE TABLE IF NOT EXISTS `sec_profile` (
 `profile_id` bigint(20) NOT NULL,
   `profile_email` varchar(150) NOT NULL,
   `profile_name` varchar(150) NOT NULL,
-  `profile_birthday` varchar(150) NOT NULL,
+  `profile_sex` varchar(10) NOT NULL DEFAULT 'Male',
+  `profile_birthplace` varchar(150) NOT NULL,
+  `profile_birthdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `profile_address` text NOT NULL,
   `profile_telp` varchar(20) DEFAULT NULL,
   `profile_phone` varchar(20) NOT NULL,
@@ -135,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `sec_profile` (
 -- Dumping data for table `sec_profile`
 --
 
-INSERT INTO `sec_profile` (`profile_id`, `profile_email`, `profile_name`, `profile_birthday`, `profile_address`, `profile_telp`, `profile_phone`, `profile_photo`, `user_id`) VALUES
-(1, 'ridla.fadilah@gmail.com', 'Ridla Fadilah', 'Tangerang, 01 Januari 2015', 'Tangerang Selatan', NULL, '0812345678', NULL, 1),
-(2, 'bangkit.pratolo@gmail.com', 'Bangkit Pratolo', 'Tangerang, 02 Januari 2015', 'Tangerang Selatan', NULL, '0812345679', NULL, 2);
+INSERT INTO `sec_profile` (`profile_id`, `profile_email`, `profile_name`, `profile_sex`, `profile_birthplace`, `profile_birthdate`, `profile_address`, `profile_telp`, `profile_phone`, `profile_photo`, `user_id`) VALUES
+(1, 'ridla.fadilah@gmail.com', 'Ridla Fadilah', 'Male', 'Tangerang', '2015-10-08 00:00:00', 'Tangerang Selatan', NULL, '0812345678', NULL, 1),
+(2, 'bangkit.pratolo@gmail.com', 'Bangkit Pratolo', 'Female', 'Tangerang', '2015-10-08 00:00:00', 'Tangerang Selatan', NULL, '0812345679', NULL, 2);
 
 -- --------------------------------------------------------
 
