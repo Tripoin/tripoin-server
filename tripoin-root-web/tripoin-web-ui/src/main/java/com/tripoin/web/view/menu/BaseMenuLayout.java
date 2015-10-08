@@ -93,7 +93,13 @@ public class BaseMenuLayout extends CssLayout implements View {
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
         settingsItem = settings.addItem("", new ThemeResource("../tripoin-valo/img/profile-pic-300px.jpg"), null);
-        settingsItem.addItem("Edit Profile", null);
+        settingsItem.addItem("Edit Profile", new Command() {
+			private static final long serialVersionUID = 8813252433421821224L;
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				UI.getCurrent().getNavigator().navigateTo("profile");
+			}
+		});
         settingsItem.addItem("Preferences", null);
         settingsItem.addSeparator();
         settingsItem.addItem("Sign Out", FontAwesome.SIGN_OUT, new Command() {			
