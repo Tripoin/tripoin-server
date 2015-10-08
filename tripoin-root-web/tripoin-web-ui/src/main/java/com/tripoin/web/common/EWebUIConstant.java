@@ -10,7 +10,7 @@ public enum EWebUIConstant {
 	LOGIN_USERNAME_NULL_DESC("Username empty."),
 	LOGIN_PASSWORD_NULL_DESC("Password empty."),
 	
-	REGEX_USERNAME("^[a-z0-9_-]{5,15}$"),
+	REGEX_USERNAME("^[a-zA-Z0-9_.@-]{5,55}$"),
 	
     COMING("Coming"), AVAILABLE("Available"), DISCONTINUED("Discontinued"),
 	
