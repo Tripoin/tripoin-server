@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2015 at 07:25 AM
+-- Generation Time: Oct 08, 2015 at 04:50 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -112,6 +112,32 @@ INSERT INTO `mst_menu_role` (`menu_role_id`, `menu_id`, `role_id`) VALUES
 (26, 15, 2),
 (27, 16, 2),
 (28, 20, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sec_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `sec_profile` (
+`profile_id` bigint(20) NOT NULL,
+  `profile_email` varchar(150) NOT NULL,
+  `profile_name` varchar(150) NOT NULL,
+  `profile_birthday` varchar(150) NOT NULL,
+  `profile_address` text NOT NULL,
+  `profile_telp` varchar(20) DEFAULT NULL,
+  `profile_phone` varchar(20) NOT NULL,
+  `profile_photo` text,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `sec_profile`
+--
+
+INSERT INTO `sec_profile` (`profile_id`, `profile_email`, `profile_name`, `profile_birthday`, `profile_address`, `profile_telp`, `profile_phone`, `profile_photo`, `user_id`) VALUES
+(1, 'ridla.fadilah@gmail.com', 'Ridla Fadilah', 'Tangerang, 01 Januari 2015', 'Tangerang Selatan', NULL, '0812345678', NULL, 1),
+(2, 'bangkit.pratolo@gmail.com', 'Bangkit Pratolo', 'Tangerang, 02 Januari 2015', 'Tangerang Selatan', NULL, '0812345679', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -272,6 +298,12 @@ ALTER TABLE `mst_menu_role`
  ADD PRIMARY KEY (`menu_role_id`);
 
 --
+-- Indexes for table `sec_profile`
+--
+ALTER TABLE `sec_profile`
+ ADD PRIMARY KEY (`profile_id`);
+
+--
 -- Indexes for table `sec_role`
 --
 ALTER TABLE `sec_role`
@@ -315,6 +347,11 @@ MODIFY `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 ALTER TABLE `mst_menu_role`
 MODIFY `menu_role_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `sec_profile`
+--
+ALTER TABLE `sec_profile`
+MODIFY `profile_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sec_role`
 --
