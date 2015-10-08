@@ -2,9 +2,15 @@ package com.tripoin.web.view.profile;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.tripoin.core.common.ParameterConstant;
+import com.tripoin.core.dto.ProfileData;
+import com.tripoin.web.service.IProfileService;
 import com.tripoin.web.servlet.VaadinView;
 import com.tripoin.web.view.page.StringGenerator;
 import com.vaadin.navigator.View;
@@ -37,8 +43,15 @@ public class ProfileView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = -4592518571070450190L;
 
+    @Autowired
+    private IProfileService profileService;
+    
+    private ProfileData profileData;
+    
 	@SuppressWarnings("deprecation")
-	public ProfileView() {
+    @PostConstruct
+    public void init(){
+		profileData = profileService.getProfile();
         setSpacing(true);
         setMargin(true);
 
@@ -59,11 +72,11 @@ public class ProfileView extends VerticalLayout implements View {
         StringGenerator sg = new StringGenerator();
 
         TextField name = new TextField("Name");
-        name.setValue(sg.nextString(true) + " " + sg.nextString(true));
+        name.setValue(profileData.getName());
         name.setWidth("50%");
         form.addComponent(name);
 
-        DateField birthday = new DateField("Birthday");
+        DateField birthday = new DateField("Place of Birth");
         birthday.setValue(new Date(80, 0, 31));
         form.addComponent(birthday);
 
@@ -73,9 +86,12 @@ public class ProfileView extends VerticalLayout implements View {
         form.addComponent(username);
 
         OptionGroup sex = new OptionGroup("Sex");
-        sex.addItem("Female");
-        sex.addItem("Male");
-        sex.select("Male");
+        sex.addItem(ParameterConstant.FEMALE);
+        sex.addItem(ParameterConstant.MALE);
+        if(ParameterConstant.MALE.equalsIgnoreCase(profileData.getSex()))
+        	sex.select(ParameterConstant.MALE);
+        else
+        	sex.select(ParameterConstant.FEMALE);
         sex.addStyleName("horizontal");
         form.addComponent(sex);
 
@@ -85,8 +101,7 @@ public class ProfileView extends VerticalLayout implements View {
         form.addComponent(section);
 
         TextField email = new TextField("Email");
-        email.setValue(sg.nextString(false) + "@" + sg.nextString(false)
-                + ".com");
+        email.setValue(profileData.getEmail());
         email.setWidth("50%");
         email.setRequired(true);
         form.addComponent(email);
@@ -99,6 +114,7 @@ public class ProfileView extends VerticalLayout implements View {
 
         TextField phone = new TextField("Phone");
         phone.setWidth("50%");
+        phone.setValue(profileData.getPhone());
         form.addComponent(phone);
 
         HorizontalLayout wrap = new HorizontalLayout();
