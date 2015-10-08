@@ -1,0 +1,78 @@
+package com.tripoin.core.rest.endpoint;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.GenericMessage;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+
+import com.tripoin.core.common.ParameterConstant;
+import com.tripoin.core.common.RoleConstant;
+import com.tripoin.core.dto.ProfileData;
+import com.tripoin.core.dto.ProfileTransferObject;
+import com.tripoin.core.pojo.Profile;
+import com.tripoin.core.service.IGenericManagerJpa;
+
+/**
+ * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
+ */
+@Component("profileLoadEndpoint")
+public class ProfileLoadEndpoint {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(ProfileLoadEndpoint.class);
+
+	@Autowired
+	private IGenericManagerJpa iGenericManagerJpa;
+
+	private String currentUserName;
+
+	@Secured({RoleConstant.ROLE_SUPERADMIN, RoleConstant.ROLE_ADMIN, RoleConstant.ROLE_USER})
+	public Message<ProfileTransferObject> getProfile(Message<?> inMessage){	
+		ProfileTransferObject profileTransferObject = new ProfileTransferObject();
+		Map<String, Object> responseHeaderMap = new HashMap<String, Object>();
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken))
+		    this.currentUserName = authentication.getName();		
+		
+		try{
+			List<Profile> profileList = iGenericManagerJpa.loadObjectsJQLStatement("SELECT pr FROM Profile pr WHERE pr.user.username = ?", new Object[]{currentUserName}, null);
+			List<ProfileData> profileDatas = new ArrayList<ProfileData>();
+			if(profileList != null){
+				for(Profile profile : profileList){
+					ProfileData profileData = new ProfileData(profile);
+					profileDatas.add(profileData);
+				}
+				profileTransferObject.setProfileDatas(profileDatas);
+			}
+			profileTransferObject.setResponseCode("0");
+			profileTransferObject.setResponseMsg(ParameterConstant.RESPONSE_SUCCESS);
+			profileTransferObject.setResponseDesc("Load Profile Data Success");			
+		}catch (Exception e){
+			LOGGER.error("Load Profile System Error : "+e.getLocalizedMessage(), e);
+			profileTransferObject.setResponseCode("1");
+			profileTransferObject.setResponseMsg(ParameterConstant.RESPONSE_FAILURE);
+			profileTransferObject.setResponseDesc("Load Profile System Error : "+e.getLocalizedMessage());
+		}
+		
+		setReturnStatusAndMessage(profileTransferObject, responseHeaderMap);
+		Message<ProfileTransferObject> message = new GenericMessage<ProfileTransferObject>(profileTransferObject, responseHeaderMap);
+		return message;		
+	}
+	
+	private void setReturnStatusAndMessage(ProfileTransferObject profileTransferObject, Map<String, Object> responseHeaderMap){		
+		responseHeaderMap.put("Return-Status", profileTransferObject.getResponseCode());
+		responseHeaderMap.put("Return-Status-Msg", profileTransferObject.getResponseDesc());
+	}
+	
+}

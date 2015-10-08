@@ -14,5 +14,8 @@ public class ParameterConstant {
 	
 	public static final String RESPONSE_SUCCESS = "SUCCESS";
 	public static final String RESPONSE_FAILURE = "FAILURE";
+
+	public static final String FEMALE = "Female";
+	public static final String MALE = "Male";
 	
 }

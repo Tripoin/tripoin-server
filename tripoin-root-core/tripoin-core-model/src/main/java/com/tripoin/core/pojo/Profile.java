@@ -1,6 +1,7 @@
 package com.tripoin.core.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,9 @@ public class Profile implements Serializable {
 	private int id;
     private String email;
     private String name;
-    private String birthday;
+    private String sex;
+    private String birthplace;
+    private Date birthdate;
     private String address;
     private String telp;
     private String phone;
@@ -69,14 +72,34 @@ public class Profile implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name="profile_birthday", length=150)
+	@Column(name="profile_sex", length=10)
     @NotNull
-	public String getBirthday() {
-		return birthday;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	@Column(name="profile_birthplace", length=150)
+    @NotNull
+	public String getBirthplace() {
+		return birthplace;
+	}
+
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+
+	@Column(name="profile_birthdate")
+    @NotNull
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	@Column(name="profile_address")
@@ -130,9 +153,9 @@ public class Profile implements Serializable {
 	@Override
 	public String toString() {
 		return "Profile [id=" + id + ", email=" + email + ", name=" + name
-				+ ", birthday=" + birthday + ", address=" + address + ", telp="
-				+ telp + ", phone=" + phone + ", photo=" + photo + ", user="
-				+ user + "]";
-	}   
+				+ ", birthplace=" + birthplace + ", birthdate=" + birthdate
+				+ ", address=" + address + ", telp=" + telp + ", phone="
+				+ phone + ", photo=" + photo + ", user=" + user + "]";
+	} 
 	
 }
