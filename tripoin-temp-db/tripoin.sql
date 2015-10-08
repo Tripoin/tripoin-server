@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `sec_profile` (
   `profile_name` varchar(150) NOT NULL,
   `profile_sex` varchar(10) NOT NULL DEFAULT 'Male',
   `profile_birthplace` varchar(150) NOT NULL,
-  `profile_birthdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `profile_birthdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `profile_address` text NOT NULL,
   `profile_telp` varchar(20) DEFAULT NULL,
   `profile_phone` varchar(20) NOT NULL,
