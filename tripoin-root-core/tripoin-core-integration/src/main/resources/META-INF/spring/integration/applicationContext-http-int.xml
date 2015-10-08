@@ -24,11 +24,12 @@
 	<import resource="applicationContext-http-int-connection.xml" />
 	<import resource="applicationContext-http-int-login.xml" />
 	<import resource="applicationContext-http-int-login-menu.xml" />
+	<import resource="applicationContext-http-int-logout.xml" />
 	<import resource="applicationContext-http-int-product.xml" />
 	<import resource="applicationContext-http-int-category.xml" />
 	<import resource="applicationContext-http-int-availability.xml" />
 	<import resource="applicationContext-http-int-employee.xml" />
-        <import resource="applicationContext-http-int-user.xml" />
+    <import resource="applicationContext-http-int-user.xml" />
 	
 	<context:component-scan base-package="com.tripoin.core.rest.endpoint">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />

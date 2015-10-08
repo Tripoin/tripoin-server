@@ -1,6 +1,7 @@
 package com.tripoin.core.pojo;
 
 import com.tripoin.core.dto.UserData;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -38,6 +40,7 @@ public class User {
     private String remarks;
     private Role role;
     private List<VersionFilter> versionFilter;
+    private Profile profile;
 
     public User(){}
     
@@ -54,8 +57,7 @@ public class User {
             this.nonLocked = userData.getNonLocked();
             this.auth = userData.getAuth();
             this.status = userData.getStatus();
-            this.remarks = userData.getRemarks();
-            
+            this.remarks = userData.getRemarks();            
         }
     }
 
@@ -160,6 +162,15 @@ public class User {
     public void setVersionFilter(List<VersionFilter> versionFilter) {
         this.versionFilter = versionFilter;
     }
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 
     @Override
     public String toString() {

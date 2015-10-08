@@ -1,0 +1,138 @@
+package com.tripoin.core.pojo;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+/**
+ * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
+ */
+@Entity
+@Table(name="sec_profile")
+public class Profile implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5575840012553613210L;
+	private int id;
+    private String email;
+    private String name;
+    private String birthday;
+    private String address;
+    private String telp;
+    private String phone;
+    private String photo; 
+    private User user;
+    
+    public Profile() {}
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="profile_id")
+    @NotNull
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+	@Column(name="profile_email", length=150)
+    @NotNull
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	} 
+
+	@Column(name="profile_name", length=150)
+    @NotNull
+    @Size(min = 5, message = "Name must have at least five characters")
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name="profile_birthday", length=150)
+    @NotNull
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	@Column(name="profile_address")
+    @NotNull
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Column(name="profile_telp", length=20)
+	public String getTelp() {
+		return telp;
+	}
+
+	public void setTelp(String telp) {
+		this.telp = telp;
+	}
+
+	@Column(name="profile_phone", length=20)
+    @NotNull
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Column(name="profile_photo")
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Profile [id=" + id + ", email=" + email + ", name=" + name
+				+ ", birthday=" + birthday + ", address=" + address + ", telp="
+				+ telp + ", phone=" + phone + ", photo=" + photo + ", user="
+				+ user + "]";
+	}   
+	
+}

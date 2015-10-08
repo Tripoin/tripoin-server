@@ -14,13 +14,17 @@
 	
 	<int:channel id="responseChannelLogin"/>
 	<int:channel id="requestChannelLogin"/>
+	<int:channel id="routeChannelLogin"/>
 	
 	<int-http:inbound-gateway request-channel="requestChannelLogin"
 		reply-channel="responseChannelLogin"
-		supported-methods="GET" 
+		supported-methods="POST" 
 		path="/wscontext/login">
 		<int-http:request-mapping consumes="application/json" produces="application/json"/>
 	</int-http:inbound-gateway>	
+	<int:router input-channel="routeChannelLogin" expression="headers.http_requestMethod">
+	    <int:mapping value="POST" channel="requestChannelLogin"/>
+	</int:router>	
 	<int:service-activator ref="loginEndpoint" method="getUser" input-channel="requestChannelLogin" output-channel="responseChannelLogin"/>
 		
 </beans>

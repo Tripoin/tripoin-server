@@ -12,19 +12,14 @@
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-4.1.xsd
         http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.0.xsd">
 	
-	<int:channel id="responseChannelLoginMenu"/>
-	<int:channel id="requestChannelLoginMenu"/>
-	<int:channel id="routeChannelLoginMenu"/>
+	<int:channel id="requestChannelLogout"/>
 	
-	<int-http:inbound-gateway request-channel="requestChannelLoginMenu"
-		reply-channel="responseChannelLoginMenu"
-		supported-methods="POST" 
-		path="/wscontext/login-menu">
-		<int-http:request-mapping consumes="application/json" produces="application/json"/>
+	<int-http:inbound-gateway request-channel="requestChannelLogout"
+		supported-methods="GET" 
+		path="/wscontext/logout">
+		<int-http:request-mapping consumes="application/json"/>
 	</int-http:inbound-gateway>	
-	<int:router input-channel="routeChannelLoginMenu" expression="headers.http_requestMethod">
-	    <int:mapping value="POST" channel="requestChannelLoginMenu"/>
-	</int:router>	
-	<int:service-activator ref="loginMenuEndpoint" method="getUserMenu" input-channel="requestChannelLoginMenu" output-channel="responseChannelLoginMenu"/>
+	
+	<int:service-activator ref="logoutEndpoint" method="doLogout" input-channel="requestChannelLogout"/>
 		
 </beans>

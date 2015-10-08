@@ -47,7 +47,7 @@ public class SecurityUser extends User implements UserDetails {
 					this.accountNonExpired = false;				
 			}else
 				this.accountNonExpired = true;
-			if(user.getNonLocked() == 1 || user.getNonLocked() == null)
+			if(user.getNonLocked() == null || user.getNonLocked() == 1)
 				this.accountNonLocked = true;
 			else
 				this.accountNonLocked = false;			

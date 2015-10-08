@@ -13,6 +13,8 @@
     
 	<security:global-method-security secured-annotations="enabled" />
 	
+	<bean id="tripoinUserDetailService" class="com.tripoin.core.rest.security.TripoinUserDetailService"/>
+	
 	<bean id="bad-credential" class="com.tripoin.core.rest.handler.JSONBadCredentialHandler">
 		<property name="realmName" value="This page required user credential"/>
 	</bean>
@@ -25,19 +27,20 @@
 		<security:http-basic entry-point-ref="bad-credential"/>	
 		<security:intercept-url pattern='/apk/*' access="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER')"  />
 		<security:intercept-url pattern='/images/*' access="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER')"  />
-		<security:intercept-url pattern='/wscontext/*' access="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER')"  />		
+		<security:intercept-url pattern='/wscontext/*' access="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER')"  />
+		<!-- <security:logout logout-url="/wscontext/logout" logout-success-url="/" />	 -->	
 	</security:http>
 	
 	
 	<!--  In this example, we are using in memory authentication. The password encoder depends on 
 					Jasypt's String Digester to digest the password stored in users.properties -->
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider>
+		<security:authentication-provider user-service-ref="tripoinUserDetailService">
 			<security:password-encoder ref="passwordEncoder"/>
-			<security:jdbc-user-service data-source-ref="dataSource"
+			<!-- <security:jdbc-user-service data-source-ref="dataSource"
                     users-by-username-query="SELECT user_username AS username, user_password AS password, user_enabled AS enabled FROM sec_user WHERE user_username = ?"
                     authorities-by-username-query="SELECT sec_user.user_username AS username, sec_role.role_code AS role FROM sec_user,sec_role
-                      WHERE sec_user.user_username = ? AND sec_user.role_id = sec_role.role_id" />
+                      WHERE sec_user.user_username = ? AND sec_user.role_id = sec_role.role_id" /> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 
