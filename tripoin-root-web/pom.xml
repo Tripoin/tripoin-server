@@ -45,7 +45,7 @@
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<vaadin.sass.compiler.version>0.9.12</vaadin.sass.compiler.version>
 		<vaadin.spring.version>1.0.0.beta3</vaadin.spring.version>
-		<vaadin.addons.aceeditor>0.8.14</vaadin.addons.aceeditor>
+		<vaadin.addons.aceeditor.version>0.8.14</vaadin.addons.aceeditor.version>
 		
         <!-- Convenience property to set the Jetty Lib -->
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>

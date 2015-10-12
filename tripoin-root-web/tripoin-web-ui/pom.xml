@@ -91,7 +91,7 @@
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
 			<artifactId>aceeditor</artifactId>
-			<version>${vaadin.addons.aceeditor}</version>
+			<version>${vaadin.addons.aceeditor.version}</version>
 		</dependency>
 		<!-- refer vaadin data -->
 		<dependency>
