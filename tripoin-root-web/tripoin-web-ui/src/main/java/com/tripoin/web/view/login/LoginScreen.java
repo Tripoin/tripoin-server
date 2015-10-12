@@ -77,10 +77,12 @@ public class LoginScreen extends CssLayout implements View {
         username.setWidth(15, Unit.EM);
         username.setDescription("Username Or Email Or Phone Number");
         username.setMaxLength(55);
+        username.setValue("ridla");
         loginForm.addComponent(password = new PasswordField("Password"));
         password.setWidth(15, Unit.EM);
         password.setDescription("Password");
         password.setMaxLength(50);
+        password.setValue("ridla");
         CssLayout buttons = new CssLayout();
         buttons.setStyleName("buttons");
         loginForm.addComponent(buttons);
