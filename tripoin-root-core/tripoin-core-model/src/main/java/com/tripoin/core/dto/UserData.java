@@ -10,6 +10,7 @@ public class UserData {
 
 	private Integer id;
 	private String username;
+	private String password;
 	private Integer enabled;
 	private String expiredDate;
 	private Integer nonLocked;
@@ -24,6 +25,7 @@ public class UserData {
 		if(user != null){
 			this.setId(user.getId());
 			this.setUsername(user.getUsername());
+			this.setPassword(user.getPassword());
 			this.setEnabled(user.getEnabled());
 			if(user.getExpiredDate() != null)
 				this.setExpiredDate(ParameterConstant.FORMAT_DEFAULT.format(user.getExpiredDate()));
@@ -50,6 +52,14 @@ public class UserData {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Integer getEnabled() {
