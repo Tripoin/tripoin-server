@@ -153,9 +153,7 @@ public class User {
 		this.email = email;
 	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+   
 
     
     @Column(name = "user_fullname")
@@ -176,10 +174,7 @@ public class User {
     }
 
 
-    @Column(name = "user_remarks", length = 255)
-    public String getRemarks() {
-        return remarks;
-    }
+    
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
@@ -195,33 +190,22 @@ public class User {
         this.role = role;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    public List<VersionFilter> getVersionFilter() {
-        return versionFilter;
-    }
+    
 
-    public void setVersionFilter(List<VersionFilter> versionFilter) {
-        this.versionFilter = versionFilter;
-    }
+    
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	public Profile getProfile() {
 		return profile;
 	}
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    public Role getRole() {
-        return role;
-    }
+    
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     public List<VersionFilter> getVersionFilter() {
