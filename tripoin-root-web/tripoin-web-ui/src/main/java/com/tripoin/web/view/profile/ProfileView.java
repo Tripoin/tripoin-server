@@ -15,6 +15,7 @@ import com.tripoin.web.service.IProfileService;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FileResource;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
@@ -71,7 +72,7 @@ public class ProfileView extends VerticalLayout implements View {
         addComponent(row);
         
         Image profilePhoto = new Image();
-        profilePhoto.setSource(new FileResource(new File(profileData.getPhoto())));
+        profilePhoto.setSource(new File(profileData.getPhoto()).exists() ? new FileResource(new File(profileData.getPhoto())) : new ExternalResource("http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"));
         profilePhoto.setWidth("150px");
         profilePhoto.setHeight("150px");
         row.addComponent(profilePhoto);
