@@ -18,13 +18,14 @@ import com.tripoin.core.common.RoleConstant;
 import com.tripoin.core.dto.UserData;
 import com.tripoin.core.dto.UserTransferObject;
 import com.tripoin.core.pojo.User;
+import com.tripoin.core.rest.endpoint.XReturnStatus;
 import com.tripoin.core.service.IGenericManagerJpa;
 
 /**
  * @author <a href="mailto:fauzi.knightmaster.achmad@gmail.com">Achmad Fauzi</a>
  */
 @Component("userUpdateEndpoint")
-public class UserUpdateEndpoint {
+public class UserUpdateEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserUpdateEndpoint.class);
 
@@ -61,11 +62,6 @@ public class UserUpdateEndpoint {
         setReturnStatusAndMessage(userTransferObject, responseHeaderMap);
         Message<UserTransferObject> message = new GenericMessage<UserTransferObject>(userTransferObject, responseHeaderMap);
         return message;
-    }
-
-    private void setReturnStatusAndMessage(UserTransferObject userTransferObject, Map<String, Object> responseHeaderMap) {
-        responseHeaderMap.put("Return-Status", userTransferObject.getResponseCode());
-        responseHeaderMap.put("Return-Status-Msg", userTransferObject.getResponseDesc());
     }
 
 }

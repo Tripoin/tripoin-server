@@ -27,7 +27,7 @@ import com.tripoin.core.service.IGenericManagerJpa;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("profileLoadEndpoint")
-public class ProfileLoadEndpoint {
+public class ProfileLoadEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(ProfileLoadEndpoint.class);
 
@@ -68,11 +68,6 @@ public class ProfileLoadEndpoint {
 		setReturnStatusAndMessage(profileTransferObject, responseHeaderMap);
 		Message<ProfileTransferObject> message = new GenericMessage<ProfileTransferObject>(profileTransferObject, responseHeaderMap);
 		return message;		
-	}
-	
-	private void setReturnStatusAndMessage(ProfileTransferObject profileTransferObject, Map<String, Object> responseHeaderMap){		
-		responseHeaderMap.put("Return-Status", profileTransferObject.getResponseCode());
-		responseHeaderMap.put("Return-Status-Msg", profileTransferObject.getResponseDesc());
 	}
 	
 }

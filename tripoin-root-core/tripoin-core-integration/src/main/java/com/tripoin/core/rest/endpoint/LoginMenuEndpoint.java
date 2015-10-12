@@ -32,7 +32,7 @@ import com.tripoin.core.service.IGenericManagerJpa;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("loginMenuEndpoint")
-public class LoginMenuEndpoint {
+public class LoginMenuEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(LoginMenuEndpoint.class);
 
@@ -88,11 +88,6 @@ public class LoginMenuEndpoint {
 		setReturnStatusAndMessage(userMenuTransferObject, responseHeaderMap);
 		Message<UserMenuTransferObject> message = new GenericMessage<UserMenuTransferObject>(userMenuTransferObject, responseHeaderMap);
 		return message;	
-	}
-	
-	private void setReturnStatusAndMessage(UserMenuTransferObject userMenuTransferObject, Map<String, Object> responseHeaderMap){		
-		responseHeaderMap.put("Return-Status", userMenuTransferObject.getResponseCode());
-		responseHeaderMap.put("Return-Status-Msg", userMenuTransferObject.getResponseDesc());
 	}
 	
 }

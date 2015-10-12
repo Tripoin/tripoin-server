@@ -16,7 +16,7 @@ import com.tripoin.core.dto.GeneralTransferObject;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("connectionEndpoint")
-public class ConnectionEndpoint {
+public class ConnectionEndpoint extends XReturnStatus {
 	
 	@Secured({RoleConstant.ROLE_SUPERADMIN, RoleConstant.ROLE_ADMIN, RoleConstant.ROLE_USER})
 	public Message<GeneralTransferObject> getConnection(Message<?> inMessage){	
@@ -36,11 +36,6 @@ public class ConnectionEndpoint {
 		setReturnStatusAndMessage(connect, responseHeaderMap);
 		Message<GeneralTransferObject> message = new GenericMessage<GeneralTransferObject>(connect, responseHeaderMap);
 		return message;		
-	}
-	
-	private void setReturnStatusAndMessage(GeneralTransferObject connect, Map<String, Object> responseHeaderMap){		
-		responseHeaderMap.put("Return-Status", connect.getResponseCode());
-		responseHeaderMap.put("Return-Status-Msg", connect.getResponseDesc());
 	}
 	
 }

@@ -17,7 +17,7 @@ import com.tripoin.core.service.IGenericManagerJpa;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("logoutEndpoint")
-public class LogoutEndpoint {
+public class LogoutEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(LogoutEndpoint.class);
 

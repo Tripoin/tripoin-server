@@ -24,7 +24,7 @@ import com.tripoin.core.service.IGenericManagerJpa;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("availabilityEndpoint")
-public class AvailabilityEndpoint {
+public class AvailabilityEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(AvailabilityEndpoint.class);
 
@@ -59,11 +59,6 @@ public class AvailabilityEndpoint {
 		setReturnStatusAndMessage(availabilityTransferObject, responseHeaderMap);
 		Message<AvailabilityTransferObject> message = new GenericMessage<AvailabilityTransferObject>(availabilityTransferObject, responseHeaderMap);
 		return message;		
-	}
-	
-	private void setReturnStatusAndMessage(AvailabilityTransferObject availabilityTransferObject, Map<String, Object> responseHeaderMap){		
-		responseHeaderMap.put("Return-Status", availabilityTransferObject.getResponseCode());
-		responseHeaderMap.put("Return-Status-Msg", availabilityTransferObject.getResponseDesc());
 	}
 	
 }

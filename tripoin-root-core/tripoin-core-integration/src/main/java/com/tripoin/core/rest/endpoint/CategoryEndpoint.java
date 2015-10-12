@@ -24,7 +24,7 @@ import com.tripoin.core.service.IGenericManagerJpa;
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
 @Component("categoryEndpoint")
-public class CategoryEndpoint {
+public class CategoryEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(CategoryEndpoint.class);
 
@@ -59,11 +59,6 @@ public class CategoryEndpoint {
 		setReturnStatusAndMessage(categoryTransferObject, responseHeaderMap);
 		Message<CategoryTransferObject> message = new GenericMessage<CategoryTransferObject>(categoryTransferObject, responseHeaderMap);
 		return message;		
-	}
-	
-	private void setReturnStatusAndMessage(CategoryTransferObject categoryTransferObject, Map<String, Object> responseHeaderMap){		
-		responseHeaderMap.put("Return-Status", categoryTransferObject.getResponseCode());
-		responseHeaderMap.put("Return-Status-Msg", categoryTransferObject.getResponseDesc());
 	}
 	
 }
