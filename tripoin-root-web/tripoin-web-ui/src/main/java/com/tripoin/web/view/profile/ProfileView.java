@@ -52,7 +52,7 @@ public class ProfileView extends VerticalLayout implements View {
     @PostConstruct
     public void init(){
 		profileData = profileService.getProfile();
-        setSpacing(true);
+//        setSpacing(true);
         setMargin(true);
 
         final FormLayout formTitle = new FormLayout();
@@ -61,12 +61,6 @@ public class ProfileView extends VerticalLayout implements View {
         Label title = new Label("Edit Profile");
         title.addStyleName("h1");
         formTitle.addComponent(title);
-        
-        Label section = new Label("Personal Info");
-        section.addStyleName("h3");
-        section.addStyleName("colored");
-        formTitle.addComponent(section);
-        formTitle.setComponentAlignment(section, Alignment.MIDDLE_LEFT);
 
         HorizontalLayout row = new HorizontalLayout();
         row.setSpacing(true);
@@ -88,6 +82,12 @@ public class ProfileView extends VerticalLayout implements View {
         form.setWidth("800px");
         form.addStyleName("light");
         addComponent(form);
+        
+        Label section = new Label("Personal Info");
+        section.addStyleName("h3");
+        section.addStyleName("colored");
+        form.addComponent(section);
+//        form.setComponentAlignment(section, Alignment.MIDDLE_LEFT);
         
         final TextField name = new TextField("Name");
         name.setValue(profileData.getName());
