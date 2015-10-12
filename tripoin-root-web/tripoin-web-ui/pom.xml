@@ -1,15 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>tripoin-web-ui</artifactId>
-    <name>tripoin-web-ui</name>
-    <packaging>war</packaging>
-    <parent>
-        <groupId>com.tripoin.web</groupId>
-        <artifactId>tripoin-root-web</artifactId>
-        <version>1.0.0</version>
-    </parent>
-    <description>Web User Interface Component</description>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>tripoin-web-ui</artifactId>
+	<name>tripoin-web-ui</name>
+	<packaging>war</packaging>
+	<parent>
+		<groupId>com.tripoin.web</groupId>
+		<artifactId>tripoin-root-web</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<description>Web User Interface Component</description>
 	<organization>
 		<name>Tripoin</name>
 		<url>http://www.tripoin.net</url>
@@ -21,37 +22,37 @@
 		</developer>
 	</developers>
 
-    <dependencies>
-        <!-- refer tripoin -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>tripoin-web-service</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-            	<exclusion>
-		            <groupId>javax.validation</groupId>
-		            <artifactId>validation-api</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.tripoin.util</groupId>
-            <artifactId>tripoin-util-ui</artifactId>
-            <version>${tripoin.util.version}</version>
-            <exclusions>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-server</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <!-- refer spring portlet -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc-portlet</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
+	<dependencies>
+		<!-- refer tripoin -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>tripoin-web-service</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.tripoin.util</groupId>
+			<artifactId>tripoin-util-ui</artifactId>
+			<version>${tripoin.util.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-server</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- refer spring portlet -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc-portlet</artifactId>
+			<version>${spring.version}</version>
+			<scope>compile</scope>
+			<optional>true</optional>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -86,17 +87,22 @@
 					<artifactId>aopalliance</artifactId>
 				</exclusion>
 			</exclusions>
-        </dependency>
-        <!-- refer vaadin data -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring</artifactId>
-            <version>${vaadin.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>aceeditor</artifactId>
+			<version>0.8.14</version>
+		</dependency>
+		<!-- refer vaadin data -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring</artifactId>
+			<version>${vaadin.spring.version}</version>
 			<exclusions>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-server</artifactId>
-            	</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-server</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-core</artifactId>
@@ -134,90 +140,90 @@
 					<groupId>org.slf4j</groupId>
 				</exclusion>
 			</exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-shared</artifactId>
-        </dependency>
-        <dependency>
-           <groupId>com.vaadin</groupId>
-           <artifactId>vaadin-sass-compiler</artifactId>
-           <version>${vaadin.sass.compiler.version}</version>
-           <exclusions>
-            	<exclusion>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-sass-compiler</artifactId>
+			<version>${vaadin.sass.compiler.version}</version>
+			<exclusions>
+				<exclusion>
 					<groupId>org.w3c.css</groupId>
-					<artifactId>sac</artifactId>            	
-            	</exclusion>
-            	<exclusion>
-            		<groupId>com.vaadin.external.flute</groupId>
+					<artifactId>sac</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin.external.flute</groupId>
 					<artifactId>flute</artifactId>
-            	</exclusion>
-           </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-server</artifactId>
-            <exclusions>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-shared</artifactId>
-            	</exclusion>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-sass-compiler</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client</artifactId>
-            <exclusions>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-server</artifactId>
-            	</exclusion>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-shared</artifactId>
-            	</exclusion>
-            	<exclusion>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-server</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-shared</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-sass-compiler</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-shared</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>org.w3c.css</groupId>
-					<artifactId>sac</artifactId>            	
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client-compiler</artifactId>
-            <exclusions>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-client</artifactId>
-            	</exclusion>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-sass-compiler</artifactId>
-            	</exclusion>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-server</artifactId>
-            	</exclusion>
-            	<exclusion>
-		            <groupId>com.vaadin</groupId>
-		            <artifactId>vaadin-shared</artifactId>
-            	</exclusion>
-            	<exclusion>
+					<artifactId>sac</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiler</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-sass-compiler</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-shared</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>net.sourceforge.nekohtml</groupId>
 					<artifactId>nekohtml</artifactId>
-            	</exclusion>
-            	<exclusion>
-            		<groupId>xerces</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>xerces</groupId>
 					<artifactId>xercesImpl</artifactId>
-            	</exclusion>
-            	<exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>xalan</groupId>
 					<artifactId>serializer</artifactId>
-            	</exclusion>
+				</exclusion>
 				<exclusion>
 					<groupId>xml-apis</groupId>
 					<artifactId>xml-apis</artifactId>
@@ -255,79 +261,79 @@
 					<artifactId>commons-io</artifactId>
 				</exclusion>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-annotations</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-annotations</artifactId>
 				</exclusion>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-servlets</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-servlets</artifactId>
 				</exclusion>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-util</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-util</artifactId>
 				</exclusion>
-            </exclusions>
-        </dependency>  
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiled</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-push</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
-        </dependency>
-        <!-- refer jetty data  --> 
-        <dependency>
-		    <groupId>org.eclipse.jetty</groupId>
-		    <artifactId>jetty-servlets</artifactId>
-		    <version>${jetty.server.version}</version>
-		    <exclusions>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-push</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes</artifactId>
+		</dependency>
+		<!-- refer jetty data -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlets</artifactId>
+			<version>${jetty.server.version}</version>
+			<exclusions>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-continuation</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-continuation</artifactId>
 				</exclusion>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-http</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-http</artifactId>
 				</exclusion>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-util</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-util</artifactId>
 				</exclusion>
-		    </exclusions>
-        </dependency>
-        <dependency>
-		    <groupId>org.eclipse.jetty</groupId>
-		    <artifactId>jetty-annotations</artifactId>
-		    <version>${jetty.server.version}</version>
-		    <exclusions>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-annotations</artifactId>
+			<version>${jetty.server.version}</version>
+			<exclusions>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-		    		<artifactId>jetty-webapp</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-webapp</artifactId>
 				</exclusion>
-		    </exclusions>
-        </dependency>
-        <dependency>
-		    <groupId>org.eclipse.jetty</groupId>
-		    <artifactId>jetty-webapp</artifactId>
-		    <version>${jetty.server.version}</version>
-		    <exclusions>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.server.version}</version>
+			<exclusions>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-server</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-server</artifactId>
 				</exclusion>
 				<exclusion>
-				    <groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-util</artifactId>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-util</artifactId>
 				</exclusion>
-		    </exclusions>
-        </dependency>
-        <!-- refer other data  -->
-        <dependency>
+			</exclusions>
+		</dependency>
+		<!-- refer other data -->
+		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.3.1</version>
@@ -337,8 +343,8 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>        
-        <dependency>
+		</dependency>
+		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm-util</artifactId>
 			<version>${asm.version}</version>
@@ -359,38 +365,38 @@
 					<artifactId>asm-tree</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>		        
-        <dependency>
+		</dependency>
+		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>serializer</artifactId>
 			<version>${xalan.version}</version>
 			<exclusions>
-            	<exclusion>
-		            <groupId>xml-apis</groupId>
-		            <artifactId>xml-apis</artifactId>            		
-            	</exclusion>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
-        <dependency>
+		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
 			<version>${nekohtml.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>javax.portlet</groupId>
-            <artifactId>portlet-api</artifactId>
-            <version>${portlet.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-    
-    <build>
+		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+			<version>${portlet.version}</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -462,17 +468,18 @@
 				</executions>
 			</plugin>
 			<plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.plugin.version}</version>
-                <configuration>
-                	<scanIntervalSeconds>10</scanIntervalSeconds>
-                </configuration>
-            </plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -508,7 +515,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<repositories>
 		<repository>
 			<id>vaadin-addons</id>
