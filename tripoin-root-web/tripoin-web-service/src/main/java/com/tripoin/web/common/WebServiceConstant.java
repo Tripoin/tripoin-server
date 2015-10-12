@@ -19,6 +19,8 @@ public class WebServiceConstant {
 	public static final String HTTP_AVAILABILITY = "/availability".concat(HTTP_LOAD);
 	public static final String HTTP_CATEGORY = "/category".concat(HTTP_LOAD);
 	public static final String HTTP_PRODUCT = "/product".concat(HTTP_LOAD);
+	public static final String HTTP_USER = "/user".concat(HTTP_LOAD);
+	public static final String HTTP_USER_SAVE = "/user".concat(HTTP_SAVE);
 	public static final String HTTP_PRODUCT_SAVE = "/product".concat(HTTP_SAVE);
 
 }

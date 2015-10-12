@@ -11,6 +11,8 @@ import com.tripoin.core.dto.CategoryData;
 import com.tripoin.core.dto.CategoryTransferObject;
 import com.tripoin.core.dto.ProductData;
 import com.tripoin.core.dto.ProductTransferObject;
+import com.tripoin.core.dto.UserData;
+import com.tripoin.core.dto.UserMenuTransferObject;
 import com.tripoin.web.common.ICommonRest;
 import com.tripoin.web.common.IStateFullRest;
 import com.tripoin.web.common.WebServiceConstant;
@@ -41,6 +43,14 @@ public class InventoryServiceImpl implements IInventoryService {
 	}
 	
 	@Override
+	public List<UserData> getAllUser() {
+		UserMenuTransferObject productConnectionDTO = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_USER), UserMenuTransferObject.class);
+		return productConnectionDTO.getUserDatas();
+	}
+	
+	
+	
+	@Override
 	public List<AvailabilityData> getAllAvailability(){
 		AvailabilityTransferObject availabilityTransferObject = stateFullRest.get(commonRest.getUrl(WebServiceConstant.HTTP_AVAILABILITY), AvailabilityTransferObject.class);
 		return availabilityTransferObject.getAvailabilityDatas();		
@@ -48,6 +58,19 @@ public class InventoryServiceImpl implements IInventoryService {
 
 	@Override
 	public void updateProduct(ProductData p) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void saveUser(UserData data) {
+//		data = new UserData();
+//		data.setEmail(data.getEmail());
+//		data.setFullname(data.getFullname());
+//		data.setUsername(data.getUsername());
+		stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_USER_SAVE),data, UserData.class);
+//		return user;		
+		
 		// TODO Auto-generated method stub
 		
 	}

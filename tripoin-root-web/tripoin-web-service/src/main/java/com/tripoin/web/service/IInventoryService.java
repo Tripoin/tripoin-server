@@ -5,6 +5,7 @@ import java.util.List;
 import com.tripoin.core.dto.AvailabilityData;
 import com.tripoin.core.dto.CategoryData;
 import com.tripoin.core.dto.ProductData;
+import com.tripoin.core.dto.UserData;
 
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
@@ -23,4 +24,9 @@ public interface IInventoryService {
 
     public ProductData getProductById(int productId);
 
+	public List<UserData> getAllUser();
+	
+	public void saveUser(UserData userdata);
+
+	
 }
