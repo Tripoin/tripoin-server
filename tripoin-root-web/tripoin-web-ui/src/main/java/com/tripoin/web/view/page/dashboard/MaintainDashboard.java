@@ -27,6 +27,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -41,26 +42,26 @@ interface a {
 @Component
 @Scope("prototype")
 @VaadinView(value = "maintainDashboard", cached = true)
-@JavaScript({ "http://" + a.ip + "/sales-dashboard/js/jquery.min.js",
-		"http://" + a.ip + "/sales-dashboard/js/highcharts.js",
-		"http://" + a.ip + "/sales-dashboard/js/highcharts-3d.js",
-		"http://" + a.ip + "/sales-dashboard/js/grouped-categories.js",
-		"http://" + a.ip + "/sales-dashboard/js/properties.js",
-		"http://" + a.ip + "/sales-dashboard/js/modules/exporting.js",
-		"http://" + a.ip + "/sales-dashboard/js/highcharts-connector.js" })
+//@JavaScript({ "http://" + a.ip + "/sales-dashboard/js/jquery.min.js",
+//		"http://" + a.ip + "/sales-dashboard/js/highcharts.js",
+//		"http://" + a.ip + "/sales-dashboard/js/highcharts-3d.js",
+//		"http://" + a.ip + "/sales-dashboard/js/grouped-categories.js",
+//		"http://" + a.ip + "/sales-dashboard/js/properties.js",
+//		"http://" + a.ip + "/sales-dashboard/js/modules/exporting.js",
+//		"http://" + a.ip + "/sales-dashboard/js/highcharts-connector.js" })
 // @JavaScript({"jquery-min.js", "highcharts.js", "highcharts-connector.js"})
 public class MaintainDashboard<DATA> extends ASimpleMaintainCrud<DATA> implements View {
 
 	private static final long serialVersionUID = -7326315426217377753L;
 	// JAVA SCRIPT FOR SALES PERFORMANCE
-		public static final String INITIAL_HCJSA = new Scanner(MaintainDashboard.class.getResourceAsStream("chart-analisa-pemesanan.js"),
-				"UTF-8").useDelimiter("\\A").next();
-		public static final String INITIAL_HCJSB = new Scanner(
-				MaintainDashboard.class.getResourceAsStream("chart-analisa-produk.js"), "UTF-8").useDelimiter("\\A").next();
-		public static final String INITIAL_HCJSC = new Scanner(
-				MaintainDashboard.class.getResourceAsStream("chart-neraca-penjualan.js"), "UTF-8").useDelimiter("\\A").next();
-		public static final String INITIAL_HCJSD = new Scanner(
-				MaintainDashboard.class.getResourceAsStream("chart-bep.js"), "UTF-8").useDelimiter("\\A").next();
+//		public static final String INITIAL_HCJSA = new Scanner(MaintainDashboard.class.getResourceAsStream("chart-analisa-pemesanan.js"),
+//				"UTF-8").useDelimiter("\\A").next();
+//		public static final String INITIAL_HCJSB = new Scanner(
+//				MaintainDashboard.class.getResourceAsStream("chart-analisa-produk.js"), "UTF-8").useDelimiter("\\A").next();
+//		public static final String INITIAL_HCJSC = new Scanner(
+//				MaintainDashboard.class.getResourceAsStream("chart-neraca-penjualan.js"), "UTF-8").useDelimiter("\\A").next();
+//		public static final String INITIAL_HCJSD = new Scanner(
+//				MaintainDashboard.class.getResourceAsStream("chart-bep.js"), "UTF-8").useDelimiter("\\A").next();
 
 
 
@@ -170,7 +171,6 @@ public class MaintainDashboard<DATA> extends ASimpleMaintainCrud<DATA> implement
 		
 
 		HighChart chart;
-		AceEditor textArea;
 
 		// panel.setSizeFull();
 
@@ -179,56 +179,38 @@ public class MaintainDashboard<DATA> extends ASimpleMaintainCrud<DATA> implement
 		// CssLayout csslay = new CssLayout();
 
 		// csslay.setMargin(new MarginInfo(true, true, true, true));
-		textArea = new AceEditor();
-		textArea.setSizeFull();
-		textArea.setMode(AceMode.javascript);
-		textArea.setValue(INITIAL_HCJSA);
-		textArea.setImmediate(true);
+		
 
 		chart = new HighChart();
 		// chart.set
-		chart.setHcjs(textArea.getValue());
+		chart.setHcjs(JsonUtilChart.CHART_ANALISA_PEMESANAN.toString());
 //		chart.setWidth("40%");
 //		Responsive.makeResponsive(chart);
 //		wrap.setWidth("100%");
+//		Notification.show(JsonUtilChart.CHART_ANALISA_PEMESANAN.toString());
 		wrap.addComponent(chart);
 
-		textArea = new AceEditor();
-		textArea.setSizeFull();
-		textArea.setMode(AceMode.javascript);
-		textArea.setValue(INITIAL_HCJSB);
-		textArea.setImmediate(true);
-
+		
 		chart = new HighChart();
-		chart.setHcjs(textArea.getValue());
+		chart.setHcjs(JsonUtilChart.CHART_ANALISA_PRODUK.toString());
 		// chart.setWidth("40%");
 //		Responsive.makeResponsive(wrap);
 		// addComponent(createPanel("Dashboard Widget "));
 
 		wrap.addComponent(chart);
 
-		textArea = new AceEditor();
-		textArea.setSizeFull();
-
-		textArea.setMode(AceMode.javascript);
-		textArea.setValue(INITIAL_HCJSC);
-		textArea.setImmediate(true);
+		
 
 		chart = new HighChart();
-		chart.setHcjs(textArea.getValue());
+		chart.setHcjs(JsonUtilChart.CHART_NERACA_PENJUALAN);
 		// chart.setWidth("40%");
 		// Responsive.makeResponsive(chart);
 
 		wrap.addComponent(chart);
 
-		textArea = new AceEditor();
-		textArea.setSizeFull();
-		textArea.setMode(AceMode.javascript);
-		textArea.setValue(INITIAL_HCJSD);
-		textArea.setImmediate(true);
-
+		
 		chart = new HighChart();
-		chart.setHcjs(textArea.getValue());
+		chart.setHcjs(JsonUtilChart.CHART_BEP);
 		// chart.setWidth("40%");
 //		Responsive.makeResponsive(chart);
 		// panel.setContent(chart);
