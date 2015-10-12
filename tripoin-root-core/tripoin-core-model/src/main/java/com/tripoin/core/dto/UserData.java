@@ -10,6 +10,8 @@ public class UserData {
 
 	private Integer id;
 	private String username;
+	private String email;
+	private String fullname;
 	private String password;
 	private Integer enabled;
 	private String expiredDate;
@@ -25,6 +27,8 @@ public class UserData {
 		if(user != null){
 			this.setId(user.getId());
 			this.setUsername(user.getUsername());
+			this.setEmail(user.getEmail());
+			this.setFullname(user.getFullname());
 			this.setPassword(user.getPassword());
 			this.setEnabled(user.getEnabled());
 			if(user.getExpiredDate() != null)
@@ -117,10 +121,28 @@ public class UserData {
 	public void setRoleData(RoleData roleData) {
 		this.roleData = roleData;
 	}
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
 	@Override
 	public String toString() {
-		return "UserData [id=" + id + ", username=" + username + ", enabled=" + enabled + ", expiredDate="
+		return "UserData [id=" + id + ", username=" + username + ", fullname=" + fullname + ", email=" + email + ", enabled=" + enabled + ", expiredDate="
 				+ expiredDate + ", nonLocked=" + nonLocked + ", auth=" + auth
 				+ ", status=" + status + ", remarks=" + remarks + ", roleData="
 				+ roleData + "]";

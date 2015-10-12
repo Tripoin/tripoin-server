@@ -28,7 +28,10 @@ public class SecurityUser extends User implements UserDetails {
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;	
 
-	public SecurityUser() {}
+    /**
+     *
+     */
+    public SecurityUser() {}
 	
 	public SecurityUser(User user) {
 		if(user != null){
@@ -58,7 +61,8 @@ public class SecurityUser extends User implements UserDetails {
 		} 
 	}
 	
-	public SecurityUser(UserData userData) {
+    
+    public SecurityUser(UserData userData) {
 		if(userData != null){
 			this.setId(userData.getId());
 			this.setUsername(userData.getUsername());

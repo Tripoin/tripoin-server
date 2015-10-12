@@ -1,5 +1,6 @@
 package com.tripoin.core.pojo;
 
+
 import com.tripoin.core.dto.UserData;
 
 import java.text.ParseException;
@@ -29,8 +30,11 @@ import javax.persistence.Table;
 @Table(name = "sec_user")
 public class User {
 
+
     private Integer id;
     private String username;
+	private String email;
+    private String fullname;
     private String password;
     private Integer enabled;
     private Date expiredDate;
@@ -41,7 +45,8 @@ public class User {
     private Role role;
     private List<VersionFilter> versionFilter;
     private Profile profile;
-
+	
+ 
     public User(){}
     
     public User(UserData userData) {
@@ -61,6 +66,7 @@ public class User {
         }
     }
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -72,10 +78,20 @@ public class User {
         this.id = id;
     }
 
+
     @Column(name = "user_username", length = 20)
     public String getUsername() {
         return username;
     }
+    @Column(name = "user_email", length = 20)
+    public String getEmail() {
+        return email;
+    }
+    @Column(name = "user_fullname", length = 20)
+    public String getFullname() {
+        return fullname;
+    }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -131,9 +147,34 @@ public class User {
         return status;
     }
 
+
+    @Column(name = "user_email")
+    public void setEmail(String email) {
+		this.email = email;
+	}
+
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    
+    @Column(name = "user_fullname")
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+
+    @Column(name = "user_remarks", length = 255)
+    public String getRemarks() {
+        return remarks;
+    }
+
+	
+	
+	public void setStatus(Integer status) {
+        this.status = status;
+    }
+
 
     @Column(name = "user_remarks", length = 255)
     public String getRemarks() {
@@ -143,7 +184,7 @@ public class User {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-
+	
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     public Role getRole() {
@@ -168,13 +209,32 @@ public class User {
 		return profile;
 	}
 
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    public Role getRole() {
+        return role;
+    }
+
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    public List<VersionFilter> getVersionFilter() {
+        return versionFilter;
+    }
+
+    public void setVersionFilter(List<VersionFilter> versionFilter) {
+        this.versionFilter = versionFilter;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password="
+        return "User [id=" + id + ", username=" + username + ", email=" + email + ", fullname=" + fullname + ", password="
                 + password + ", enabled=" + enabled + ", expiredDate="
                 + expiredDate + ", nonLocked=" + nonLocked + ", auth=" + auth
                 + ", status=" + status + ", remarks=" + remarks + ", role="
