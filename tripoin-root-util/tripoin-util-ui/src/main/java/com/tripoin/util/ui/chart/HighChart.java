@@ -10,7 +10,24 @@ import com.vaadin.annotations.JavaScript;
  *
  * @author <a href="mailto:tripoinstudio@gmail.com">Tripoin, inc.</a>
  */
-@JavaScript({"jquery.min.js", "highcharts.js", "highcharts-connector.js"})
+
+interface a {
+//	String ip = "10.10.130.206";
+	String ip = "192.168.43.64";
+}
+//@JavaScript({ "http://" + a.ip + "/sales-dashboard/js/jquery.min.js",
+//"http://" + a.ip + "/sales-dashboard/js/highcharts.js",
+//"http://" + a.ip + "/sales-dashboard/js/highcharts-3d.js",
+//"http://" + a.ip + "/sales-dashboard/js/grouped-categories.js",
+//"http://" + a.ip + "/sales-dashboard/js/properties.js",
+//"http://" + a.ip + "/sales-dashboard/js/modules/exporting.js",
+//"http://" + a.ip + "/sales-dashboard/js/highcharts-connector.js" })
+@JavaScript({"jquery.min.js", "highcharts.js",
+	"highcharts-3d.js",
+
+	"grouped-categories.js",
+	"properties.js",
+	"exporting.js", "highcharts-connector.js"})
 public class HighChart extends AbstractHighChart {
 	private static final long serialVersionUID = -7326315426217377753L;
 }

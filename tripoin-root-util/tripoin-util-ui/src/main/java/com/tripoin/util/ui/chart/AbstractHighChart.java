@@ -68,6 +68,7 @@ public abstract class AbstractHighChart extends AbstractJavaScriptComponent {
 	 * @param hcjs Highcharts JavaScript code describing the chart
 	 */
 	public void setHcjs(String hcjs) {
+//		getState().hcjs = hcjs;
 		getState().hcjs = "var options = ".concat(hcjs);
   }
 }
