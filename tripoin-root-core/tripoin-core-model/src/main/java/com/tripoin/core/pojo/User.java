@@ -54,11 +54,14 @@ public class User {
             this.id = userData.getId();
                 this.username = userData.getUsername();
                 this.enabled = userData.getEnabled();                                
-            try {                
-                this.expiredDate = new SimpleDateFormat().parse(userData.getExpiredDate());
+            try {
+            	if(userData.getExpiredDate().isEmpty()) this.expiredDate = new Date();
+            	else this.expiredDate = new SimpleDateFormat().parse(userData.getExpiredDate());
             } catch (ParseException ex) {
                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.password = userData.getPassword();
+            this.role = new Role(userData.getRoleData());
             this.nonLocked = userData.getNonLocked();
             this.auth = userData.getAuth();
             this.status = userData.getStatus();

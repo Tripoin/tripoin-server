@@ -23,7 +23,7 @@ public class TripoinUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String argument) throws UsernameNotFoundException {
 		SecurityUser securityUser = null;
 		try {
-			List<User> users = iGenericManagerJpa.loadObjectsJQLStatement("SELECT pr.user FROM Profile pr WHERE pr.email = ? OR pr.phone = ? OR pr.user.username = ?", new Object[]{argument,argument,argument}, null);
+			List<User> users = iGenericManagerJpa.loadObjectsJQLStatement("SELECT pr.user FROM Profile pr WHERE pr.user.username = ?", new Object[]{argument}, null);
 			securityUser = new SecurityUser(users.get(0));			
 		} catch (Exception e) {
 			e.printStackTrace();

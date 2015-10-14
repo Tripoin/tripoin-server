@@ -18,6 +18,7 @@ public class ProfileData {
 	private String telp;
 	private String phone;
 	private String photo;
+	private String bio;
 	private UserData userData;
 
 	public ProfileData() {}
@@ -35,12 +36,13 @@ public class ProfileData {
 		this.telp = profile.getTelp();
 		this.phone = profile.getPhone();
 		this.photo = profile.getPhoto();
+		this.bio = profile.getBio();
 		this.userData = new UserData(profile.getUser());
 	}
 	
 	public ProfileData(int id, String email, String name, String sex,
 			String birthplace, String birthdate, String address, String telp,
-			String phone, String photo, UserData userData) {
+			String phone, String photo, String bio, UserData userData) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -52,6 +54,7 @@ public class ProfileData {
 		this.telp = telp;
 		this.phone = phone;
 		this.photo = photo;
+		this.bio = bio;
 		this.userData = userData;
 	}
 
@@ -133,6 +136,14 @@ public class ProfileData {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
 	public UserData getUserData() {

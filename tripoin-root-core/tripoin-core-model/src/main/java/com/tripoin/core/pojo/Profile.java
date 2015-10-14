@@ -34,7 +34,8 @@ public class Profile implements Serializable {
     private String address;
     private String telp;
     private String phone;
-    private String photo; 
+    private String photo;
+    private String bio; 
     private User user;
     
     public Profile() {}
@@ -140,6 +141,15 @@ public class Profile implements Serializable {
 		this.photo = photo;
 	}
 
+	@Column(name="profile_bio")
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
 	public User getUser() {
@@ -155,7 +165,7 @@ public class Profile implements Serializable {
 		return "Profile [id=" + id + ", email=" + email + ", name=" + name
 				+ ", birthplace=" + birthplace + ", birthdate=" + birthdate
 				+ ", address=" + address + ", telp=" + telp + ", phone="
-				+ phone + ", photo=" + photo + ", user=" + user + "]";
+				+ phone + ", photo=" + photo + ", bio=" + bio + ", user=" + user + "]";
 	} 
 	
 }
