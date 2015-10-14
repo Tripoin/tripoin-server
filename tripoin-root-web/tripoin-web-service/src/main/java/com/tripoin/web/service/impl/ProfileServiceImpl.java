@@ -40,7 +40,7 @@ public class ProfileServiceImpl implements IProfileService {
 		stateFullRest.setPassword("ridla");
 		LOGGER.info("SHOW URL: "+commonRest.getUrl(WebServiceConstant.HTTP_USER_SAVE));
 //		ProfileTransferObject profileTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PROFILE_SAVE), profileData, ProfileTransferObject.class);
-		UserTransferObject userTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_USER_UPDATE), userData, UserTransferObject.class);
+		UserTransferObject userTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_USER_SAVE), userData, UserTransferObject.class);
 //		LOGGER.debug("Response Body Profile : "+profileTransferObject.getProfileDatas());
 		LOGGER.debug("Response Body User : "+userTransferObject.getUserDatas());
 	
@@ -49,8 +49,15 @@ public class ProfileServiceImpl implements IProfileService {
 
 	@Override
 	public String updateProfile(ProfileData profileData, UserData userData) {
-		// TODO Auto-generated method stub
-		return null;
+		stateFullRest.setUsername("ridla");
+		stateFullRest.setPassword("ridla");
+		LOGGER.info("SHOW URL: "+commonRest.getUrl(WebServiceConstant.HTTP_USER_SAVE));
+//		ProfileTransferObject profileTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PROFILE_SAVE), profileData, ProfileTransferObject.class);
+		UserTransferObject userTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_USER_UPDATE), userData, UserTransferObject.class);
+//		LOGGER.debug("Response Body Profile : "+profileTransferObject.getProfileDatas());
+		LOGGER.debug("Response Body User : "+userTransferObject.getUserDatas());
+	
+		return "Successfully";
 	}
 
 }
