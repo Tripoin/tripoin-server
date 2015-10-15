@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.tripoin.core.dto.ProfileData;
+
 /**
  * @author <a href="mailto:ridla.fadilah@gmail.com">Ridla Fadilah</a>
  */
@@ -37,8 +39,23 @@ public class Profile implements Serializable {
     private String photo;
     private String bio; 
     private User user;
-    
+
     public Profile() {}
+    
+    public Profile(ProfileData profileData) {
+    	this.id = profileData.getId();
+    	this.email = profileData.getEmail();
+    	this.name = profileData.getName();
+    	this.sex = profileData.getSex();
+    	this.birthplace = profileData.getBirthplace();
+    	this.birthdate = profileData.getBirthdate();
+    	this.address = profileData.getAddress();
+    	this.telp = profileData.getTelp();
+    	this.phone = profileData.getPhone();
+    	this.photo = profileData.getPhoto();
+    	this.bio = profileData.getBio();
+    	this.user = new User(profileData.getUserData());
+    }
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
