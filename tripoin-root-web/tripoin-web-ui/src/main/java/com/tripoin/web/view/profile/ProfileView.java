@@ -2,14 +2,10 @@ package com.tripoin.web.view.profile;
 
 import java.io.File;
 import java.util.Date;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.dto.ProfileData;
 import com.tripoin.web.service.IProfileService;
@@ -101,6 +97,7 @@ public class ProfileView extends VerticalLayout implements View {
         final TextField username = new TextField("Username");
         username.setValue(profileData.getUserData().getUsername());
         username.setWidth("50%");
+        username.setRequired(true);
         form.addComponent(username);
 
         final OptionGroup sex = new OptionGroup("Gender");
@@ -128,11 +125,16 @@ public class ProfileView extends VerticalLayout implements View {
         phone.setValue(profileData.getPhone());
         form.addComponent(phone);
 
-        final TextField email = new TextField("Email");
-        email.setValue(profileData.getEmail());
-        email.setWidth("50%");
-        email.setRequired(true);
-        form.addComponent(email);
+        final TextField primaryEmail = new TextField("Primary Email");
+        primaryEmail.setValue(profileData.getUserData().getEmail());
+        primaryEmail.setWidth("50%");
+        primaryEmail.setRequired(true);
+        form.addComponent(primaryEmail);
+
+        final TextField additionalEmail = new TextField("Additional Email");
+        additionalEmail.setValue(profileData.getEmail());
+        additionalEmail.setWidth("50%");
+        form.addComponent(additionalEmail);
 
         section = new Label("Additional Info");
         section.addStyleName("h4");
@@ -150,7 +152,8 @@ public class ProfileView extends VerticalLayout implements View {
         username.setReadOnly(true);
         sex.setReadOnly(true);
         address.setReadOnly(true);
-        email.setReadOnly(true);
+        primaryEmail.setReadOnly(true);
+        additionalEmail.setReadOnly(true);
         phone.setReadOnly(true);
         bio.setReadOnly(true);
 
@@ -166,7 +169,8 @@ public class ProfileView extends VerticalLayout implements View {
                     username.setReadOnly(false);
                     sex.setReadOnly(false);
                     address.setReadOnly(false);
-                    email.setReadOnly(false);
+                    primaryEmail.setReadOnly(false);
+                    additionalEmail.setReadOnly(false);
                     phone.setReadOnly(false);
                     bio.setReadOnly(false);
                     
@@ -175,21 +179,23 @@ public class ProfileView extends VerticalLayout implements View {
                     event.getButton().addStyleName("primary");
                 } else {
                 	profileData.setName(name.getValue());
-                	profileData.setBirthdate("20150909");
+                	profileData.setBirthdate(ParameterConstant.FORMAT_DEFAULT.format(birthday.getValue()));
                 	profileData.getUserData().setUsername(username.getValue());
                 	profileData.setSex(sex.getValue().toString());
                 	profileData.setAddress(address.getValue());
                 	profileData.setPhone(phone.getValue());
-                	profileData.setEmail(email.getValue());
+                	profileData.getUserData().setEmail(primaryEmail.getValue());
+                	profileData.setEmail(additionalEmail.getValue());
                 	profileData.setBio(bio.getValue());
-                	String as = profileService.updateProfile(profileData, profileData.getUserData());
+                	profileService.updateProfile(profileData, profileData.getUserData());
                     form.setReadOnly(true);
                     name.setReadOnly(true);
                     birthday.setReadOnly(true);
                     username.setReadOnly(true);
                     sex.setReadOnly(true);
                     address.setReadOnly(true);
-                    email.setReadOnly(true);
+                    primaryEmail.setReadOnly(true);
+                    additionalEmail.setReadOnly(true);
                     phone.setReadOnly(true);
                     bio.setReadOnly(true);
                     
