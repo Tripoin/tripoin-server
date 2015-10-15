@@ -38,10 +38,9 @@ public class ProfileServiceImpl implements IProfileService {
 	public String saveProfile(ProfileData profileData, UserData userData) {
 		stateFullRest.setUsername("ridla");
 		stateFullRest.setPassword("ridla");
-		LOGGER.info("SHOW URL: "+commonRest.getUrl(WebServiceConstant.HTTP_USER_SAVE));
-//		ProfileTransferObject profileTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PROFILE_SAVE), profileData, ProfileTransferObject.class);
+		ProfileTransferObject profileTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PROFILE_SAVE), profileData, ProfileTransferObject.class);
 		UserTransferObject userTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_USER_SAVE), userData, UserTransferObject.class);
-//		LOGGER.debug("Response Body Profile : "+profileTransferObject.getProfileDatas());
+		LOGGER.debug("Response Body Profile : "+profileTransferObject.getProfileDatas());
 		LOGGER.debug("Response Body User : "+userTransferObject.getUserDatas());
 	
 		return "Successfully";
@@ -51,10 +50,9 @@ public class ProfileServiceImpl implements IProfileService {
 	public String updateProfile(ProfileData profileData, UserData userData) {
 		stateFullRest.setUsername("ridla");
 		stateFullRest.setPassword("ridla");
-		LOGGER.info("SHOW URL: "+commonRest.getUrl(WebServiceConstant.HTTP_USER_UPDATE));
-//		ProfileTransferObject profileTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PROFILE_SAVE), profileData, ProfileTransferObject.class);
+		ProfileTransferObject profileTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_PROFILE_SAVE), profileData, ProfileTransferObject.class);
 		UserTransferObject userTransferObject = stateFullRest.post(commonRest.getUrl(WebServiceConstant.HTTP_USER_UPDATE), userData, UserTransferObject.class);
-//		LOGGER.debug("Response Body Profile : "+profileTransferObject.getProfileDatas());
+		LOGGER.debug("Response Body Profile : "+profileTransferObject.getProfileDatas());
 		LOGGER.debug("Response Body User : "+userTransferObject.getUserDatas());
 	
 		return "Successfully";
