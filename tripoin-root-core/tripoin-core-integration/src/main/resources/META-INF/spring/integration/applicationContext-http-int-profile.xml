@@ -14,6 +14,7 @@
 	
 	<int:channel id="responseChannelProfileLoad"/>
 	<int:channel id="requestChannelProfileLoad"/>	
+	
 	<int:channel id="responseChannelProfileSave"/>
 	<int:channel id="requestChannelProfileSave"/>
 	<int:channel id="routeChannelProfileSave"/>
@@ -26,7 +27,7 @@
 	</int-http:inbound-gateway>	
 	<int:service-activator ref="profileLoadEndpoint" method="getProfile" input-channel="requestChannelProfileLoad" output-channel="responseChannelProfileLoad"/>		
 	
-	<!-- <int-http:inbound-gateway request-channel="requestChannelProfileSave"
+	<int-http:inbound-gateway request-channel="requestChannelProfileSave"
 		reply-channel="responseChannelProfileSave"
 		supported-methods="POST" 
 		path="/wscontext/profile/save, /wscontext/profile/save/{profile}"
@@ -36,6 +37,6 @@
 	<int:router input-channel="routeChannelProfileSave" expression="headers.http_requestMethod">
 	    <int:mapping value="POST" channel="requestChannelProfileSave"/>
 	</int:router>	
-	<int:service-activator ref="profileSaveEndpoint" method="saveProfile" input-channel="requestChannelProfileSave" output-channel="responseChannelProfileSave"/> -->
+	<int:service-activator ref="profileSaveEndpoint" method="saveProduct" input-channel="requestChannelProfileSave" output-channel="responseChannelProfileSave"/>
 		
 </beans>
