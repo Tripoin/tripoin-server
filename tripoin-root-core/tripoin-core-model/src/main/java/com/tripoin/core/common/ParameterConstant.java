@@ -8,8 +8,11 @@ import java.text.SimpleDateFormat;
 public class ParameterConstant {
 
 	public static final String HOST_SERVER = "tripoin.host.server";
+
+	private static final String formatUi = "dd-MM-yyyy";
+	public static SimpleDateFormat FORMAT_UI = new SimpleDateFormat(formatUi);
 	
-	private static final String formatDefault = "dd-MM-yyyy HH:mm:ss.S";	
+	private static final String formatDefault = "dd-MM-yyyy HH:mm:ss.S";
 	public static SimpleDateFormat FORMAT_DEFAULT = new SimpleDateFormat(formatDefault);
 	
 	public static final String RESPONSE_SUCCESS = "SUCCESS";
