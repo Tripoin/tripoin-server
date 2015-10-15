@@ -52,20 +52,16 @@ public class User {
     public User(UserData userData) {
         if (userData.getId() != null) {
             this.id = userData.getId();
-                this.username = userData.getUsername();
-                this.enabled = userData.getEnabled();                                
-            try {
-            	if(userData.getExpiredDate().isEmpty()) this.expiredDate = new Date();
-            	else this.expiredDate = new SimpleDateFormat().parse(userData.getExpiredDate());
-            } catch (ParseException ex) {
-                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            this.username = userData.getUsername();
+            this.enabled = userData.getEnabled();
+            this.expiredDate = userData.getExpiredDate();
             this.password = userData.getPassword();
             this.role = new Role(userData.getRoleData());
             this.nonLocked = userData.getNonLocked();
             this.auth = userData.getAuth();
             this.status = userData.getStatus();
-            this.remarks = userData.getRemarks();            
+            this.remarks = userData.getRemarks();
+			this.email = userData.getEmail();
         }
     }
 
@@ -86,19 +82,29 @@ public class User {
     public String getUsername() {
         return username;
     }
-    @Column(name = "user_email", length = 20)
-    public String getEmail() {
-        return email;
-    }
-    @Column(name = "user_fullname", length = 20)
-    public String getFullname() {
-        return fullname;
-    }
-
 
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    @Column(name = "user_email", length = 20)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+		this.email = email;
+	}
+
+    @Column(name = "user_fullname", length = 20)
+    public String getFullname() {
+        return fullname;
+    }
+    
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+    
 
     @Column(name = "user_password", length = 255)
     public String getPassword() {
@@ -148,36 +154,16 @@ public class User {
     @Column(name = "user_status")
     public Integer getStatus() {
         return status;
-    }
-
-
-    @Column(name = "user_email")
-    public void setEmail(String email) {
-		this.email = email;
-	}
-
-   
-
-    
-    @Column(name = "user_fullname")
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-
-    @Column(name = "user_remarks", length = 255)
-    public String getRemarks() {
-        return remarks;
-    }
-
-	
+    }   
 	
 	public void setStatus(Integer status) {
         this.status = status;
     }
 
-
-    
+    @Column(name = "user_remarks", length = 255)
+    public String getRemarks() {
+        return remarks;
+    }  
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
@@ -191,24 +177,16 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    
-
-    
+    }       
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	public Profile getProfile() {
 		return profile;
 	}
 
-    
-
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
-
-    
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     public List<VersionFilter> getVersionFilter() {
