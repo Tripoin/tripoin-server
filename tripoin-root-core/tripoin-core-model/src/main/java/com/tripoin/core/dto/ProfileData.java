@@ -1,6 +1,6 @@
 package com.tripoin.core.dto;
 
-import com.tripoin.core.common.ParameterConstant;
+import java.util.Date;
 import com.tripoin.core.pojo.Profile;
 
 /**
@@ -13,7 +13,7 @@ public class ProfileData {
 	private String name;
 	private String sex;
 	private String birthplace;
-	private String birthdate;
+	private Date birthdate;
 	private String address;
 	private String telp;
 	private String phone;
@@ -30,8 +30,7 @@ public class ProfileData {
 		this.name = profile.getName();
 		this.sex = profile.getSex();
 		this.birthplace = profile.getBirthplace();
-		if(profile.getBirthdate() != null)
-			this.birthdate = ParameterConstant.FORMAT_DEFAULT.format(profile.getBirthdate());
+		this.birthdate = profile.getBirthdate();
 		this.address = profile.getAddress();
 		this.telp = profile.getTelp();
 		this.phone = profile.getPhone();
@@ -41,7 +40,7 @@ public class ProfileData {
 	}
 	
 	public ProfileData(int id, String email, String name, String sex,
-			String birthplace, String birthdate, String address, String telp,
+			String birthplace, Date birthdate, String address, String telp,
 			String phone, String photo, String bio, UserData userData) {
 		super();
 		this.id = id;
@@ -98,11 +97,11 @@ public class ProfileData {
 		this.birthplace = birthplace;
 	}
 
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 
