@@ -1,15 +1,11 @@
 package com.tripoin.core.security;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.dto.UserData;
 import com.tripoin.core.pojo.Role;
 import com.tripoin.core.pojo.User;
@@ -73,11 +69,7 @@ public class SecurityUser extends User implements UserDetails {
 				this.enabled = false;
 			if(userData.getExpiredDate() != null){
 				Date expiredDateUserData;
-				try {
-					expiredDateUserData = ParameterConstant.FORMAT_DEFAULT.parse(userData.getExpiredDate());
-				} catch (ParseException e) {
-					expiredDateUserData = new Date();
-				}
+				expiredDateUserData = userData.getExpiredDate();
 				if(expiredDateUserData.compareTo(new Date()) >= 0)
 					this.accountNonExpired = true;
 				else
