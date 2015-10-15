@@ -48,7 +48,7 @@ public class ProfileView extends VerticalLayout implements View {
     @PostConstruct
     public void init(){
 		profileData = profileService.getProfile();
-//        setSpacing(true);
+        setSpacing(false);
         setMargin(true);
 
         final FormLayout formTitle = new FormLayout();
@@ -83,15 +83,21 @@ public class ProfileView extends VerticalLayout implements View {
         section.addStyleName("h3");
         section.addStyleName("colored");
         form.addComponent(section);
-//        form.setComponentAlignment(section, Alignment.MIDDLE_LEFT);
         
         final TextField name = new TextField("Name");
         name.setValue(profileData.getName());
         name.setWidth("50%");
         form.addComponent(name);
 
-        final DateField birthday = new DateField("Birth");
-        birthday.setValue(new Date(80, 0, 31));
+        final TextField birthPlace = new TextField("Birth");
+        birthPlace.setValue(profileData.getBirthplace().concat(", ").concat(ParameterConstant.FORMAT_UI.format(profileData.getBirthdate())));
+        birthPlace.setWidth("50%");
+        form.addComponent(birthPlace);
+
+        final DateField birthday = new DateField("Birth Date");
+        if(profileData.getBirthdate() != null) birthday.setValue(profileData.getBirthdate());
+        else birthday.setValue(new Date());
+        birthday.setWidth("50%");
         form.addComponent(birthday);
 
         final TextField username = new TextField("Username");
@@ -148,7 +154,8 @@ public class ProfileView extends VerticalLayout implements View {
 
         form.setReadOnly(true);
         name.setReadOnly(true);
-        birthday.setReadOnly(true);
+        birthPlace.setReadOnly(true);
+        birthday.setVisible(false);
         username.setReadOnly(true);
         sex.setReadOnly(true);
         address.setReadOnly(true);
@@ -165,7 +172,9 @@ public class ProfileView extends VerticalLayout implements View {
                 if (readOnly) {
                     form.setReadOnly(false);
                     name.setReadOnly(false);
-                    birthday.setReadOnly(false);
+                    birthPlace.setReadOnly(false);
+                    birthPlace.setValue(birthPlace.getValue().substring(0, birthPlace.getValue().indexOf(", ")));
+                    birthday.setVisible(true);
                     username.setReadOnly(false);
                     sex.setReadOnly(false);
                     address.setReadOnly(false);
@@ -179,7 +188,8 @@ public class ProfileView extends VerticalLayout implements View {
                     event.getButton().addStyleName("primary");
                 } else {
                 	profileData.setName(name.getValue());
-                	profileData.setBirthdate(ParameterConstant.FORMAT_DEFAULT.format(birthday.getValue()));
+                	profileData.setBirthplace(birthPlace.getValue());
+                	profileData.setBirthdate(birthday.getValue());
                 	profileData.getUserData().setUsername(username.getValue());
                 	profileData.setSex(sex.getValue().toString());
                 	profileData.setAddress(address.getValue());
@@ -190,7 +200,9 @@ public class ProfileView extends VerticalLayout implements View {
                 	profileService.updateProfile(profileData, profileData.getUserData());
                     form.setReadOnly(true);
                     name.setReadOnly(true);
-                    birthday.setReadOnly(true);
+                    birthPlace.setValue(profileData.getBirthplace().concat(", ").concat(ParameterConstant.FORMAT_UI.format(profileData.getBirthdate())));
+                    birthPlace.setReadOnly(true);
+                    birthday.setVisible(false);
                     username.setReadOnly(true);
                     sex.setReadOnly(true);
                     address.setReadOnly(true);
