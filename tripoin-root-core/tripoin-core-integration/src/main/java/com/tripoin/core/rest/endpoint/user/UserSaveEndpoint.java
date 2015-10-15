@@ -43,8 +43,8 @@ public class UserSaveEndpoint extends XReturnStatus {
             List<User> userList = iGenericManagerJpa.loadObjects(User.class);
             List<UserData> userDatas = new ArrayList<UserData>();
             if (userList != null) {
-                for (User employee : userList) {
-                    UserData userData = new UserData(employee);
+                for (User user : userList) {
+                    UserData userData = new UserData(user);
                     userDatas.add(userData);
                 }
                 userTransferObject.setUserDatas(userDatas);
