@@ -1,6 +1,7 @@
 package com.tripoin.core.dto;
 
-import com.tripoin.core.common.ParameterConstant;
+import java.util.Date;
+
 import com.tripoin.core.pojo.User;
 
 /**
@@ -14,7 +15,7 @@ public class UserData {
 	private String fullname;
 	private String password;
 	private Integer enabled;
-	private String expiredDate;
+	private Date expiredDate;
 	private Integer nonLocked;
 	private String auth;
 	private Integer status;
@@ -31,8 +32,7 @@ public class UserData {
 			this.setFullname(user.getFullname());
 			this.setPassword(user.getPassword());
 			this.setEnabled(user.getEnabled());
-			if(user.getExpiredDate() != null)
-				this.setExpiredDate(ParameterConstant.FORMAT_DEFAULT.format(user.getExpiredDate()));
+			this.setExpiredDate(user.getExpiredDate());
 			this.setNonLocked(user.getNonLocked());
 			this.setAuth(user.getAuth());
 			this.setStatus(user.getStatus());
@@ -73,12 +73,12 @@ public class UserData {
 	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
-
-	public String getExpiredDate() {
+	
+	public Date getExpiredDate() {
 		return expiredDate;
 	}
 
-	public void setExpiredDate(String expiredDate) {
+	public void setExpiredDate(Date expiredDate) {
 		this.expiredDate = expiredDate;
 	}
 
@@ -122,8 +122,6 @@ public class UserData {
 		this.roleData = roleData;
 	}
 	
-	
-
 	public String getEmail() {
 		return email;
 	}
