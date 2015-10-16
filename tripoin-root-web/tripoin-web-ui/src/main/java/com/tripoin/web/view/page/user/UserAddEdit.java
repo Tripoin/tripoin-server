@@ -56,6 +56,10 @@ public class UserAddEdit<DATA> extends VerticalLayout implements View {
 
 	// VerticalLayout left = new VerticalLayout();
 	// FormLayout form = new FormLayout();
+	
+	private Button edit;
+	private Button save;
+//	private Button edit;
 
 	@PostConstruct
 	public void init() {
@@ -66,14 +70,14 @@ public class UserAddEdit<DATA> extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 
 	}
-
+	
 	public FormLayout formCreateUser(final FormLayout form, final VerticalLayout left, final DATA user) {
 
 		final TextField name = new TextField("Name");
 		final TextField email = new TextField("Email");
 		final TextField username = new TextField("Username");
 		PasswordField pwf = new PasswordField("Password");
-
+		
 		final Button cancel = new Button("Cancel", new ClickListener() {
 			private static final long serialVersionUID = 2260935572262992380L;
 
@@ -87,7 +91,12 @@ public class UserAddEdit<DATA> extends VerticalLayout implements View {
 		});
 
 		// final productDatas =
-		final Button save = new Button("Save", new ClickListener() {
+		
+		
+
+		
+		
+		save = new Button("Save", new ClickListener() {
 			private static final long serialVersionUID = 2260935572262992380L;
 
 			@Override
@@ -110,15 +119,35 @@ public class UserAddEdit<DATA> extends VerticalLayout implements View {
 
 			}
 		});
+		edit = new Button("Edit", new ClickListener() {
+			private static final long serialVersionUID = 2260935572262992380L;
 
+			@Override
+			public void buttonClick(ClickEvent event) {
+//				UserData userd = new UserData();
+				try {
+					form.setVisible(true);
+					form.removeStyleName("light");
+					left.setVisible(false);
+					save.setVisible(true);
+					edit.setVisible(false);
+				} catch (Exception ex) {
+					Notification.show("Data Has Been Save Error", "Desc : ", Notification.Type.WARNING_MESSAGE);
+				}
+			}
+		});
+
+		edit.setIcon(FontAwesome.EDIT);
 		save.setIcon(FontAwesome.SAVE);
 		cancel.setIcon(FontAwesome.REPLY);
 		HorizontalLayout footer = new HorizontalLayout();
 		footer.setMargin(new MarginInfo(false, false, false, false));
 		footer.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
 		footer.addComponent(save);
+		footer.addComponent(edit);
 		footer.addComponent(cancel);
 		form.addComponent(footer);
+		save.setVisible(false);
 		// DATA data = (DATA) user;
 		if (user != null) {
 			UserData userd = (UserData) user;
@@ -144,7 +173,7 @@ public class UserAddEdit<DATA> extends VerticalLayout implements View {
 
 		} else {
 			// UserData userd = (UserData) user;
-
+			
 			name.setValue("");
 			name.setWidth("50%");
 			name.setRequired(true);
@@ -166,6 +195,7 @@ public class UserAddEdit<DATA> extends VerticalLayout implements View {
 			form.addComponent(email);
 
 		}
+		form.setSizeFull();
 		return form;
 	}
 

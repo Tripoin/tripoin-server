@@ -61,7 +61,7 @@ public abstract class ASimpleMaintainCrud<DATA> extends VerticalLayout implement
 	protected VerticalLayout left = new VerticalLayout();
 	protected FormLayout form = new FormLayout();
 
-	DATA datas;
+	protected DATA datas;
 
 	@Override
 	public void enter(ViewChangeEvent event) {
