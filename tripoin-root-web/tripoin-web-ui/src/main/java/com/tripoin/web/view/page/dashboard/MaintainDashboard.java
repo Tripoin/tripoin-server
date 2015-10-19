@@ -1,5 +1,6 @@
 package com.tripoin.web.view.page.dashboard;
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
@@ -20,9 +21,11 @@ import com.vaadin.annotations.JavaScript;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Responsive;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.BrowserFrame;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -53,6 +56,11 @@ interface a {
 public class MaintainDashboard<DATA> extends ASimpleMaintainCrud<DATA> implements View {
 
 	private static final long serialVersionUID = -7326315426217377753L;
+	
+
+	@Autowired
+	private IInventoryService inventoryService;
+	
 	// JAVA SCRIPT FOR SALES PERFORMANCE
 //		public static final String INITIAL_HCJSA = new Scanner(MaintainDashboard.class.getResourceAsStream("chart-analisa-pemesanan.js"),
 //				"UTF-8").useDelimiter("\\A").next();
@@ -179,7 +187,34 @@ public class MaintainDashboard<DATA> extends ASimpleMaintainCrud<DATA> implement
 		// CssLayout csslay = new CssLayout();
 
 		// csslay.setMargin(new MarginInfo(true, true, true, true));
+		List<UserData> productDatas = inventoryService.getAllUser();
+		String categories="";
+		String seriesdata="";
+		int no =0;
+		String coma = "";
+		for (UserData userdata : productDatas) {
+			no++;
+			if(no == productDatas.size()){
+				coma = "";
+			} else {
+				coma = ",";
+			}
+			categories = categories + "'"+userdata.getUsername()+"'"+coma;
+			seriesdata = seriesdata + ""+userdata.getId()+""+coma;
+		}
 		
+//		String categories="";
+//		for (UserData userdata : productDatas) {
+//			categories = categories + "'"+userdata.getUsername()+"',";
+//		}
+//		
+		
+		Notification.show(seriesdata);
+//		Notification.show(categories);
+		
+//		BrowserFrame browser = new BrowserFrame("Contoh IFRAME",
+//			    new ExternalResource("http://180.250.115.193:8181/jasperserver/flow.html?_flowId=viewReportFlow&standAlone=true&_flowId=viewReportFlow&ParentFolderUri=%2FMQA%2FTelkomsel%2FReports&reportUnit=%2FMQA%2FTelkomsel%2FReports%2FActivtyAgent&j_username=jasperadmin&j_password=jasperadmin"));
+//		wrap.addComponent(browser);
 
 		chart = new HighChart();
 		// chart.set
@@ -200,9 +235,59 @@ public class MaintainDashboard<DATA> extends ASimpleMaintainCrud<DATA> implement
 		wrap.addComponent(chart);
 
 		
+		chart = new HighChart();
+//		chart.setTitle("USER");
+//		chart.setType("column");
+//		chart.setCategories(categories);
+//		chart.setSeriesname("User");
+//		chart.setSeriesdata(seriesdata);
+		String charttext = "{"
+				+ "        chart: {"
+				+ "            type: 'column'"
+				+ "        },"
+				+ "        title: {"
+				+ "            text: 'User'"
+				+ "        },"
+				+ "        subtitle: {"
+				+ "            text: ''"
+				+ "        },"
+				+ "        xAxis: {"
+				+ "            categories: ["+categories+"],"
+				+ "            crosshair: true"
+				+ "        },"
+				+ "        yAxis: {"
+				+ "            min: 0,"
+				+ "            title: {"
+				+ "                text: 'jumlah produk' "
+				+ "           }"
+				+ "        },"
+				+ "        tooltip: {"
+				+ "            headerFormat: '<span style=\"font-size:10px\">{point.key}</span><table>',"
+				+ "            pointFormat: '<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td><td style=\"padding:0\"><b>{point.y:.1f} </b></td></tr>',"
+				+ "                "
+				+ "            footerFormat: '</table>',"
+				+ "            shared: true,"
+				+ "            useHTML: true"
+				+ "        },"
+				+ "        plotOptions: {"
+				+ "            column: {"
+				+ "                pointPadding: 0.2,"
+				+ "                borderWidth: 0"
+				+ "            }"
+				+ "        },"
+				+ "        series: [{"
+				+ "            name: 'User',"
+				+ "            data: ["+seriesdata+"]"
+				+ "        }]"
+				+ "    }";
+//		chart.setHcjs2("column","USER",categories,"User",seriesdata);
+		chart.setHcjs(charttext);
+		wrap.addComponent(chart);
+		
 
 		chart = new HighChart();
 		chart.setHcjs(JsonUtilChart.CHART_NERACA_PENJUALAN);
+		//chart.setHcjs2("column","USER",categories,"User",seriesdata);
 		// chart.setWidth("40%");
 		// Responsive.makeResponsive(chart);
 
