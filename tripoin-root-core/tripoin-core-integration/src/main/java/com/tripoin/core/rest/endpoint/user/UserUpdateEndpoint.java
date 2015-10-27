@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
-
 import com.tripoin.core.common.ParameterConstant;
 import com.tripoin.core.common.RoleConstant;
 import com.tripoin.core.dto.UserData;
@@ -28,7 +26,7 @@ import com.tripoin.core.service.IGenericManagerJpa;
 public class UserUpdateEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserUpdateEndpoint.class);
-
+	
     @Autowired
     private IGenericManagerJpa iGenericManagerJpa;
 
