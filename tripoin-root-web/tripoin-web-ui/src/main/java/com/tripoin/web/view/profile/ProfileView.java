@@ -61,7 +61,7 @@ public class ProfileView extends VerticalLayout implements View {
         HorizontalLayout row = new HorizontalLayout();
         row.setSpacing(true);
         row.setMargin(false);
-        row.setWidth("800px");
+        row.setSizeFull();
         row.addComponent(formTitle);
         addComponent(row);
         
@@ -75,7 +75,7 @@ public class ProfileView extends VerticalLayout implements View {
 
         final FormLayout form = new FormLayout();
         form.setMargin(false);
-        form.setWidth("800px");
+        form.setSizeFull();
         form.addStyleName("light");
         addComponent(form);
         

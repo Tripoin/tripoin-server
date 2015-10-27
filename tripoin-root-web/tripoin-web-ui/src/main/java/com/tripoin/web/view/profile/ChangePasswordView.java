@@ -1,18 +1,16 @@
 package com.tripoin.web.view.profile;
 
-import java.io.File;
 import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import com.tripoin.core.dto.ProfileData;
-import com.tripoin.web.TripoinUI;
 import com.tripoin.web.service.IProfileService;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.FileResource;
-import com.vaadin.server.ThemeResource;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -20,9 +18,8 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -37,69 +34,74 @@ public class ChangePasswordView extends VerticalLayout implements View {
 
     @Autowired
     private IProfileService profileService;
-    
     private ProfileData profileData;
     
     @PostConstruct
     public void init(){
 		profileData = profileService.getProfile();
-//        setSpacing(true);
+        setSpacing(false);
         setMargin(true);
 
-        final FormLayout formTitle = new FormLayout();
-        formTitle.setMargin(false);
-        formTitle.addStyleName("light");
+        final FormLayout form = new FormLayout();
+        form.setSizeFull();
+        addComponent(form);
         
         Label title = new Label("Change Password");
         title.addStyleName("h1");
-        formTitle.addComponent(title);
+        form.addComponent(title);
 
-        HorizontalLayout row = new HorizontalLayout();
-        row.setSpacing(true);
-        row.setMargin(false);
-        row.setWidth("800px");
-        row.addComponent(formTitle);
-        addComponent(row);
         
-//        Image profilePhoto = new Image();
-//        profilePhoto.setSource(new File(profileData.getPhoto()).exists() ? new FileResource(new File(profileData.getPhoto())) : new ThemeResource("../tripoin-valo/img/profile-pic-new-300px.png")); 
-//        profilePhoto.setWidth("150px");
-//        profilePhoto.setHeight("150px");
-//        profilePhoto.addStyleName("light2");
-//        row.addComponent(profilePhoto);
-//        row.setComponentAlignment(profilePhoto, Alignment.TOP_RIGHT);
-
-        final FormLayout form = new FormLayout();
-        form.setMargin(false);
-        form.setWidth("800px");
-        addComponent(form);
+        HorizontalLayout rowOp = new HorizontalLayout();
+        rowOp.setWidth("30%");
         
-        Label section = new Label(" ");
-        section.addStyleName("h3");
-        section.addStyleName("colored");
-        form.addComponent(section);
-//        form.setComponentAlignment(section, Alignment.MIDDLE_LEFT);
+        Label labelOp = new Label("Old Password");
+        rowOp.addComponent(labelOp);
         
-        final TextField oldPassword = new TextField("Old Password");
+        final PasswordField oldPassword = new PasswordField();
+        oldPassword.addStyleName("inline-icon");
+        oldPassword.setIcon(FontAwesome.LOCK);
+        oldPassword.setInputPrompt("anjarganteng");
         oldPassword.setRequired(true);
-        oldPassword.setWidth("50%");
-        form.addComponent(oldPassword);
+        rowOp.addComponent(oldPassword);
+        form.addComponent(rowOp);
         
-        final TextField newPassword = new TextField("New Password");
+        HorizontalLayout rowNp = new HorizontalLayout();
+        rowNp.setWidth("30%");
+        
+        Label labelNp = new Label("New Password");
+        rowNp.addComponent(labelNp);
+        
+        final PasswordField newPassword = new PasswordField();
+        newPassword.addStyleName("inline-icon");
+        newPassword.setIcon(FontAwesome.LOCK);
+        newPassword.setInputPrompt("anjarganteng");
         newPassword.setRequired(true);
-        newPassword.setWidth("50%");
-        form.addComponent(newPassword);
+        rowNp.addComponent(newPassword);
+        form.addComponent(rowNp);
+
         
-        final TextField reTypePassword = new TextField("Re-type Password");
+        HorizontalLayout rowRp = new HorizontalLayout();
+        rowRp.setWidth("30%");
+        
+        Label labelRp = new Label("Re-type Password");
+        rowRp.addComponent(labelRp);
+        
+        final PasswordField reTypePassword = new PasswordField();
+        reTypePassword.addStyleName("inline-icon");
+        reTypePassword.setIcon(FontAwesome.LOCK);
+        reTypePassword.setInputPrompt("anjarganteng");
         reTypePassword.setRequired(true);
-        reTypePassword.setWidth("50%");
-        form.addComponent(reTypePassword);
+        rowRp.addComponent(reTypePassword);
+        form.addComponent(rowRp);
 
         Button save = new Button("Save", new ClickListener() {
 			private static final long serialVersionUID = 2260935572262992380L;
 			@Override
             public void buttonClick(ClickEvent event) {
-                TripoinUI.get().close();
+				if(newPassword.getValue()!=null && reTypePassword.getValue()!=null && newPassword.getValue().equals(reTypePassword.getValue())){
+					profileData.getUserData().setPassword(newPassword.getValue());
+                	profileService.updateProfile(profileData, profileData.getUserData());
+				}
 			}
         });
 
@@ -107,6 +109,7 @@ public class ChangePasswordView extends VerticalLayout implements View {
         footer.setMargin(new MarginInfo(true, false, true, false));
         footer.setSpacing(true);
         footer.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
+        footer.setSizeFull();
         form.addComponent(footer);
         footer.addComponent(save);
     }
