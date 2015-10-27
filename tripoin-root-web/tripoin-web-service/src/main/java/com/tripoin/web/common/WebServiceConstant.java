@@ -16,7 +16,8 @@ public class WebServiceConstant {
 	public static final String HTTP_LOGIN = "/login";	
 	public static final String HTTP_LOGIN_MENU = "/login-menu";
 	public static final String HTTP_PROFILE = "/profile".concat(HTTP_LOAD);
-	public static final String HTTP_PROFILE_SAVE = "/profile".concat(HTTP_SAVE);
+	public static final String HTTP_PROFILE_SAVE = "/profile".concat(HTTP_UPDATE);
+	public static final String HTTP_PASSWORD_UPDATE = "/password".concat(HTTP_UPDATE);
 	public static final String HTTP_AVAILABILITY = "/availability".concat(HTTP_LOAD);
 	public static final String HTTP_CATEGORY = "/category".concat(HTTP_LOAD);
 	public static final String HTTP_PRODUCT = "/product".concat(HTTP_LOAD);
