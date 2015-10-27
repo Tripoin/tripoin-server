@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import org.jasypt.digest.StandardStringDigester;
-//import org.springframework.security.crypto.codec.Base64;
+import org.jasypt.digest.StandardStringDigester;
+import org.springframework.security.crypto.codec.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,8 @@ public class PasswordUpdateEndpoint extends XReturnStatus {
 
     private static Logger LOGGER = LoggerFactory.getLogger(PasswordUpdateEndpoint.class);
 	
-//	@Autowired
-//	private StandardStringDigester jasyptStringDigester;
+	@Autowired
+	private StandardStringDigester jasyptStringDigester;
 
     @Autowired
     private IGenericManagerJpa iGenericManagerJpa;
@@ -44,9 +44,9 @@ public class PasswordUpdateEndpoint extends XReturnStatus {
 
         try {
             User userPayload = new User(inMessage.getPayload());
-//            String passToBase64 = new String(Base64.decode(userPayload.getPassword().getBytes()));
-//            String passToJasypt = jasyptStringDigester.digest(passToBase64);
-//            userPayload.setPassword(passToJasypt);
+            String passToBase64 = new String(Base64.decode(userPayload.getPassword().getBytes()));
+            String passToJasypt = jasyptStringDigester.digest(passToBase64);
+            userPayload.setPassword(passToJasypt);
             iGenericManagerJpa.updateObject(userPayload);
             List<User> userList = iGenericManagerJpa.loadObjects(User.class);
             List<UserData> userDatas = new ArrayList<UserData>();
