@@ -27,6 +27,10 @@
 	<int:channel id="requestChannelUserDelete"/>
 	<int:channel id="routeChannelUserDelete"/>
 	
+	<int:channel id="responseChannelPasswordUpdate"/>
+	<int:channel id="requestChannelPasswordUpdate"/>
+	<int:channel id="routeChannelPasswordUpdate"/>
+	
 	<int-http:inbound-gateway request-channel="requestChannelUser"
 		reply-channel="responseChannelUser"
 		supported-methods="GET" 
@@ -58,6 +62,18 @@
 	    <int:mapping value="POST" channel="requestChannelUserUpdate"/>
 	</int:router>	
 	<int:service-activator ref="userUpdateEndpoint" method="saveProduct" input-channel="requestChannelUserUpdate" output-channel="responseChannelUserUpdate"/>
+	
+	<int-http:inbound-gateway request-channel="requestChannelPasswordUpdate"
+		reply-channel="responseChannelPasswordUpdate"
+		supported-methods="POST" 
+		path="/wscontext/password/update, /wscontext/password/save/{product}"
+		request-payload-type="com.tripoin.core.dto.UserData">	
+		<int-http:request-mapping consumes="application/json" produces="application/json"/>
+	</int-http:inbound-gateway>
+	<int:router input-channel="routeChannelPasswordUpdate" expression="headers.http_requestMethod">
+	    <int:mapping value="POST" channel="requestChannelPasswordUpdate"/>
+	</int:router>	
+	<int:service-activator ref="passwordUpdateEndpoint" method="saveProduct" input-channel="requestChannelPasswordUpdate" output-channel="responseChannelPasswordUpdate"/>
 	
 	<int-http:inbound-gateway request-channel="requestChannelUserDelete"
 		reply-channel="responseChannelUserDelete"
