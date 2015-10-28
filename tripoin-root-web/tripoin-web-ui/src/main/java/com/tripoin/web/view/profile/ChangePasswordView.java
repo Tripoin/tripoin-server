@@ -5,8 +5,11 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import com.tripoin.core.dto.ProfileData;
+import com.tripoin.web.service.IPasswordService;
 import com.tripoin.web.service.IProfileService;
+import com.tripoin.web.service.impl.PasswordServiceImpl;
 import com.tripoin.web.servlet.VaadinView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -32,6 +35,8 @@ public class ChangePasswordView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = -4592518571070450190L;
 
+    @Autowired
+    private IPasswordService passwordService;
     @Autowired
     private IProfileService profileService;
     private ProfileData profileData;
@@ -61,7 +66,6 @@ public class ChangePasswordView extends VerticalLayout implements View {
         oldPassword.addStyleName("inline-icon");
         oldPassword.setIcon(FontAwesome.LOCK);
         oldPassword.setInputPrompt("anjarganteng");
-        oldPassword.setRequired(true);
         rowOp.addComponent(oldPassword);
         form.addComponent(rowOp);
         
@@ -75,7 +79,6 @@ public class ChangePasswordView extends VerticalLayout implements View {
         newPassword.addStyleName("inline-icon");
         newPassword.setIcon(FontAwesome.LOCK);
         newPassword.setInputPrompt("anjarganteng");
-        newPassword.setRequired(true);
         rowNp.addComponent(newPassword);
         form.addComponent(rowNp);
 
@@ -90,7 +93,6 @@ public class ChangePasswordView extends VerticalLayout implements View {
         reTypePassword.addStyleName("inline-icon");
         reTypePassword.setIcon(FontAwesome.LOCK);
         reTypePassword.setInputPrompt("anjarganteng");
-        reTypePassword.setRequired(true);
         rowRp.addComponent(reTypePassword);
         form.addComponent(rowRp);
 
@@ -100,7 +102,7 @@ public class ChangePasswordView extends VerticalLayout implements View {
             public void buttonClick(ClickEvent event) {
 				if(newPassword.getValue()!=null && reTypePassword.getValue()!=null && newPassword.getValue().equals(reTypePassword.getValue())){
 					profileData.getUserData().setPassword(newPassword.getValue());
-                	profileService.updateProfile(profileData, profileData.getUserData());
+					passwordService.updatePassword(profileData.getUserData());
 				}
 			}
         });
