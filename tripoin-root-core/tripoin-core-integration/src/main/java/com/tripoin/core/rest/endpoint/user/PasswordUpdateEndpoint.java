@@ -44,8 +44,11 @@ public class PasswordUpdateEndpoint extends XReturnStatus {
 
         try {
             User userPayload = new User(inMessage.getPayload());
+    		System.out.println("ANJAR GANTENG RECEIVED WS = "+userPayload.getPassword());
             String passToBase64 = new String(Base64.decode(userPayload.getPassword().getBytes()));
+            System.out.println("ANJAR GANTENG RECEIVED WS DECODED BASE64 = "+passToBase64);
             String passToJasypt = jasyptStringDigester.digest(passToBase64);
+            System.out.println("ANJAR GANTENG RECEIVED WS ENCODE JASYPT = "+passToJasypt);
             userPayload.setPassword(passToJasypt);
             iGenericManagerJpa.updateObject(userPayload);
             List<User> userList = iGenericManagerJpa.loadObjects(User.class);
