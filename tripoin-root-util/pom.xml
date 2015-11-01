@@ -82,6 +82,7 @@
     <modules>
         <!-- <module>tripoin-util-api</module> -->
         <!-- <module>tripoin-util-report</module> -->
+        <module>tripoin-util-common</module>
         <module>tripoin-util-communication</module>
         <module>tripoin-util-ui</module>
     </modules>

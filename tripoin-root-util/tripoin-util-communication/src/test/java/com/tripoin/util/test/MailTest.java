@@ -34,7 +34,7 @@ public class MailTest implements ApplicationContextAware {
 	
 	@Test
 	public void runTest() throws Exception {
-		iCoreMailSender.sendMailContent("tripoinstudio@gmail.com", "ridla8086@gmail.com", "[TEST] Spring Mail", "This is mail test form java code.");
+		iCoreMailSender.sendMailContent("test321@gmail.com", "test123@gmail.com", "[TEST] Spring Mail", "This is mail test form java code.");
 	}
 	
 }

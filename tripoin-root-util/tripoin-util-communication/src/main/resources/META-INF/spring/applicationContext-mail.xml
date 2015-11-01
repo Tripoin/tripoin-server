@@ -13,14 +13,15 @@
                            http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com"/>
-		<property name="port" value="587"/>
-		<property name="username" value="tripoinstudio"/>
-		<property name="password" value="xxxxxxxx"/>			
+		<property name="host" value="${tripoin.email.host}"/>
+		<property name="port" value="${tripoin.email.port}"/>
+		<property name="username" value="${tripoin.email.username}"/>
+		<property name="password" value="${tripoin.email.password}"/>			
 		<property name="javaMailProperties">
 			<props>
-	     	    <prop key="mail.smtp.auth">true</prop>
-	     	    <prop key="mail.smtp.starttls.enable">true</prop>
+	     	    <prop key="mail.smtp.auth">${tripoin.email.auth}</prop>
+	     	    <prop key="mail.smtp.starttls.enable">${tripoin.email.tls.enable}</prop>
+	     	    <prop key="mail.smtp.quitwait">${tripoin.email.quitwait}</prop>
 	    	</props>
 		</property>
 	</bean>
