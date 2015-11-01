@@ -28,6 +28,7 @@ public class CoreMailSenderImpl implements ICoreMailSender {
 			helper.setTo(to);
 			helper.setSubject(subject);
 			helper.setText(content, true);
+			helper.setPriority(1);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
