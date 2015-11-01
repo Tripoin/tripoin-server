@@ -1,7 +1,10 @@
 package com.tripoin.util.mail.impl;
 
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.tripoin.util.mail.ICoreMailSender;
 
@@ -10,19 +13,24 @@ import com.tripoin.util.mail.ICoreMailSender;
  */
 public class CoreMailSenderImpl implements ICoreMailSender {
 	
-	private MailSender mailSender;
+	private JavaMailSender mailSender;
 
-	public void setMailSender(MailSender mailSender) {
+	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 
 	@Override
 	public void sendMailContent(String from, String to, String subject, String content) {
-		SimpleMailMessage message = new SimpleMailMessage();		
-		message.setFrom(from);
-		message.setTo(to);
-		message.setSubject(subject);
-		message.setText(content);
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		try {
+			helper.setFrom(from);
+			helper.setTo(to);
+			helper.setSubject(subject);
+			helper.setText(content, true);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		mailSender.send(message);	
 	}
 
