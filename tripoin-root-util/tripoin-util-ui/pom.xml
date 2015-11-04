@@ -52,6 +52,11 @@
             <version>${vaadin.version}</version>
         </dependency>
 		<!-- refer other data -->
+        <dependency>
+            <groupId>net.tanesha.recaptcha4j</groupId>
+            <artifactId>recaptcha4j</artifactId>
+            <version>${tanesha.recaptcha.version}</version>
+        </dependency>
 	</dependencies>
 
 </project>
