@@ -51,6 +51,11 @@
             <artifactId>vaadin-server</artifactId>
             <version>${vaadin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client</artifactId>
+            <version>${vaadin.version}</version>
+        </dependency>
 		<!-- refer other data -->
         <dependency>
             <groupId>net.tanesha.recaptcha4j</groupId>
