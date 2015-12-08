@@ -93,6 +93,16 @@
             <version>${com.vaadin.tapio.version}</version>
         </dependency>
 		<!-- refer other data -->
+		<!-- <dependency>
+    		<groupId>com.google.code.gwt-mobile-webkit</groupId>
+    		<artifactId>gwt-html5-geolocation</artifactId>
+    		<version>0.9.5</version>
+  		</dependency> -->
+  		<dependency>
+    		<groupId>com.google.code.geocoder-java</groupId>
+    		<artifactId>geocoder-java</artifactId>
+    		<version>${geocoder.version}</version>
+		</dependency>
         <dependency>
             <groupId>net.tanesha.recaptcha4j</groupId>
             <artifactId>recaptcha4j</artifactId>
