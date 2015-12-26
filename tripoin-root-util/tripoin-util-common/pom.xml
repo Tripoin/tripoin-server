@@ -185,11 +185,6 @@
 			<version>${commons.logging.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>${commons.collections.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-daemon</groupId>
 			<artifactId>commons-daemon</artifactId>
 			<version>${commons.daemon.version}</version>
@@ -266,5 +261,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>jasper</id>
+			<url>http://central.maven.org/maven2</url>
+		</repository>
+	</repositories>
 
 </project>
