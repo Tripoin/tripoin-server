@@ -25,7 +25,7 @@ public class ReportGenerator {
 	}
 	
 	public void printReportToFile(String reportFilename, JRDataSource dataSource, Map<String, Object> params, String outputFilename, OutputStream outputStream) throws Exception {
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportFilename,  params, dataSource);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reportFilename, params, dataSource);
         
         JRPdfExporter exporter = new JRPdfExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
