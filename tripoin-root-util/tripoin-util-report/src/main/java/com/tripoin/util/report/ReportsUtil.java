@@ -31,22 +31,16 @@ public class ReportsUtil {
 	}
 	
     public StreamResource createPdfReport(Collection<?> data, String reportFilename, Map<String, Object> params, String outputFilename){
-    	JRDataSource dataSource = getDataSource(data);
     	if(params == null)
     		params = new HashMap<String, Object>();
-		params.put("datasource", dataSource);
+    	JRDataSource dataSource = null;
+    	if(!data.isEmpty()){
+    		dataSource = new JRBeanCollectionDataSource(data);
+    		params.put("eanCollectionDataSource", dataSource);
+    	}    	
     	outputFilename = outputFilename.concat(UUID.randomUUID().toString()).concat(EReportUtilConstant.REPORT_PDF.getString());
         return createStreamResource(dataSource, reportFilename, params, outputFilename);        
     }
-    
-	/**
-	 * Returns a data source that's wrapped within {@link JRDataSource}
-	 * @param data
-	 * @return
-	 */
-	public JRDataSource getDataSource(Collection<?> data) {
-		return new JRBeanCollectionDataSource(data);
-	}
     
 	/**
 	 * @param dataSource
