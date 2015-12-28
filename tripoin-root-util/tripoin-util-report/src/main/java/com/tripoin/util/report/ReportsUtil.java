@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,6 +32,8 @@ public class ReportsUtil {
 	
     public StreamResource createPdfReport(Collection<?> data, String reportFilename, Map<String, Object> params, String outputFilename){
     	JRDataSource dataSource = getDataSource(data);
+    	if(params == null)
+    		params = new HashMap<String, Object>();
 		params.put("datasource", dataSource);
     	outputFilename = outputFilename.concat(UUID.randomUUID().toString()).concat(EReportUtilConstant.REPORT_PDF.getString());
         return createStreamResource(dataSource, reportFilename, params, outputFilename);        

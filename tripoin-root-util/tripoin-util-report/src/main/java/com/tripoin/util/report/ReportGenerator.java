@@ -30,9 +30,9 @@ public class ReportGenerator {
 	}
 	
 	public void printReportToFile(String reportFilename, JRDataSource dataSource, Map<String, Object> params, String outputFilename, OutputStream outputStream) throws Exception {
-        JasperDesign jasperDesign=loadTemplate(reportFilename);
+        JasperDesign jasperDesign = loadTemplate(reportFilename);
         setTempDirectory(reportFilename);
-        JasperReport jasperReport=compileReport(jasperDesign);
+        JasperReport jasperReport = compileReport(jasperDesign);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,  params, dataSource);		
 
         JRPdfExporter exporter = new JRPdfExporter();

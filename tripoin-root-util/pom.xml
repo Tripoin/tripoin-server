@@ -82,6 +82,7 @@
         <tanesha.recaptcha.version>0.0.7</tanesha.recaptcha.version>
         <geocoder.version>0.16</geocoder.version>
         <jasperreports.version>6.0.0</jasperreports.version>
+        <jasperreports.fonts.version>6.0.0.extensions</jasperreports.fonts.version>
         <bcprov-jdk14.version>1.38</bcprov-jdk14.version>
         <jackson-annotations.version>2.1.4</jackson-annotations.version>
         <jackson-core.version>2.1.4</jackson-core.version>
