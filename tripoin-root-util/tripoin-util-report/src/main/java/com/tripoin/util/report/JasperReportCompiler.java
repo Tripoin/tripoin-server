@@ -21,6 +21,8 @@ public class JasperReportCompiler implements InitializingBean {
 
     private static Logger LOGGER = LoggerFactory.getLogger(JasperReportCompiler.class);
     
+    private File baseFileReportsPath = null;
+    
     public JasperReportCompiler() {}
     
 	@Override
@@ -29,7 +31,6 @@ public class JasperReportCompiler implements InitializingBean {
 	}
 	
 	public void compileAllReport() throws Exception {
-		File baseFileReportsPath = null;
 		try {
 			baseFileReportsPath = new ClassPathResource("/report").getFile();
 		} catch (IOException e) {
@@ -71,5 +72,13 @@ public class JasperReportCompiler implements InitializingBean {
         	LOGGER.error("Error, file not exists");
         return(jasperDesign);
     }
+
+	public File getBaseFileReportsPath() {
+		return baseFileReportsPath;
+	}
+
+	public void setBaseFileReportsPath(File baseFileReportsPath) {
+		this.baseFileReportsPath = baseFileReportsPath;
+	}
 
 }

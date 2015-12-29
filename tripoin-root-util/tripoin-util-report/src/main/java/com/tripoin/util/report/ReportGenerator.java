@@ -1,7 +1,10 @@
 package com.tripoin.util.report;
 
+import java.io.File;
 import java.io.OutputStream;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -12,20 +15,11 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 public class ReportGenerator {
 	
-	public static final ReportGenerator instance;
+	@Autowired
+	private JasperReportCompiler jasperReportCompiler;
 	
-	private ReportGenerator() {}
-	
-	static {
-		instance = new ReportGenerator();
-	}
-	
-	public static ReportGenerator getInstance() {
-		return instance;
-	}
-	
-	public void printReportToFile(String reportFilename, JRDataSource dataSource, Map<String, Object> params, String outputFilename, OutputStream outputStream) throws Exception {
-		JasperPrint jasperPrint = JasperFillManager.fillReport(reportFilename, params, dataSource);
+	public void printReportToFile(String reportFilename, JRDataSource dataSource, Map<String, Object> params, OutputStream outputStream) throws Exception {
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReportCompiler.getBaseFileReportsPath().getPath().concat(File.separator).concat(reportFilename), params, dataSource);
         
         JRPdfExporter exporter = new JRPdfExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));

@@ -56,6 +56,7 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>provided</scope>
 		</dependency>
 		<!-- <dependency>
 			<groupId>org.springframework</groupId>
@@ -78,6 +79,7 @@
 					<artifactId>spring-core</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -89,6 +91,7 @@
 					<artifactId>spring-core</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>test</scope>
 		</dependency>
     	<dependency>
             <groupId>org.springframework</groupId>
@@ -108,6 +111,7 @@
 					<artifactId>aopalliance</artifactId>
 				</exclusion>
             </exclusions>
+			<scope>test</scope>
         </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -131,6 +135,7 @@
 					<artifactId>spring-aop</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -146,6 +151,7 @@
 					<artifactId>spring-core</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -165,18 +171,19 @@
 					<artifactId>spring-core</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>provided</scope>
 		</dependency>
     	<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.core.version}</version>
-            <scope>test</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-core</artifactId>
 				</exclusion>
 			</exclusions>
+            <scope>test</scope>
         </dependency>
 		<!-- refer javax mail -->
 		<dependency>
@@ -195,21 +202,25 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commons.logging.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-daemon</groupId>
 			<artifactId>commons-daemon</artifactId>
 			<version>${commons.daemon.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>${commons.lang.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -221,32 +232,38 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+            <scope>test</scope>
 		</dependency>
 		<!-- refer other data -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>${cglib.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>aopalliance</groupId>
 			<artifactId>aopalliance</artifactId>
 			<version>${aopalliance.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectjweaver.version}</version>
+            <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
+            <scope>test</scope>
 		</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -258,6 +275,7 @@
 					<artifactId>slf4j-api</artifactId>
             	</exclusion>
             </exclusions>
+            <scope>test</scope>
         </dependency>
     	<dependency>
             <groupId>junit</groupId>
