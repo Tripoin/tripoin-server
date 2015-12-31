@@ -20,6 +20,7 @@ import org.springframework.core.io.ClassPathResource;
 public class JasperReportCompiler implements InitializingBean {
 
     private static Logger LOGGER = LoggerFactory.getLogger(JasperReportCompiler.class);
+    public static final String CLASSPATH_REPORT = "/report";
     
     private File baseFileReportsPath = null;
     
@@ -32,7 +33,7 @@ public class JasperReportCompiler implements InitializingBean {
 	
 	public void compileAllReport() throws Exception {
 		try {
-			baseFileReportsPath = new ClassPathResource("/report").getFile();
+			baseFileReportsPath = new ClassPathResource(CLASSPATH_REPORT).getFile();
 		} catch (IOException e) {
 			LOGGER.error("Directory Report Failure", e);
 		}		
