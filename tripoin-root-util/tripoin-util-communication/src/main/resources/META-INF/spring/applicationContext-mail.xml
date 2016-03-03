@@ -15,6 +15,7 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${tripoin.email.host}"/>
 		<property name="port" value="${tripoin.email.port}"/>
+		<property name="protocol" value="${tripoin.email.protocol}"/>
 		<property name="username" value="${tripoin.email.username}"/>
 		<property name="password" value="${tripoin.email.password}"/>			
 		<property name="javaMailProperties">
@@ -22,6 +23,12 @@
 	     	    <prop key="mail.smtp.auth">${tripoin.email.auth}</prop>
 	     	    <prop key="mail.smtp.starttls.enable">${tripoin.email.tls.enable}</prop>
 	     	    <prop key="mail.smtp.quitwait">${tripoin.email.quitwait}</prop>
+	     	    <prop key="mail.smtp.timeout">${tripoin.smtp.timeout}</prop>
+	     	    <prop key="mail.debug">${tripoin.mail.debug}</prop>
+	     	    
+	     	    <!-- <prop key="mail.smtp.socketFactory.port">${tripoin.email.port}</prop>
+	     	    <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+	     	    <prop key="mail.smtp.socketFactory.fallback">false</prop> -->
 	    	</props>
 		</property>
 	</bean>
