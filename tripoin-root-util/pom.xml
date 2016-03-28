@@ -22,8 +22,8 @@
 		
         <!-- Convenience property to set the Spring Framework version -->
         <spring.default.version>2.5.6</spring.default.version>
-		<spring.version>4.1.6.RELEASE</spring.version>
-		<spring.core.version>4.1.6.RELEASE</spring.core.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<spring.core.version>4.2.5.RELEASE</spring.core.version>
 		<spring.orm.version>3.1.2.RELEASE</spring.orm.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 		<spring.batch.version>2.2.1.RELEASE</spring.batch.version>
